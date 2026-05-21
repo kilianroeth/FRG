@@ -1,0 +1,1 @@
+/usr/bin/g++ -g CMakeFiles/FRG.dir/src/main.cpp.o -o FRG 

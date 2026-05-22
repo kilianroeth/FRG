@@ -153,6 +153,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/FRG.dir/build.make CMakeFiles/FRG.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/phi4_lpa.o: src/phi4_lpa.cpp.o
+.PHONY : src/phi4_lpa.o
+
+# target to build an object file
+src/phi4_lpa.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FRG.dir/build.make CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o
+.PHONY : src/phi4_lpa.cpp.o
+
+src/phi4_lpa.i: src/phi4_lpa.cpp.i
+.PHONY : src/phi4_lpa.i
+
+# target to preprocess a source file
+src/phi4_lpa.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FRG.dir/build.make CMakeFiles/FRG.dir/src/phi4_lpa.cpp.i
+.PHONY : src/phi4_lpa.cpp.i
+
+src/phi4_lpa.s: src/phi4_lpa.cpp.s
+.PHONY : src/phi4_lpa.s
+
+# target to generate assembly for a file
+src/phi4_lpa.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FRG.dir/build.make CMakeFiles/FRG.dir/src/phi4_lpa.cpp.s
+.PHONY : src/phi4_lpa.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +189,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/phi4_lpa.o"
+	@echo "... src/phi4_lpa.i"
+	@echo "... src/phi4_lpa.s"
 .PHONY : help
 
 

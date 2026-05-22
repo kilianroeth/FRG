@@ -1,1 +1,1 @@
-/usr/bin/g++ -g CMakeFiles/FRG.dir/src/main.cpp.o -o FRG 
+/usr/bin/g++ -g CMakeFiles/FRG.dir/src/main.cpp.o CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o -o FRG 

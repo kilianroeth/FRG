@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kilian/Code/FRG/src/main.cpp" "CMakeFiles/FRG.dir/src/main.cpp.o" "gcc" "CMakeFiles/FRG.dir/src/main.cpp.o.d"
+  "/home/kilian/Code/FRG/src/phi4_lpa.cpp" "CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o" "gcc" "CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

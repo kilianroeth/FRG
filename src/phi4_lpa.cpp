@@ -56,5 +56,18 @@ inline std::vector<double> V_classical() {
     return V;
 }
 
+inline std::vector<double> RHS(std::vector<double> V, double k) {
+    std::vector<double> RHS;
+    RHS.reserve(N_RHO);
+
+    double prefactor = std::pow(k,3.0)/(6.0*M_PI*M_PI);
+
+    for (size_t i = 0; i < N_RHO; ++i) {
+        RHS[i] = prefactor * 1.0 / (1.0 + (dV[V, i] + 2.0*i/RHO_MAX*ddV[V, i])/(k*k))
+    }
+
+    return RHS;
+}
+
 
 // --- Integrate RG time step --------------

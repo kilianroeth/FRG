@@ -69,7 +69,9 @@ inline std::vector<double> RHS(std::vector<double> V, double k) {
     return RHS;
 }
 
-inline std::vector<double> integrate(std::vector<double> V, double k, double dt) {
+// --- Integrate RG time step --------------
+
+inline std::vector<double> integrate(const std::vector<double>& V, double k, double dt) {
     std::vector<double> V_next;
     V_next.reserve(N_RHO);
 
@@ -79,7 +81,23 @@ inline std::vector<double> integrate(std::vector<double> V, double k, double dt)
     }
 }
 
+// --- Integrate complete RG flow ----------
 
+void integrate_flow(const std::vector<double>& V_init, double k, double dt) {
+    
+}
 
+// --- save current potential --------------
 
-// --- Integrate RG time step --------------
+inline void save_V(const std::vector<double>& V, const std::string filename) {
+    std::ofstream file(filename);
+
+    file << "ρ = 1/2 φ², V(ρ)\n";
+    for (size_t i = 0; i < V.size(); ++i) {
+        file << i/RHO_MAX << ", " << V[i] <<"\n";
+    }
+    file << std::endl;
+
+    file.close();
+
+}

@@ -22,7 +22,7 @@ static double T_END     = -10.0;
 
 // rho grid
 static int N_RHO        = 500;      // number of rho grid points
-static int RHO_MAX      = 10.0;     // maximal value for rho
+static double RHO_MAX      = 10.0;  // maximal value for rho
 
 
 
@@ -30,15 +30,15 @@ static int RHO_MAX      = 10.0;     // maximal value for rho
 
 static double d_rho;
 
-inline double dV(std::vector<double> V, int i) {
+inline double dV(const std::vector<double>& V, int i) {
     if (i == 0) { return (V[1] - V[0])/d_rho; }
-    if (i == N_RHO) { return (V[N_RHO] - V[N_RHO-1])/d_rho; }
+    if (i == N_RHO) { return (V[N_RHO-1] - V[N_RHO-2])/d_rho; }
     return (V[i+1] - V[i-1])/(2*d_rho);
 }
 
-inline double ddV(std::vector<double> V, int i) {
+inline double ddV(const std::vector<double>& V, int i) {
     if (i == 0) { return (V[2] - 2.0*V[1] + V[0])/(d_rho*d_rho); }
-    if (i == N_RHO) { return (V[N_RHO] - 2.0*V[N_RHO-1] + V[N_RHO-2])/(d_rho*d_rho); }
+    if (i == N_RHO) { return (V[N_RHO-1] - 2.0*V[N_RHO-2] + V[N_RHO-3])/(d_rho*d_rho); }
     return (V[i+1] - 2.0*V[i] + V[i-1])/(d_rho*d_rho);
 }
 
@@ -63,11 +63,23 @@ inline std::vector<double> RHS(std::vector<double> V, double k) {
     double prefactor = std::pow(k,3.0)/(6.0*M_PI*M_PI);
 
     for (size_t i = 0; i < N_RHO; ++i) {
-        RHS[i] = prefactor * 1.0 / (1.0 + (dV[V, i] + 2.0*i/RHO_MAX*ddV[V, i])/(k*k))
+        RHS[i] = prefactor * 1.0 / (1.0 + (dV(V, i) + 2.0*i/RHO_MAX*ddV(V, i))/(k*k));
     }
 
     return RHS;
 }
+
+inline std::vector<double> integrate(std::vector<double> V, double k, double dt) {
+    std::vector<double> V_next;
+    V_next.reserve(N_RHO);
+
+    std::vector<double> RHS_vals = RHS(V, k);
+    for (size_t i = 0; i < N_RHO; ++i) {
+        V_next[i] = dt * RHS_vals[i];
+    }
+}
+
+
 
 
 // --- Integrate RG time step --------------

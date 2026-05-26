@@ -1,5 +1,7 @@
 # FRG
 
+Trying to implement some FRG numerics from scratch
+
 ## build & Run
 
 ```bash

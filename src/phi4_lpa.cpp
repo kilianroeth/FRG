@@ -11,7 +11,7 @@
  * 
  */
 
-// --- Paramters ---------------------------
+// Paramters ---------------------------
 
 static double M2        = -1.0;     // classical mass paramters
 static double LAMBDA    = 0.5;      // classical coupling paramter  
@@ -22,28 +22,28 @@ static double T_END     = -10.0;
 
 // rho grid
 static int N_RHO        = 500;      // number of rho grid points
-static double RHO_MAX      = 10.0;  // maximal value for rho
+static double RHO_MAX   = 10.0;  // maximal value for rho
 
 
 
-// --- Finite difference derivatives -------
+// Finite difference derivatives -------
 
-static double d_rho;
+static double d_rho = RHO_MAX / (N_RHO - 1);
 
 inline double dV(const std::vector<double>& V, int i) {
     if (i == 0) { return (V[1] - V[0])/d_rho; }
-    if (i == N_RHO) { return (V[N_RHO-1] - V[N_RHO-2])/d_rho; }
+    if (i == N_RHO - 1) { return (V[N_RHO-1] - V[N_RHO-2])/d_rho; }
     return (V[i+1] - V[i-1])/(2*d_rho);
 }
 
 inline double ddV(const std::vector<double>& V, int i) {
     if (i == 0) { return (V[2] - 2.0*V[1] + V[0])/(d_rho*d_rho); }
-    if (i == N_RHO) { return (V[N_RHO-1] - 2.0*V[N_RHO-2] + V[N_RHO-3])/(d_rho*d_rho); }
+    if (i == N_RHO - 1) { return (V[N_RHO-1] - 2.0*V[N_RHO-2] + V[N_RHO-3])/(d_rho*d_rho); }
     return (V[i+1] - 2.0*V[i] + V[i-1])/(d_rho*d_rho);
 }
 
 
-// --- Compute RHS -------------------------
+// Compute RHS -------------------------
 
 inline std::vector<double> V_classical() {
     std::vector<double> V;
@@ -57,8 +57,7 @@ inline std::vector<double> V_classical() {
 }
 
 inline std::vector<double> RHS(std::vector<double> V, double k) {
-    std::vector<double> RHS;
-    RHS.reserve(N_RHO);
+    std::vector<double> RHS(N_RHO);
 
     double prefactor = std::pow(k,3.0)/(6.0*M_PI*M_PI);
 
@@ -69,25 +68,19 @@ inline std::vector<double> RHS(std::vector<double> V, double k) {
     return RHS;
 }
 
-// --- Integrate RG time step --------------
+// Integrate RG time step --------------
 
 inline std::vector<double> integrate(const std::vector<double>& V, double k, double dt) {
-    std::vector<double> V_next;
-    V_next.reserve(N_RHO);
+    std::vector<double> V_next(N_RHO);
 
     std::vector<double> RHS_vals = RHS(V, k);
     for (size_t i = 0; i < N_RHO; ++i) {
-        V_next[i] = dt * RHS_vals[i];
+        V_next[i] = V[i] +  dt * RHS_vals[i];
     }
+    return V_next;
 }
 
-// --- Integrate complete RG flow ----------
-
-void integrate_flow(const std::vector<double>& V_init, double k, double dt) {
-    
-}
-
-// --- save current potential --------------
+// save current potential --------------
 
 inline void save_V(const std::vector<double>& V, const std::string filename) {
     std::ofstream file(filename);
@@ -99,5 +92,19 @@ inline void save_V(const std::vector<double>& V, const std::string filename) {
     file << std::endl;
 
     file.close();
+}
 
+// Integrate complete RG flow ----------
+
+inline void integrate_flow(const std::vector<double>& V_init, double dt) {
+    size_t N = static_cast<int>( std::ceil(T_START - T_END)/ std::abs(dt));
+    std::vector<double> V = V_classical();
+    for (size_t i = 0; i < N; ++i) {
+        double t = T_START + i*(T_END - T_START)/(N - 1);
+        double k = exp(t);
+        V = integrate(V, k, dt);
+        if (i % 100 == 0) {
+            save_V(V, "results/V_" + std::to_string(std::abs(t)) + ".txt");
+        }
+    }
 }

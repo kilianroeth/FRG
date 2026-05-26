@@ -16,6 +16,11 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 # add exectuable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
+find_package(HDF5 REQUIRED COMPONENTS C)
+
+target_include_directories(FRG PRIVATE ${HDF5_INCLUDE_DIRS})
+target_link_libraries(FRG PRIVATE ${HDF5_LIBRARIES})
+
 # including directories
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 

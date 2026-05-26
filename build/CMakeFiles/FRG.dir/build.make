@@ -108,6 +108,14 @@ FRG_EXTERNAL_OBJECTS =
 FRG: CMakeFiles/FRG.dir/src/main.cpp.o
 FRG: CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o
 FRG: CMakeFiles/FRG.dir/build.make
+FRG: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so
+FRG: /usr/lib/x86_64-linux-gnu/libcrypto.so
+FRG: /usr/lib/x86_64-linux-gnu/libcurl.so
+FRG: /usr/lib/x86_64-linux-gnu/libpthread.a
+FRG: /usr/lib/x86_64-linux-gnu/libsz.so
+FRG: /usr/lib/x86_64-linux-gnu/libz.so
+FRG: /usr/lib/x86_64-linux-gnu/libdl.a
+FRG: /usr/lib/x86_64-linux-gnu/libm.so
 FRG: CMakeFiles/FRG.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kilian/Code/FRG/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable FRG"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/FRG.dir/link.txt --verbose=$(VERBOSE)

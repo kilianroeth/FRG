@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/FRG.dir/src/main.cpp.o CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o -o FRG 
+/usr/bin/c++ -g CMakeFiles/FRG.dir/src/main.cpp.o CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o -o FRG  -Wl,-rpath,/usr/lib/x86_64-linux-gnu/hdf5/serial /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so /usr/lib/x86_64-linux-gnu/libcrypto.so /usr/lib/x86_64-linux-gnu/libcurl.so /usr/lib/x86_64-linux-gnu/libpthread.a /usr/lib/x86_64-linux-gnu/libsz.so /usr/lib/x86_64-linux-gnu/libz.so /usr/lib/x86_64-linux-gnu/libdl.a -lm 

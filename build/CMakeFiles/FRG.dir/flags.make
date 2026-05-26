@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/kilian/Code/FRG/include
+CXX_INCLUDES = -I/usr/include/hdf5/serial -I/home/kilian/Code/FRG/include
 
 CXX_FLAGS = -g -std=c++20 -Wall -Wextra -Wpedantic -g
 

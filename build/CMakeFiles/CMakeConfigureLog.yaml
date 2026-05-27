@@ -96,7 +96,7 @@ events:
       The output was:
       0
       MSBuild-Version 17.13.9+e0f243f1e für .NET Framework
-      Der Buildvorgang wurde am 27.05.2026 19:35:11 gestartet.
+      Der Buildvorgang wurde am 27.05.2026 20:18:29 gestartet.
       
       Projekt "\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" auf Knoten "1" (Standardziele).
       PrepareForBuild:
@@ -125,7 +125,7 @@ events:
           0 Warnung(en)
           0 Fehler
       
-      Verstrichene Zeit 00:00:02.27
+      Verstrichene Zeit 00:00:03.92
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -1189,8 +1189,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-60pblj"
-      binary: "//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-60pblj"
+      source: "//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-7ix8s1"
+      binary: "//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-7ix8s1"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -1200,40 +1200,40 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-60pblj'
+        Change Dir: '//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-7ix8s1'
         
-        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_ad4aa.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_22150.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild-Version 17.13.9+e0f243f1e für .NET Framework
-        Der Buildvorgang wurde am 27.05.2026 19:35:16 gestartet.
+        Der Buildvorgang wurde am 27.05.2026 20:18:37 gestartet.
         
-        Projekt "\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-60pblj\\cmTC_ad4aa.vcxproj" auf Knoten "1" (Standardziele).
+        Projekt "\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7ix8s1\\cmTC_22150.vcxproj" auf Knoten "1" (Standardziele).
         PrepareForBuild:
-          Das Verzeichnis "cmTC_ad4aa.dir\\Debug\\" wird erstellt.
+          Das Verzeichnis "cmTC_22150.dir\\Debug\\" wird erstellt.
           Die strukturierte Ausgabe ist aktiviert. Die Formatierung der Compilerdiagnose spiegelt die Fehlerhierarchie wider. Weitere Informationen finden Sie unter https://aka.ms/cpp/structured-output.
-          Das Verzeichnis "\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-60pblj\\Debug\\" wird erstellt.
-          Das Verzeichnis "cmTC_ad4aa.dir\\Debug\\cmTC_ad4aa.tlog\\" wird erstellt.
+          Das Verzeichnis "\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7ix8s1\\Debug\\" wird erstellt.
+          Das Verzeichnis "cmTC_22150.dir\\Debug\\cmTC_22150.tlog\\" wird erstellt.
         InitializeBuildStatus:
-          "cmTC_ad4aa.dir\\Debug\\cmTC_ad4aa.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
-          Aktualisieren des Timestamps von "cmTC_ad4aa.dir\\Debug\\cmTC_ad4aa.tlog\\unsuccessfulbuild".
+          "cmTC_22150.dir\\Debug\\cmTC_22150.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+          Aktualisieren des Timestamps von "cmTC_22150.dir\\Debug\\cmTC_22150.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /GR /Fo"cmTC_ad4aa.dir\\Debug\\\\" /Fd"cmTC_ad4aa.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /GR /Fo"cmTC_22150.dir\\Debug\\\\" /Fd"cmTC_22150.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++-Optimierungscompiler Version 19.43.34808 für x64
           Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /GR /Fo"cmTC_ad4aa.dir\\Debug\\\\" /Fd"cmTC_ad4aa.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /GR /Fo"cmTC_22150.dir\\Debug\\\\" /Fd"cmTC_22150.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\link.exe /OUT:"\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-60pblj\\Debug\\cmTC_ad4aa.exe" /INCREMENTAL /ILK:"cmTC_ad4aa.dir\\Debug\\cmTC_ad4aa.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-60pblj/Debug/cmTC_ad4aa.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-60pblj/Debug/cmTC_ad4aa.lib" /MACHINE:X64  /machine:x64 cmTC_ad4aa.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_ad4aa.vcxproj -> \\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-60pblj\\Debug\\cmTC_ad4aa.exe
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\link.exe /OUT:"\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7ix8s1\\Debug\\cmTC_22150.exe" /INCREMENTAL /ILK:"cmTC_22150.dir\\Debug\\cmTC_22150.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-7ix8s1/Debug/cmTC_22150.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-7ix8s1/Debug/cmTC_22150.lib" /MACHINE:X64  /machine:x64 cmTC_22150.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_22150.vcxproj -> \\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7ix8s1\\Debug\\cmTC_22150.exe
         FinalizeBuildStatus:
-          Die Datei "cmTC_ad4aa.dir\\Debug\\cmTC_ad4aa.tlog\\unsuccessfulbuild" wird gelöscht.
-          Aktualisieren des Timestamps von "cmTC_ad4aa.dir\\Debug\\cmTC_ad4aa.tlog\\cmTC_ad4aa.lastbuildstate".
-        Die Erstellung von Projekt "\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-60pblj\\cmTC_ad4aa.vcxproj" ist abgeschlossen (Standardziele).
+          Die Datei "cmTC_22150.dir\\Debug\\cmTC_22150.tlog\\unsuccessfulbuild" wird gelöscht.
+          Aktualisieren des Timestamps von "cmTC_22150.dir\\Debug\\cmTC_22150.tlog\\cmTC_22150.lastbuildstate".
+        Die Erstellung von Projekt "\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7ix8s1\\cmTC_22150.vcxproj" ist abgeschlossen (Standardziele).
         
         Der Buildvorgang wurde erfolgreich ausgeführt.
             0 Warnung(en)
             0 Fehler
         
-        Verstrichene Zeit 00:00:02.52
+        Verstrichene Zeit 00:00:04.35
         
       exitCode: 0
   -

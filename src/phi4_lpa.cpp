@@ -2,7 +2,11 @@
 #include <fstream>
 #include <iomanip>
 #include <vector>
+#define _USE_MATH_DEFINES
 #include <cmath>
+#ifndef M_PI
+    constexpr double M_PI = 3.14159265358979323846;
+#endif
 #include <string>
 
 /**

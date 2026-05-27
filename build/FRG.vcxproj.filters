@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="\\wsl.localhost\Ubuntu\home\roeth\Uni\FRG\myFRG\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="\\wsl.localhost\Ubuntu\home\roeth\Uni\FRG\myFRG\src\phi4_lpa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="\\wsl.localhost\Ubuntu\home\roeth\Uni\FRG\myFRG\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{73D20E36-3CB2-3FA6-9382-DA89607680F4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

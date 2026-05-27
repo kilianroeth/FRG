@@ -1,0 +1,10 @@
+^\\WSL.LOCALHOST\UBUNTU\HOME\ROETH\UNI\FRG\MYFRG\BUILD\CMAKEFILES\48E35E92215926CAA9E28242035035CD\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -S//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG -B//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file //wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/FRG.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

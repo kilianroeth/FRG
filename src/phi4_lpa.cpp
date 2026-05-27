@@ -55,7 +55,7 @@ std::vector<double> RHS(const std::vector<double>& V, double k) {
 
 // Integrate RG time step --------------
 
-std::vector<double> integrate(const std::vector<double>& V, double k, double dt) {
+std::vector<double> step(const std::vector<double>& V, double k, double dt) {
     std::vector<double> V_next(N_RHO);
     if (dt >= 0) {
         std::cerr << "[ERROR] dt must be negative" << std::endl;
@@ -111,7 +111,7 @@ void integrate_flow(const std::vector<double>& V_init, double dt) {
             save_V(V, "results/V_" + std::to_string(std::abs(t)) + ".txt");
         }
         if (i + 1 < N) {
-            V = integrate(V, k, dt_t);
+            V = step(V, k, dt_t);
         }
     }
 }

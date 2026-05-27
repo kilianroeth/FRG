@@ -29,21 +29,21 @@
 
  // Paramters ---------------------------
 
-struct Params
-{
-    double m2;
-    double lambda;
+// struct Params
+// {
+//     double m2;
+//     double lambda;
 
-    double t_start;
-    double t_end;
+//     double t_start;
+//     double t_end;
 
-    size_t n_rho;
-    double rho_max,
-    double d_rho;
-};
+//     size_t n_rho;
+//     double rho_max,
+//     double d_rho;
+// };
 
 
-static double M2            = -0.1;     // classical mass paramters
+static double M2            = -0.5;     // classical mass paramters
 static double LAMBDA        = 0.5;      // classical coupling paramter  
 
 // RG times t = ln(k/Λ)
@@ -71,7 +71,7 @@ std::vector<double> RHS(const std::vector<double>& V, double k);
 
 // Integrate RG time step --------------
 
-std::vector<double> integrate(const std::vector<double>& V, double k, double dt);
+std::vector<double> step(const std::vector<double>& V, double k, double dt);
 
 // save current potential --------------
 

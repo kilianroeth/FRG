@@ -24,10 +24,14 @@ target_link_libraries(FRG PRIVATE ${HDF5_LIBRARIES})
 # including directories
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
-target_compile_options(${PROJECT_NAME} PRIVATE
-    -Wall
-    -Wextra
-    -Wpedantic
-    $<$<CONFIG:Debug>:-g>
-    $<$<CONFIG:Release>:-O2>
-)
+if (MSVC) 
+    target_compile_options(${PROJECT_NAME} PRIVATE /W4)
+else()
+    target_compile_options(${PROJECT_NAME} PRIVATE
+        -Wall
+        -Wextra
+        -Wpedantic
+        $<$<CONFIG:Debug>:-g>
+        $<$<CONFIG:Release>:-O2>
+    )
+endif()

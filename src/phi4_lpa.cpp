@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <vector>
 #include <cmath>
+#include <string>
 
 /**
  * @brief phi4_lpa.cpp
@@ -67,10 +68,10 @@ inline std::vector<double> V_classical() {
     return V;
 }
 
-inline std::vector<double> RHS(std::vector<double> V, double k) {
+inline std::vector<double> RHS(const std::vector<double>& V, double k) {
     std::vector<double> RHS(N_RHO);
 
-    double prefactor = std::pow(k,3.0)/(6.0*M_PI*M_PI);
+    double prefactor = k*k*k/(6.0*M_PI*M_PI);
     double rho;
 
     for (size_t i = 0; i < N_RHO; ++i) {

@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

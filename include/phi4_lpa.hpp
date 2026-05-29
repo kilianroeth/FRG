@@ -27,34 +27,37 @@
  * 
  */
 
- // Paramters ---------------------------
+// Paramters ---------------------------
 
-// struct Params
-// {
-//     double m2;
-//     double lambda;
+struct Params {
+    double m2;
+    double λ;
 
-//     double t_start;
-//     double t_end;
+    double t_start;
+    double t_end;
 
-//     size_t n_rho;
-//     double rho_max,
-//     double d_rho;
-// };
+    double n_rho;
+    double rho_max;
+};
 
-
-static double M2            = -0.5;     // classical mass paramters
-static double LAMBDA        = 0.5;      // classical coupling paramter  
+static double M2            = -1/(9*M_PI*M_PI);     // classical mass paramters
+static double LAMBDA        = 1.0;      // classical coupling paramter  
 
 // RG times t = ln(k/Λ)
 static double T_START       = 0.0;
-static double T_END         = -7.5;
+static double T_END         = -15.0;
 
 // rho grid
 static size_t N_RHO         = 1000;                     // number of rho grid points
-static double RHO_MAX       = 7.5;                      // maximal value for rho
+static double RHO_MAX       = 0.5;                      // maximal value for rho
 static double D_RHO         = RHO_MAX / (N_RHO - 1);    // rho spacing
 
+class Solver {
+    private:
+
+    public:
+        Params m_params;
+};
 
 // Finite difference derivatives -------
 

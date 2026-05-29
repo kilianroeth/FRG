@@ -4,1954 +4,454 @@ events:
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake:233 (message)"
       - "CMakeLists.txt:4 (project)"
     message: |
-      The system is: Windows - 10.0.26200 - AMD64
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:4 (project)"
-    mode: "file"
-    variable: "src_in"
-    description: "Path to a file."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: true
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "CMakeCXXCompilerId.cpp.in"
-    candidate_directories:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/"
-    found: "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerId.cpp.in"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\local\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
-        - "C:\\Users\\roeth\\micromamba\\condabin"
-        - "C:\\Program Files\\Microsoft\\jdk-17.0.15.6-hotspot\\bin"
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
-        - "C:\\WINDOWS\\System32\\OpenSSH"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\nodejs"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Wolfram Research\\WolframScript"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files\\HDF_Group\\HDF5\\1.14.6\\bin"
-        - "C:\\Program Files\\LLVM\\bin"
-        - "C:\\Program Files (x86)\\LLVM\\bin"
-        - "C:\\Program Files\\dotnet"
-        - "C:\\Program Files\\PowerShell\\7"
-        - "C:\\Users\\roeth\\AppData\\Local\\micromamba"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312\\Scripts"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312"
-        - "C:\\Users\\roeth\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Program Files\\JetBrains\\PyCharm 2023.1\\bin"
-        - "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2023.2.2\\bin"
-        - "C:\\Users\\roeth\\AppData\\Local\\Pandoc"
-        - "C:\\texlive\\2024\\bin\\windows"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\npm"
-        - "C:\\Users\\roeth\\AppData\\Local\\Android\\Sdk\\platform-tools"
-        - "C:\\MinGW\\bin"
-        - "C:\\Users\\roeth\\vcpkg"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
-        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
-        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
+      The system is: Linux - 6.17.0-35-generic - x86_64
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
       - "CMakeLists.txt:4 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-      Compiler:  
+      Compiler: /usr/bin/g++ 
       Build flags: 
       Id flags:  
       
       The output was:
       0
-      MSBuild-Version 17.13.9+e0f243f1e für .NET Framework
-      Der Buildvorgang wurde am 27.05.2026 20:18:29 gestartet.
-      
-      Projekt "\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" auf Knoten "1" (Standardziele).
-      PrepareForBuild:
-        Das Verzeichnis "Debug\\" wird erstellt.
-        Die strukturierte Ausgabe ist aktiviert. Die Formatierung der Compilerdiagnose spiegelt die Fehlerhierarchie wider. Weitere Informationen finden Sie unter https://aka.ms/cpp/structured-output.
-        Das Verzeichnis "Debug\\CompilerIdCXX.tlog\\" wird erstellt.
-      InitializeBuildStatus:
-        "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
-        Aktualisieren des Timestamps von "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
-      ClCompile:
-        C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
-        CMakeCXXCompilerId.cpp
-      Link:
-        C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
-        CompilerIdCXX.vcxproj -> \\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.exe
-      PostBuildEvent:
-        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
-        :VCEnd
-        CMAKE_CXX_COMPILER=C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\bin\\Hostx64\\x64\\cl.exe
-      FinalizeBuildStatus:
-        Die Datei "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" wird gelöscht.
-        Aktualisieren des Timestamps von "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
-      Die Erstellung von Projekt "\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" ist abgeschlossen (Standardziele).
-      
-      Der Buildvorgang wurde erfolgreich ausgeführt.
-          0 Warnung(en)
-          0 Fehler
-      
-      Verstrichene Zeit 00:00:03.92
       
       
-      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
       
-      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      The CXX compiler identification is GNU, found in:
+        /home/kilian/Code/FRG/build/CMakeFiles/3.28.3/CompilerIdCXX/a.out
       
-      The CXX compiler identification is MSVC, found in:
-        //wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/4.1.1/CompilerIdCXX/CompilerIdCXX.exe
-      
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:103 (__resolve_linker_path)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:4 (project)"
-    mode: "program"
-    variable: "_CMAKE_TOOL_WITH_PATH"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "link"
-    candidate_directories:
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/"
-      - "C:/Users/roeth/bin/"
-      - "C:/Program Files/Git/mingw64/bin/"
-      - "C:/Program Files/Git/usr/local/bin/"
-      - "C:/Program Files/Git/usr/bin/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
-      - "C:/Users/roeth/micromamba/condabin/"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Program Files/nodejs/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Wolfram Research/WolframScript/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/"
-      - "C:/Program Files/LLVM/bin/"
-      - "C:/Program Files (x86)/LLVM/bin/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files/PowerShell/7/"
-      - "C:/Users/roeth/AppData/Local/micromamba/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/"
-      - "C:/Users/roeth/AppData/Local/Pandoc/"
-      - "C:/texlive/2024/bin/windows/"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "C:/Users/roeth/AppData/Roaming/npm/"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/"
-      - "C:/MinGW/bin/"
-      - "C:/Users/roeth/vcpkg/"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/"
-      - "C:/Program Files/Git/usr/bin/core_perl/"
-    searched_directories:
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/link.com"
-    found: "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/link.exe"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\local\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
-        - "C:\\Users\\roeth\\micromamba\\condabin"
-        - "C:\\Program Files\\Microsoft\\jdk-17.0.15.6-hotspot\\bin"
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
-        - "C:\\WINDOWS\\System32\\OpenSSH"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\nodejs"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Wolfram Research\\WolframScript"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files\\HDF_Group\\HDF5\\1.14.6\\bin"
-        - "C:\\Program Files\\LLVM\\bin"
-        - "C:\\Program Files (x86)\\LLVM\\bin"
-        - "C:\\Program Files\\dotnet"
-        - "C:\\Program Files\\PowerShell\\7"
-        - "C:\\Users\\roeth\\AppData\\Local\\micromamba"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312\\Scripts"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312"
-        - "C:\\Users\\roeth\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Program Files\\JetBrains\\PyCharm 2023.1\\bin"
-        - "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2023.2.2\\bin"
-        - "C:\\Users\\roeth\\AppData\\Local\\Pandoc"
-        - "C:\\texlive\\2024\\bin\\windows"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\npm"
-        - "C:\\Users\\roeth\\AppData\\Local\\Android\\Sdk\\platform-tools"
-        - "C:\\MinGW\\bin"
-        - "C:\\Users\\roeth\\vcpkg"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
-        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
-        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:4 (project)"
-    mode: "program"
-    variable: "_CMAKE_TOOL_WITH_PATH"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "lld-link"
-    candidate_directories:
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/"
-      - "C:/Users/roeth/bin/"
-      - "C:/Program Files/Git/mingw64/bin/"
-      - "C:/Program Files/Git/usr/local/bin/"
-      - "C:/Program Files/Git/usr/bin/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
-      - "C:/Users/roeth/micromamba/condabin/"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Program Files/nodejs/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Wolfram Research/WolframScript/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/"
-      - "C:/Program Files/LLVM/bin/"
-      - "C:/Program Files (x86)/LLVM/bin/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files/PowerShell/7/"
-      - "C:/Users/roeth/AppData/Local/micromamba/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/"
-      - "C:/Users/roeth/AppData/Local/Pandoc/"
-      - "C:/texlive/2024/bin/windows/"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "C:/Users/roeth/AppData/Roaming/npm/"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/"
-      - "C:/MinGW/bin/"
-      - "C:/Users/roeth/vcpkg/"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/"
-      - "C:/Program Files/Git/usr/bin/core_perl/"
-    searched_directories:
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/lld-link.com"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/lld-link.exe"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/lld-link"
-      - "C:/Users/roeth/bin/lld-link.com"
-      - "C:/Users/roeth/bin/lld-link.exe"
-      - "C:/Users/roeth/bin/lld-link"
-      - "C:/Program Files/Git/mingw64/bin/lld-link.com"
-      - "C:/Program Files/Git/mingw64/bin/lld-link.exe"
-      - "C:/Program Files/Git/mingw64/bin/lld-link"
-      - "C:/Program Files/Git/usr/local/bin/lld-link.com"
-      - "C:/Program Files/Git/usr/local/bin/lld-link.exe"
-      - "C:/Program Files/Git/usr/local/bin/lld-link"
-      - "C:/Program Files/Git/usr/bin/lld-link.com"
-      - "C:/Program Files/Git/usr/bin/lld-link.exe"
-      - "C:/Program Files/Git/usr/bin/lld-link"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/lld-link.com"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/lld-link.exe"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/lld-link"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/lld-link.com"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/lld-link.exe"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/lld-link"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/lld-link.com"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/lld-link.exe"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/lld-link"
-      - "C:/Users/roeth/micromamba/condabin/lld-link.com"
-      - "C:/Users/roeth/micromamba/condabin/lld-link.exe"
-      - "C:/Users/roeth/micromamba/condabin/lld-link"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/lld-link.com"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/lld-link.exe"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/lld-link"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link.com"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link.exe"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link"
-      - "C:/Windows/System32/lld-link.com"
-      - "C:/Windows/System32/lld-link.exe"
-      - "C:/Windows/System32/lld-link"
-      - "C:/Windows/lld-link.com"
-      - "C:/Windows/lld-link.exe"
-      - "C:/Windows/lld-link"
-      - "C:/Windows/System32/wbem/lld-link.com"
-      - "C:/Windows/System32/wbem/lld-link.exe"
-      - "C:/Windows/System32/wbem/lld-link"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link"
-      - "C:/Windows/System32/OpenSSH/lld-link.com"
-      - "C:/Windows/System32/OpenSSH/lld-link.exe"
-      - "C:/Windows/System32/OpenSSH/lld-link"
-      - "C:/Program Files/Git/cmd/lld-link.com"
-      - "C:/Program Files/Git/cmd/lld-link.exe"
-      - "C:/Program Files/Git/cmd/lld-link"
-      - "C:/Program Files/nodejs/lld-link.com"
-      - "C:/Program Files/nodejs/lld-link.exe"
-      - "C:/Program Files/nodejs/lld-link"
-      - "C:/ProgramData/chocolatey/bin/lld-link.com"
-      - "C:/ProgramData/chocolatey/bin/lld-link.exe"
-      - "C:/ProgramData/chocolatey/bin/lld-link"
-      - "C:/Program Files/Wolfram Research/WolframScript/lld-link.com"
-      - "C:/Program Files/Wolfram Research/WolframScript/lld-link.exe"
-      - "C:/Program Files/Wolfram Research/WolframScript/lld-link"
-      - "C:/Program Files/CMake/bin/lld-link.com"
-      - "C:/Program Files/CMake/bin/lld-link.exe"
-      - "C:/Program Files/CMake/bin/lld-link"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/lld-link.com"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/lld-link.exe"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/lld-link"
-      - "C:/Program Files/LLVM/bin/lld-link.com"
-    found: "C:/Program Files/LLVM/bin/lld-link.exe"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\local\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
-        - "C:\\Users\\roeth\\micromamba\\condabin"
-        - "C:\\Program Files\\Microsoft\\jdk-17.0.15.6-hotspot\\bin"
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
-        - "C:\\WINDOWS\\System32\\OpenSSH"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\nodejs"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Wolfram Research\\WolframScript"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files\\HDF_Group\\HDF5\\1.14.6\\bin"
-        - "C:\\Program Files\\LLVM\\bin"
-        - "C:\\Program Files (x86)\\LLVM\\bin"
-        - "C:\\Program Files\\dotnet"
-        - "C:\\Program Files\\PowerShell\\7"
-        - "C:\\Users\\roeth\\AppData\\Local\\micromamba"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312\\Scripts"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312"
-        - "C:\\Users\\roeth\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Program Files\\JetBrains\\PyCharm 2023.1\\bin"
-        - "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2023.2.2\\bin"
-        - "C:\\Users\\roeth\\AppData\\Local\\Pandoc"
-        - "C:\\texlive\\2024\\bin\\windows"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\npm"
-        - "C:\\Users\\roeth\\AppData\\Local\\Android\\Sdk\\platform-tools"
-        - "C:\\MinGW\\bin"
-        - "C:\\Users\\roeth\\vcpkg"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
-        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
-        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:4 (project)"
-    mode: "program"
-    variable: "CMAKE_LINKER"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "link"
-    candidate_directories:
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/"
-      - "C:/Users/roeth/bin/"
-      - "C:/Program Files/Git/mingw64/bin/"
-      - "C:/Program Files/Git/usr/local/bin/"
-      - "C:/Program Files/Git/usr/bin/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
-      - "C:/Users/roeth/micromamba/condabin/"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Program Files/nodejs/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Wolfram Research/WolframScript/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/"
-      - "C:/Program Files/LLVM/bin/"
-      - "C:/Program Files (x86)/LLVM/bin/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files/PowerShell/7/"
-      - "C:/Users/roeth/AppData/Local/micromamba/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/"
-      - "C:/Users/roeth/AppData/Local/Pandoc/"
-      - "C:/texlive/2024/bin/windows/"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "C:/Users/roeth/AppData/Roaming/npm/"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/"
-      - "C:/MinGW/bin/"
-      - "C:/Users/roeth/vcpkg/"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/"
-      - "C:/Program Files/Git/usr/bin/core_perl/"
-    searched_directories:
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/link.com"
-    found: "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/link.exe"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\local\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
-        - "C:\\Users\\roeth\\micromamba\\condabin"
-        - "C:\\Program Files\\Microsoft\\jdk-17.0.15.6-hotspot\\bin"
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
-        - "C:\\WINDOWS\\System32\\OpenSSH"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\nodejs"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Wolfram Research\\WolframScript"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files\\HDF_Group\\HDF5\\1.14.6\\bin"
-        - "C:\\Program Files\\LLVM\\bin"
-        - "C:\\Program Files (x86)\\LLVM\\bin"
-        - "C:\\Program Files\\dotnet"
-        - "C:\\Program Files\\PowerShell\\7"
-        - "C:\\Users\\roeth\\AppData\\Local\\micromamba"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312\\Scripts"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312"
-        - "C:\\Users\\roeth\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Program Files\\JetBrains\\PyCharm 2023.1\\bin"
-        - "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2023.2.2\\bin"
-        - "C:\\Users\\roeth\\AppData\\Local\\Pandoc"
-        - "C:\\texlive\\2024\\bin\\windows"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\npm"
-        - "C:\\Users\\roeth\\AppData\\Local\\Android\\Sdk\\platform-tools"
-        - "C:\\MinGW\\bin"
-        - "C:\\Users\\roeth\\vcpkg"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
-        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
-        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:4 (project)"
-    mode: "program"
-    variable: "CMAKE_MT"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "mt"
-    candidate_directories:
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/"
-      - "C:/Users/roeth/bin/"
-      - "C:/Program Files/Git/mingw64/bin/"
-      - "C:/Program Files/Git/usr/local/bin/"
-      - "C:/Program Files/Git/usr/bin/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
-      - "C:/Users/roeth/micromamba/condabin/"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Program Files/nodejs/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Wolfram Research/WolframScript/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/"
-      - "C:/Program Files/LLVM/bin/"
-      - "C:/Program Files (x86)/LLVM/bin/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files/PowerShell/7/"
-      - "C:/Users/roeth/AppData/Local/micromamba/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/"
-      - "C:/Users/roeth/AppData/Local/Pandoc/"
-      - "C:/texlive/2024/bin/windows/"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "C:/Users/roeth/AppData/Roaming/npm/"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/"
-      - "C:/MinGW/bin/"
-      - "C:/Users/roeth/vcpkg/"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/"
-      - "C:/Program Files/Git/usr/bin/core_perl/"
-    searched_directories:
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/mt.com"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/mt.exe"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/mt"
-      - "C:/Users/roeth/bin/mt.com"
-      - "C:/Users/roeth/bin/mt.exe"
-      - "C:/Users/roeth/bin/mt"
-      - "C:/Program Files/Git/mingw64/bin/mt.com"
-      - "C:/Program Files/Git/mingw64/bin/mt.exe"
-      - "C:/Program Files/Git/mingw64/bin/mt"
-      - "C:/Program Files/Git/usr/local/bin/mt.com"
-      - "C:/Program Files/Git/usr/local/bin/mt.exe"
-      - "C:/Program Files/Git/usr/local/bin/mt"
-      - "C:/Program Files/Git/usr/bin/mt.com"
-      - "C:/Program Files/Git/usr/bin/mt.exe"
-      - "C:/Program Files/Git/usr/bin/mt"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/mt.com"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/mt.exe"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/mt"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/mt.com"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/mt.exe"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/mt"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/mt.com"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/mt.exe"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/mt"
-      - "C:/Users/roeth/micromamba/condabin/mt.com"
-      - "C:/Users/roeth/micromamba/condabin/mt.exe"
-      - "C:/Users/roeth/micromamba/condabin/mt"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/mt.com"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/mt.exe"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/mt"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/mt.com"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/mt.exe"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/mt"
-      - "C:/Windows/System32/mt.com"
-      - "C:/Windows/System32/mt.exe"
-      - "C:/Windows/System32/mt"
-      - "C:/Windows/mt.com"
-      - "C:/Windows/mt.exe"
-      - "C:/Windows/mt"
-      - "C:/Windows/System32/wbem/mt.com"
-      - "C:/Windows/System32/wbem/mt.exe"
-      - "C:/Windows/System32/wbem/mt"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt"
-      - "C:/Windows/System32/OpenSSH/mt.com"
-      - "C:/Windows/System32/OpenSSH/mt.exe"
-      - "C:/Windows/System32/OpenSSH/mt"
-      - "C:/Program Files/Git/cmd/mt.com"
-      - "C:/Program Files/Git/cmd/mt.exe"
-      - "C:/Program Files/Git/cmd/mt"
-      - "C:/Program Files/nodejs/mt.com"
-      - "C:/Program Files/nodejs/mt.exe"
-      - "C:/Program Files/nodejs/mt"
-      - "C:/ProgramData/chocolatey/bin/mt.com"
-      - "C:/ProgramData/chocolatey/bin/mt.exe"
-      - "C:/ProgramData/chocolatey/bin/mt"
-      - "C:/Program Files/Wolfram Research/WolframScript/mt.com"
-      - "C:/Program Files/Wolfram Research/WolframScript/mt.exe"
-      - "C:/Program Files/Wolfram Research/WolframScript/mt"
-      - "C:/Program Files/CMake/bin/mt.com"
-      - "C:/Program Files/CMake/bin/mt.exe"
-      - "C:/Program Files/CMake/bin/mt"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/mt.com"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/mt.exe"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/mt"
-      - "C:/Program Files/LLVM/bin/mt.com"
-      - "C:/Program Files/LLVM/bin/mt.exe"
-      - "C:/Program Files/LLVM/bin/mt"
-      - "C:/Program Files (x86)/LLVM/bin/mt.com"
-      - "C:/Program Files (x86)/LLVM/bin/mt.exe"
-      - "C:/Program Files (x86)/LLVM/bin/mt"
-      - "C:/Program Files/dotnet/mt.com"
-      - "C:/Program Files/dotnet/mt.exe"
-      - "C:/Program Files/dotnet/mt"
-      - "C:/Program Files/PowerShell/7/mt.com"
-      - "C:/Program Files/PowerShell/7/mt.exe"
-      - "C:/Program Files/PowerShell/7/mt"
-      - "C:/Users/roeth/AppData/Local/micromamba/mt.com"
-      - "C:/Users/roeth/AppData/Local/micromamba/mt.exe"
-      - "C:/Users/roeth/AppData/Local/micromamba/mt"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/mt.com"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/mt.exe"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/mt"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/mt.com"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/mt.exe"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/mt"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/mt.com"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/mt.exe"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/mt"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/mt.com"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/mt.exe"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/mt"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/mt.com"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/mt.exe"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/mt"
-      - "C:/Users/roeth/AppData/Local/Pandoc/mt.com"
-      - "C:/Users/roeth/AppData/Local/Pandoc/mt.exe"
-      - "C:/Users/roeth/AppData/Local/Pandoc/mt"
-      - "C:/texlive/2024/bin/windows/mt.com"
-      - "C:/texlive/2024/bin/windows/mt.exe"
-      - "C:/texlive/2024/bin/windows/mt"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/mt.com"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/mt.exe"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/mt"
-      - "C:/Users/roeth/AppData/Roaming/npm/mt.com"
-      - "C:/Users/roeth/AppData/Roaming/npm/mt.exe"
-      - "C:/Users/roeth/AppData/Roaming/npm/mt"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/mt.com"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/mt.exe"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/mt"
-      - "C:/MinGW/bin/mt.com"
-      - "C:/MinGW/bin/mt.exe"
-      - "C:/MinGW/bin/mt"
-      - "C:/Users/roeth/vcpkg/mt.com"
-      - "C:/Users/roeth/vcpkg/mt.exe"
-      - "C:/Users/roeth/vcpkg/mt"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/mt.com"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/mt.exe"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/mt"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/mt.com"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/mt.exe"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/mt"
-      - "C:/Program Files/Git/usr/bin/core_perl/mt.com"
-      - "C:/Program Files/Git/usr/bin/core_perl/mt.exe"
-      - "C:/Program Files/Git/usr/bin/core_perl/mt"
-    found: false
-    search_context:
-      ENV{PATH}:
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\local\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
-        - "C:\\Users\\roeth\\micromamba\\condabin"
-        - "C:\\Program Files\\Microsoft\\jdk-17.0.15.6-hotspot\\bin"
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
-        - "C:\\WINDOWS\\System32\\OpenSSH"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\nodejs"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Wolfram Research\\WolframScript"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files\\HDF_Group\\HDF5\\1.14.6\\bin"
-        - "C:\\Program Files\\LLVM\\bin"
-        - "C:\\Program Files (x86)\\LLVM\\bin"
-        - "C:\\Program Files\\dotnet"
-        - "C:\\Program Files\\PowerShell\\7"
-        - "C:\\Users\\roeth\\AppData\\Local\\micromamba"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312\\Scripts"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312"
-        - "C:\\Users\\roeth\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Program Files\\JetBrains\\PyCharm 2023.1\\bin"
-        - "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2023.2.2\\bin"
-        - "C:\\Users\\roeth\\AppData\\Local\\Pandoc"
-        - "C:\\texlive\\2024\\bin\\windows"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\npm"
-        - "C:\\Users\\roeth\\AppData\\Local\\Android\\Sdk\\platform-tools"
-        - "C:\\MinGW\\bin"
-        - "C:\\Users\\roeth\\vcpkg"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
-        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
-        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:4 (project)"
-    mode: "program"
-    variable: "CMAKE_AR"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "lib"
-    candidate_directories:
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/"
-      - "C:/Users/roeth/bin/"
-      - "C:/Program Files/Git/mingw64/bin/"
-      - "C:/Program Files/Git/usr/local/bin/"
-      - "C:/Program Files/Git/usr/bin/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
-      - "C:/Users/roeth/micromamba/condabin/"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Program Files/nodejs/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Wolfram Research/WolframScript/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/"
-      - "C:/Program Files/LLVM/bin/"
-      - "C:/Program Files (x86)/LLVM/bin/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files/PowerShell/7/"
-      - "C:/Users/roeth/AppData/Local/micromamba/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/"
-      - "C:/Users/roeth/AppData/Local/Pandoc/"
-      - "C:/texlive/2024/bin/windows/"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "C:/Users/roeth/AppData/Roaming/npm/"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/"
-      - "C:/MinGW/bin/"
-      - "C:/Users/roeth/vcpkg/"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/"
-      - "C:/Program Files/Git/usr/bin/core_perl/"
-    searched_directories:
-      - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/lib.com"
-    found: "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/lib.exe"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\local\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
-        - "C:\\Users\\roeth\\micromamba\\condabin"
-        - "C:\\Program Files\\Microsoft\\jdk-17.0.15.6-hotspot\\bin"
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
-        - "C:\\WINDOWS\\System32\\OpenSSH"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\nodejs"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Wolfram Research\\WolframScript"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files\\HDF_Group\\HDF5\\1.14.6\\bin"
-        - "C:\\Program Files\\LLVM\\bin"
-        - "C:\\Program Files (x86)\\LLVM\\bin"
-        - "C:\\Program Files\\dotnet"
-        - "C:\\Program Files\\PowerShell\\7"
-        - "C:\\Users\\roeth\\AppData\\Local\\micromamba"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312\\Scripts"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312"
-        - "C:\\Users\\roeth\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Program Files\\JetBrains\\PyCharm 2023.1\\bin"
-        - "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2023.2.2\\bin"
-        - "C:\\Users\\roeth\\AppData\\Local\\Pandoc"
-        - "C:\\texlive\\2024\\bin\\windows"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\npm"
-        - "C:\\Users\\roeth\\AppData\\Local\\Android\\Sdk\\platform-tools"
-        - "C:\\MinGW\\bin"
-        - "C:\\Users\\roeth\\vcpkg"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
-        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
-        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineRCCompiler.cmake:40 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC.cmake:574 (enable_language)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC.cmake:547 (__windows_compiler_msvc_enable_rc)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC-CXX.cmake:6 (__windows_compiler_msvc)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXInformation.cmake:48 (include)"
-      - "CMakeLists.txt:4 (project)"
-    mode: "program"
-    variable: "CMAKE_RC_COMPILER"
-    description: "RC compiler"
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: true
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "rc"
-    candidate_directories:
-      - "C:/Users/roeth/bin/"
-      - "C:/Program Files/Git/mingw64/bin/"
-      - "C:/Program Files/Git/usr/local/bin/"
-      - "C:/Program Files/Git/usr/bin/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
-      - "C:/Users/roeth/micromamba/condabin/"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Program Files/nodejs/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Wolfram Research/WolframScript/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/"
-      - "C:/Program Files/LLVM/bin/"
-      - "C:/Program Files (x86)/LLVM/bin/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files/PowerShell/7/"
-      - "C:/Users/roeth/AppData/Local/micromamba/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/"
-      - "C:/Users/roeth/AppData/Local/Pandoc/"
-      - "C:/texlive/2024/bin/windows/"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "C:/Users/roeth/AppData/Roaming/npm/"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/"
-      - "C:/MinGW/bin/"
-      - "C:/Users/roeth/vcpkg/"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/"
-      - "C:/Program Files/Git/usr/bin/core_perl/"
-      - "C:/Program Files/bin/"
-      - "C:/Program Files/sbin/"
-      - "C:/Program Files/"
-      - "C:/Program Files (x86)/bin/"
-      - "C:/Program Files (x86)/sbin/"
-      - "C:/Program Files (x86)/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/CMake/sbin/"
-      - "C:/Program Files/CMake/"
-      - "C:/Program Files (x86)/FRG/bin/"
-      - "C:/Program Files (x86)/FRG/sbin/"
-      - "C:/Program Files (x86)/FRG/"
-    searched_directories:
-      - "C:/Users/roeth/bin/rc.com"
-      - "C:/Users/roeth/bin/rc.exe"
-      - "C:/Users/roeth/bin/rc"
-      - "C:/Program Files/Git/mingw64/bin/rc.com"
-      - "C:/Program Files/Git/mingw64/bin/rc.exe"
-      - "C:/Program Files/Git/mingw64/bin/rc"
-      - "C:/Program Files/Git/usr/local/bin/rc.com"
-      - "C:/Program Files/Git/usr/local/bin/rc.exe"
-      - "C:/Program Files/Git/usr/local/bin/rc"
-      - "C:/Program Files/Git/usr/bin/rc.com"
-      - "C:/Program Files/Git/usr/bin/rc.exe"
-      - "C:/Program Files/Git/usr/bin/rc"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/rc.com"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/rc.exe"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/rc"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/rc.com"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/rc.exe"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/rc"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/rc.com"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/rc.exe"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/rc"
-      - "C:/Users/roeth/micromamba/condabin/rc.com"
-      - "C:/Users/roeth/micromamba/condabin/rc.exe"
-      - "C:/Users/roeth/micromamba/condabin/rc"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/rc.com"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/rc.exe"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/rc"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/rc.com"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/rc.exe"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/rc"
-      - "C:/Windows/System32/rc.com"
-      - "C:/Windows/System32/rc.exe"
-      - "C:/Windows/System32/rc"
-      - "C:/Windows/rc.com"
-      - "C:/Windows/rc.exe"
-      - "C:/Windows/rc"
-      - "C:/Windows/System32/wbem/rc.com"
-      - "C:/Windows/System32/wbem/rc.exe"
-      - "C:/Windows/System32/wbem/rc"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc"
-      - "C:/Windows/System32/OpenSSH/rc.com"
-      - "C:/Windows/System32/OpenSSH/rc.exe"
-      - "C:/Windows/System32/OpenSSH/rc"
-      - "C:/Program Files/Git/cmd/rc.com"
-      - "C:/Program Files/Git/cmd/rc.exe"
-      - "C:/Program Files/Git/cmd/rc"
-      - "C:/Program Files/nodejs/rc.com"
-      - "C:/Program Files/nodejs/rc.exe"
-      - "C:/Program Files/nodejs/rc"
-      - "C:/ProgramData/chocolatey/bin/rc.com"
-      - "C:/ProgramData/chocolatey/bin/rc.exe"
-      - "C:/ProgramData/chocolatey/bin/rc"
-      - "C:/Program Files/Wolfram Research/WolframScript/rc.com"
-      - "C:/Program Files/Wolfram Research/WolframScript/rc.exe"
-      - "C:/Program Files/Wolfram Research/WolframScript/rc"
-      - "C:/Program Files/CMake/bin/rc.com"
-      - "C:/Program Files/CMake/bin/rc.exe"
-      - "C:/Program Files/CMake/bin/rc"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/rc.com"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/rc.exe"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/rc"
-      - "C:/Program Files/LLVM/bin/rc.com"
-      - "C:/Program Files/LLVM/bin/rc.exe"
-      - "C:/Program Files/LLVM/bin/rc"
-      - "C:/Program Files (x86)/LLVM/bin/rc.com"
-      - "C:/Program Files (x86)/LLVM/bin/rc.exe"
-      - "C:/Program Files (x86)/LLVM/bin/rc"
-      - "C:/Program Files/dotnet/rc.com"
-      - "C:/Program Files/dotnet/rc.exe"
-      - "C:/Program Files/dotnet/rc"
-      - "C:/Program Files/PowerShell/7/rc.com"
-      - "C:/Program Files/PowerShell/7/rc.exe"
-      - "C:/Program Files/PowerShell/7/rc"
-      - "C:/Users/roeth/AppData/Local/micromamba/rc.com"
-      - "C:/Users/roeth/AppData/Local/micromamba/rc.exe"
-      - "C:/Users/roeth/AppData/Local/micromamba/rc"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/rc.com"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/rc.exe"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/rc"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/rc.com"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/rc.exe"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/rc"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/rc.com"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/rc.exe"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/rc"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/rc.com"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/rc.exe"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/rc"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/rc.com"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/rc.exe"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/rc"
-      - "C:/Users/roeth/AppData/Local/Pandoc/rc.com"
-      - "C:/Users/roeth/AppData/Local/Pandoc/rc.exe"
-      - "C:/Users/roeth/AppData/Local/Pandoc/rc"
-      - "C:/texlive/2024/bin/windows/rc.com"
-      - "C:/texlive/2024/bin/windows/rc.exe"
-      - "C:/texlive/2024/bin/windows/rc"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/rc.com"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/rc.exe"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/rc"
-      - "C:/Users/roeth/AppData/Roaming/npm/rc.com"
-      - "C:/Users/roeth/AppData/Roaming/npm/rc.exe"
-      - "C:/Users/roeth/AppData/Roaming/npm/rc"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/rc.com"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/rc.exe"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/rc"
-      - "C:/MinGW/bin/rc.com"
-      - "C:/MinGW/bin/rc.exe"
-      - "C:/MinGW/bin/rc"
-      - "C:/Users/roeth/vcpkg/rc.com"
-      - "C:/Users/roeth/vcpkg/rc.exe"
-      - "C:/Users/roeth/vcpkg/rc"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/rc.com"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/rc.exe"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/rc"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/rc.com"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/rc.exe"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/rc"
-      - "C:/Program Files/Git/usr/bin/core_perl/rc.com"
-      - "C:/Program Files/Git/usr/bin/core_perl/rc.exe"
-      - "C:/Program Files/Git/usr/bin/core_perl/rc"
-      - "C:/Program Files/bin/rc.com"
-      - "C:/Program Files/bin/rc.exe"
-      - "C:/Program Files/bin/rc"
-      - "C:/Program Files/sbin/rc.com"
-      - "C:/Program Files/sbin/rc.exe"
-      - "C:/Program Files/sbin/rc"
-      - "C:/Program Files/rc.com"
-      - "C:/Program Files/rc.exe"
-      - "C:/Program Files/rc"
-      - "C:/Program Files (x86)/bin/rc.com"
-      - "C:/Program Files (x86)/bin/rc.exe"
-      - "C:/Program Files (x86)/bin/rc"
-      - "C:/Program Files (x86)/sbin/rc.com"
-      - "C:/Program Files (x86)/sbin/rc.exe"
-      - "C:/Program Files (x86)/sbin/rc"
-      - "C:/Program Files (x86)/rc.com"
-      - "C:/Program Files (x86)/rc.exe"
-      - "C:/Program Files (x86)/rc"
-      - "C:/Program Files/CMake/bin/rc.com"
-      - "C:/Program Files/CMake/bin/rc.exe"
-      - "C:/Program Files/CMake/bin/rc"
-      - "C:/Program Files/CMake/sbin/rc.com"
-      - "C:/Program Files/CMake/sbin/rc.exe"
-      - "C:/Program Files/CMake/sbin/rc"
-      - "C:/Program Files/CMake/rc.com"
-      - "C:/Program Files/CMake/rc.exe"
-      - "C:/Program Files/CMake/rc"
-      - "C:/Program Files (x86)/FRG/bin/rc.com"
-      - "C:/Program Files (x86)/FRG/bin/rc.exe"
-      - "C:/Program Files (x86)/FRG/bin/rc"
-      - "C:/Program Files (x86)/FRG/sbin/rc.com"
-      - "C:/Program Files (x86)/FRG/sbin/rc.exe"
-      - "C:/Program Files (x86)/FRG/sbin/rc"
-      - "C:/Program Files (x86)/FRG/rc.com"
-      - "C:/Program Files (x86)/FRG/rc.exe"
-      - "C:/Program Files (x86)/FRG/rc"
-    found: false
-    search_context:
-      ENV{PATH}:
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\local\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
-        - "C:\\Users\\roeth\\micromamba\\condabin"
-        - "C:\\Program Files\\Microsoft\\jdk-17.0.15.6-hotspot\\bin"
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
-        - "C:\\WINDOWS\\System32\\OpenSSH"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\nodejs"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Wolfram Research\\WolframScript"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files\\HDF_Group\\HDF5\\1.14.6\\bin"
-        - "C:\\Program Files\\LLVM\\bin"
-        - "C:\\Program Files (x86)\\LLVM\\bin"
-        - "C:\\Program Files\\dotnet"
-        - "C:\\Program Files\\PowerShell\\7"
-        - "C:\\Users\\roeth\\AppData\\Local\\micromamba"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312\\Scripts"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312"
-        - "C:\\Users\\roeth\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Program Files\\JetBrains\\PyCharm 2023.1\\bin"
-        - "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2023.2.2\\bin"
-        - "C:\\Users\\roeth\\AppData\\Local\\Pandoc"
-        - "C:\\texlive\\2024\\bin\\windows"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\npm"
-        - "C:\\Users\\roeth\\AppData\\Local\\Android\\Sdk\\platform-tools"
-        - "C:\\MinGW\\bin"
-        - "C:\\Users\\roeth\\vcpkg"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
-        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
-        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/FRG"
-      CMAKE_SYSTEM_PREFIX_PATH:
-        - "C:/Program Files"
-        - "C:/Program Files (x86)"
-        - "C:/Program Files/CMake"
-        - "C:/Program Files (x86)/FRG"
   -
     kind: "try_compile-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:4 (project)"
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-7ix8s1"
-      binary: "//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-7ix8s1"
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-IoRfVS"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-IoRfVS"
     cmakeVariables:
-      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
-      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
-      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
-      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
     buildResult:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-7ix8s1'
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-IoRfVS'
         
-        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_22150.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
-        MSBuild-Version 17.13.9+e0f243f1e für .NET Framework
-        Der Buildvorgang wurde am 27.05.2026 20:18:37 gestartet.
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_3d938/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_3d938.dir/build.make CMakeFiles/cmTC_3d938.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-IoRfVS'
+        Building CXX object CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/g++   -v -o CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/g++
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 13.3.0-6ubuntu2~24.04.1' --with-bugurl=file:///usr/share/doc/gcc-13/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-13 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/libexec --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-libstdcxx-backtrace --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-13-EldibY/gcc-13-13.3.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-13-EldibY/gcc-13-13.3.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04.1) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_3d938.dir/'
+         /usr/libexec/gcc/x86_64-linux-gnu/13/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_3d938.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cc0uSYVG.s
+        GNU C++17 (Ubuntu 13.3.0-6ubuntu2~24.04.1) version 13.3.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 13.3.0, GMP version 6.3.0, MPFR version 4.2.1, MPC version 1.3.1, isl version isl-0.26-GMP
         
-        Projekt "\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7ix8s1\\cmTC_22150.vcxproj" auf Knoten "1" (Standardziele).
-        PrepareForBuild:
-          Das Verzeichnis "cmTC_22150.dir\\Debug\\" wird erstellt.
-          Die strukturierte Ausgabe ist aktiviert. Die Formatierung der Compilerdiagnose spiegelt die Fehlerhierarchie wider. Weitere Informationen finden Sie unter https://aka.ms/cpp/structured-output.
-          Das Verzeichnis "\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7ix8s1\\Debug\\" wird erstellt.
-          Das Verzeichnis "cmTC_22150.dir\\Debug\\cmTC_22150.tlog\\" wird erstellt.
-        InitializeBuildStatus:
-          "cmTC_22150.dir\\Debug\\cmTC_22150.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
-          Aktualisieren des Timestamps von "cmTC_22150.dir\\Debug\\cmTC_22150.tlog\\unsuccessfulbuild".
-        ClCompile:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /GR /Fo"cmTC_22150.dir\\Debug\\\\" /Fd"cmTC_22150.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
-          Microsoft (R) C/C++-Optimierungscompiler Version 19.43.34808 für x64
-          Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /GR /Fo"cmTC_22150.dir\\Debug\\\\" /Fd"cmTC_22150.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
-          CMakeCXXCompilerABI.cpp
-        Link:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\link.exe /OUT:"\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7ix8s1\\Debug\\cmTC_22150.exe" /INCREMENTAL /ILK:"cmTC_22150.dir\\Debug\\cmTC_22150.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-7ix8s1/Debug/cmTC_22150.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/CMakeScratch/TryCompile-7ix8s1/Debug/cmTC_22150.lib" /MACHINE:X64  /machine:x64 cmTC_22150.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_22150.vcxproj -> \\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7ix8s1\\Debug\\cmTC_22150.exe
-        FinalizeBuildStatus:
-          Die Datei "cmTC_22150.dir\\Debug\\cmTC_22150.tlog\\unsuccessfulbuild" wird gelöscht.
-          Aktualisieren des Timestamps von "cmTC_22150.dir\\Debug\\cmTC_22150.tlog\\cmTC_22150.lastbuildstate".
-        Die Erstellung von Projekt "\\\\wsl.localhost\\Ubuntu\\home\\roeth\\Uni\\FRG\\myFRG\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7ix8s1\\cmTC_22150.vcxproj" ist abgeschlossen (Standardziele).
-        
-        Der Buildvorgang wurde erfolgreich ausgeführt.
-            0 Warnung(en)
-            0 Fehler
-        
-        Verstrichene Zeit 00:00:04.35
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/13"
+        ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/13/include-fixed/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/13/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/13/../../../../x86_64-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/include/c++/13
+         /usr/include/x86_64-linux-gnu/c++/13
+         /usr/include/c++/13/backward
+         /usr/lib/gcc/x86_64-linux-gnu/13/include
+         /usr/local/include
+         /usr/include/x86_64-linux-gnu
+         /usr/include
+        End of search list.
+        Compiler executable checksum: 7896445e4990772fdae9dc0659a99266
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_3d938.dir/'
+         as -v --64 -o CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc0uSYVG.s
+        GNU assembler version 2.42 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.42
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-linux-gnu/13/:/usr/libexec/gcc/x86_64-linux-gnu/13/:/usr/libexec/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/13/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/13/:/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/13/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/13/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_3d938
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3d938.dir/link.txt --verbose=1
+        /usr/bin/g++  -v CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_3d938 
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/g++
+        COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-linux-gnu/13/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 13.3.0-6ubuntu2~24.04.1' --with-bugurl=file:///usr/share/doc/gcc-13/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-13 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/libexec --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-libstdcxx-backtrace --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-13-EldibY/gcc-13-13.3.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-13-EldibY/gcc-13-13.3.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04.1) 
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-linux-gnu/13/:/usr/libexec/gcc/x86_64-linux-gnu/13/:/usr/libexec/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/13/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/13/:/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/13/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/13/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3d938' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_3d938.'
+         /usr/libexec/gcc/x86_64-linux-gnu/13/collect2 -plugin /usr/libexec/gcc/x86_64-linux-gnu/13/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/13/lto-wrapper -plugin-opt=-fresolution=/tmp/ccTemeVd.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_3d938 /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/13/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/13 -L/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/13/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/13/../../.. CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/13/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crtn.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3d938' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_3d938.'
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-IoRfVS'
         
       exitCode: 0
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:4 (project)"
     message: |
-      Parsed CXX implicit link information:
-        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
-        linker tool for 'CXX': C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/HostX64/x64/link.exe
-        implicit libs: []
-        implicit objs: []
-        implicit dirs: []
-        implicit fwks: []
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/include/c++/13]
+          add: [/usr/include/x86_64-linux-gnu/c++/13]
+          add: [/usr/include/c++/13/backward]
+          add: [/usr/lib/gcc/x86_64-linux-gnu/13/include]
+          add: [/usr/local/include]
+          add: [/usr/include/x86_64-linux-gnu]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/include/c++/13] ==> [/usr/include/c++/13]
+        collapse include dir [/usr/include/x86_64-linux-gnu/c++/13] ==> [/usr/include/x86_64-linux-gnu/c++/13]
+        collapse include dir [/usr/include/c++/13/backward] ==> [/usr/include/c++/13/backward]
+        collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/13/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/13/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/include/c++/13;/usr/include/x86_64-linux-gnu/c++/13;/usr/include/c++/13/backward;/usr/lib/gcc/x86_64-linux-gnu/13/include;/usr/local/include;/usr/include/x86_64-linux-gnu;/usr/include]
       
       
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:159 (message)"
+      - "/usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:4 (project)"
     message: |
-      Running the CXX compiler's linker: "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/HostX64/x64/link.exe" "-v"
-      Microsoft (R) Incremental Linker Version 14.43.34808.0
-      Copyright (C) Microsoft Corporation.  All rights reserved.
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-IoRfVS']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_3d938/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_3d938.dir/build.make CMakeFiles/cmTC_3d938.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-IoRfVS']
+        ignore line: [Building CXX object CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/g++   -v -o CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/g++]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 13.3.0-6ubuntu2~24.04.1' --with-bugurl=file:///usr/share/doc/gcc-13/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-13 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/libexec --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-libstdcxx-backtrace --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-13-EldibY/gcc-13-13.3.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-13-EldibY/gcc-13-13.3.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04.1) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_3d938.dir/']
+        ignore line: [ /usr/libexec/gcc/x86_64-linux-gnu/13/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_3d938.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cc0uSYVG.s]
+        ignore line: [GNU C++17 (Ubuntu 13.3.0-6ubuntu2~24.04.1) version 13.3.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 13.3.0  GMP version 6.3.0  MPFR version 4.2.1  MPC version 1.3.1  isl version isl-0.26-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/13"]
+        ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/13/include-fixed/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/13/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/13/../../../../x86_64-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/include/c++/13]
+        ignore line: [ /usr/include/x86_64-linux-gnu/c++/13]
+        ignore line: [ /usr/include/c++/13/backward]
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/13/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include/x86_64-linux-gnu]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 7896445e4990772fdae9dc0659a99266]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_3d938.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc0uSYVG.s]
+        ignore line: [GNU assembler version 2.42 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.42]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-linux-gnu/13/:/usr/libexec/gcc/x86_64-linux-gnu/13/:/usr/libexec/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/13/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/13/:/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/13/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/13/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_3d938]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3d938.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/g++  -v CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_3d938 ]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/g++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-linux-gnu/13/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 13.3.0-6ubuntu2~24.04.1' --with-bugurl=file:///usr/share/doc/gcc-13/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-13 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/libexec --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-libstdcxx-backtrace --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-13-EldibY/gcc-13-13.3.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-13-EldibY/gcc-13-13.3.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04.1) ]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-linux-gnu/13/:/usr/libexec/gcc/x86_64-linux-gnu/13/:/usr/libexec/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/13/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/13/:/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/13/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/13/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3d938' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_3d938.']
+        link line: [ /usr/libexec/gcc/x86_64-linux-gnu/13/collect2 -plugin /usr/libexec/gcc/x86_64-linux-gnu/13/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/13/lto-wrapper -plugin-opt=-fresolution=/tmp/ccTemeVd.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_3d938 /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/13/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/13 -L/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/13/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/13/../../.. CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/13/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crtn.o]
+          arg [/usr/libexec/gcc/x86_64-linux-gnu/13/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/libexec/gcc/x86_64-linux-gnu/13/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/13/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccTemeVd.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_3d938] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crti.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/13/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/13/crtbeginS.o]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/13] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/13]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/13/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/13/../../../../lib]
+          arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/13/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/13/../../..]
+          arg [CMakeFiles/cmTC_3d938.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/13/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/13/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crtn.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/Scrt1.o] ==> [/usr/lib/x86_64-linux-gnu/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/13] ==> [/usr/lib/gcc/x86_64-linux-gnu/13]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/13/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/13/../../..] ==> [/usr/lib]
+        implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+        implicit objs: [/usr/lib/x86_64-linux-gnu/Scrt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-linux-gnu/13/crtbeginS.o;/usr/lib/gcc/x86_64-linux-gnu/13/crtendS.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/13;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+        implicit fwks: []
+      
+      
   -
-    kind: "find_package-v1"
+    kind: "try_compile-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/FindHDF5.cmake:677 (find_package)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
       - "CMakeLists.txt:19 (find_package)"
-    name: "HDF5"
-    components:
-      -
-        name: "C"
-        required: true
-        found: false
-    configs:
-      -
-        filename: "HDF5Config.cmake"
-        kind: "cmake"
-      -
-        filename: "hdf5-config.cmake"
-        kind: "cmake"
-    version_request:
-      exact: false
-    settings:
-      required: "optional"
-      quiet: true
-      global: false
-      policy_scope: true
-      bypass_provider: false
-      names:
-        - "HDF5"
-      path_suffixes:
-        - ""
-      paths:
-        CMAKE_FIND_USE_CMAKE_PATH: true
-        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
-        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-        CMAKE_FIND_USE_INSTALL_PREFIX: true
-        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
-        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
-        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
-        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
-    candidates:
-      -
-        path: "//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/pkgRedirects/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "//wsl.localhost/Ubuntu/home/roeth/Uni/FRG/myFRG/build/CMakeFiles/pkgRedirects/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/roeth/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/roeth/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/Git/mingw64/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/Git/mingw64/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/Git/usr/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/Git/usr/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/roeth/micromamba/condabin/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/roeth/micromamba/condabin/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/Common Files/Oracle/Java/javapath/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/Common Files/Oracle/Java/javapath/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/System32/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/System32/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/System32/wbem/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/System32/wbem/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/System32/WindowsPowerShell/v1.0/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/System32/WindowsPowerShell/v1.0/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/System32/OpenSSH/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/System32/OpenSSH/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/Git/cmd/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/Git/cmd/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/nodejs/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/nodejs/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/ProgramData/chocolatey/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/ProgramData/chocolatey/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/Wolfram Research/WolframScript/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/Wolfram Research/WolframScript/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/CMake/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/CMake/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/HDF_Group/HDF5/1.14.6/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/HDF_Group/HDF5/1.14.6/hdf5-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files/HDF_Group/HDF5/1.14.6/cmake/HDF5Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-    found:
-      path: "C:/Program Files/HDF_Group/HDF5/1.14.6/cmake/hdf5-config.cmake"
-      mode: "config"
-      version: "1.14.6"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\local\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
-        - "C:\\Users\\roeth\\micromamba\\condabin"
-        - "C:\\Program Files\\Microsoft\\jdk-17.0.15.6-hotspot\\bin"
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
-        - "C:\\WINDOWS\\System32\\OpenSSH"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\nodejs"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Wolfram Research\\WolframScript"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files\\HDF_Group\\HDF5\\1.14.6\\bin"
-        - "C:\\Program Files\\LLVM\\bin"
-        - "C:\\Program Files (x86)\\LLVM\\bin"
-        - "C:\\Program Files\\dotnet"
-        - "C:\\Program Files\\PowerShell\\7"
-        - "C:\\Users\\roeth\\AppData\\Local\\micromamba"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312\\Scripts"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312"
-        - "C:\\Users\\roeth\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Program Files\\JetBrains\\PyCharm 2023.1\\bin"
-        - "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2023.2.2\\bin"
-        - "C:\\Users\\roeth\\AppData\\Local\\Pandoc"
-        - "C:\\texlive\\2024\\bin\\windows"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\npm"
-        - "C:\\Users\\roeth\\AppData\\Local\\Android\\Sdk\\platform-tools"
-        - "C:\\MinGW\\bin"
-        - "C:\\Users\\roeth\\vcpkg"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
-        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
-        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/FRG"
-      CMAKE_SYSTEM_PREFIX_PATH:
-        - "C:/Program Files"
-        - "C:/Program Files (x86)"
-        - "C:/Program Files/CMake"
-        - "C:/Program Files (x86)/FRG"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-iUZy66"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-iUZy66"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-iUZy66'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_bc87e/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_bc87e.dir/build.make CMakeFiles/cmTC_bc87e.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-iUZy66'
+        Building CXX object CMakeFiles/cmTC_bc87e.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/g++   -std=c++20 -o CMakeFiles/cmTC_bc87e.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_bc87e.dir/build.make:78: CMakeFiles/cmTC_bc87e.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-iUZy66'
+        gmake: *** [Makefile:127: cmTC_bc87e/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
   -
-    kind: "find-v1"
+    kind: "try_compile-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/FindHDF5.cmake:971 (find_program)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
       - "CMakeLists.txt:19 (find_package)"
-    mode: "program"
-    variable: "HDF5_DIFF_EXECUTABLE"
-    description: "HDF5 file differencing tool."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: true
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "h5diff"
-    candidate_directories:
-      - "C:/Users/roeth/bin/bin/"
-      - "C:/Users/roeth/bin/Bin/"
-      - "C:/Users/roeth/bin/"
-      - "C:/Program Files/Git/mingw64/bin/bin/"
-      - "C:/Program Files/Git/mingw64/bin/Bin/"
-      - "C:/Program Files/Git/mingw64/bin/"
-      - "C:/Program Files/Git/usr/local/bin/bin/"
-      - "C:/Program Files/Git/usr/local/bin/Bin/"
-      - "C:/Program Files/Git/usr/local/bin/"
-      - "C:/Program Files/Git/usr/bin/bin/"
-      - "C:/Program Files/Git/usr/bin/Bin/"
-      - "C:/Program Files/Git/usr/bin/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/bin/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/Bin/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/bin/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/Bin/"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/bin/"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/Bin/"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
-      - "C:/Users/roeth/micromamba/condabin/bin/"
-      - "C:/Users/roeth/micromamba/condabin/Bin/"
-      - "C:/Users/roeth/micromamba/condabin/"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/bin/"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/Bin/"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/bin/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/Bin/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Windows/System32/bin/"
-      - "C:/Windows/System32/Bin/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/bin/"
-      - "C:/Windows/Bin/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/bin/"
-      - "C:/Windows/System32/wbem/Bin/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/bin/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/Bin/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/bin/"
-      - "C:/Windows/System32/OpenSSH/Bin/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/Git/cmd/bin/"
-      - "C:/Program Files/Git/cmd/Bin/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Program Files/nodejs/bin/"
-      - "C:/Program Files/nodejs/Bin/"
-      - "C:/Program Files/nodejs/"
-      - "C:/ProgramData/chocolatey/bin/bin/"
-      - "C:/ProgramData/chocolatey/bin/Bin/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Wolfram Research/WolframScript/bin/"
-      - "C:/Program Files/Wolfram Research/WolframScript/Bin/"
-      - "C:/Program Files/Wolfram Research/WolframScript/"
-      - "C:/Program Files/CMake/bin/bin/"
-      - "C:/Program Files/CMake/bin/Bin/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/bin/"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/Bin/"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/"
-      - "C:/Program Files/LLVM/bin/bin/"
-      - "C:/Program Files/LLVM/bin/Bin/"
-      - "C:/Program Files/LLVM/bin/"
-      - "C:/Program Files (x86)/LLVM/bin/bin/"
-      - "C:/Program Files (x86)/LLVM/bin/Bin/"
-      - "C:/Program Files (x86)/LLVM/bin/"
-      - "C:/Program Files/dotnet/bin/"
-      - "C:/Program Files/dotnet/Bin/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files/PowerShell/7/bin/"
-      - "C:/Program Files/PowerShell/7/Bin/"
-      - "C:/Program Files/PowerShell/7/"
-      - "C:/Users/roeth/AppData/Local/micromamba/bin/"
-      - "C:/Users/roeth/AppData/Local/micromamba/Bin/"
-      - "C:/Users/roeth/AppData/Local/micromamba/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/bin/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/Bin/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Scripts/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/bin/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/Bin/"
-      - "C:/Users/roeth/AppData/Local/Programs/Python/Python312/"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/bin/"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/Bin/"
-      - "C:/Users/roeth/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/bin/"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/Bin/"
-      - "C:/Program Files/JetBrains/PyCharm 2023.1/bin/"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/bin/"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/Bin/"
-      - "C:/Program Files/JetBrains/PyCharm Community Edition 2023.2.2/bin/"
-      - "C:/Users/roeth/AppData/Local/Pandoc/bin/"
-      - "C:/Users/roeth/AppData/Local/Pandoc/Bin/"
-      - "C:/Users/roeth/AppData/Local/Pandoc/"
-      - "C:/texlive/2024/bin/windows/bin/"
-      - "C:/texlive/2024/bin/windows/Bin/"
-      - "C:/texlive/2024/bin/windows/"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/bin/"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/Bin/"
-      - "C:/Users/roeth/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "C:/Users/roeth/AppData/Roaming/npm/bin/"
-      - "C:/Users/roeth/AppData/Roaming/npm/Bin/"
-      - "C:/Users/roeth/AppData/Roaming/npm/"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/bin/"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/Bin/"
-      - "C:/Users/roeth/AppData/Local/Android/Sdk/platform-tools/"
-      - "C:/MinGW/bin/bin/"
-      - "C:/MinGW/bin/Bin/"
-      - "C:/MinGW/bin/"
-      - "C:/Users/roeth/vcpkg/bin/"
-      - "C:/Users/roeth/vcpkg/Bin/"
-      - "C:/Users/roeth/vcpkg/"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/bin/"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/Bin/"
-      - "C:/Users/roeth/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/bin/"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/Bin/"
-      - "C:/Program Files/Git/usr/bin/vendor_perl/"
-      - "C:/Program Files/Git/usr/bin/core_perl/bin/"
-      - "C:/Program Files/Git/usr/bin/core_perl/Bin/"
-      - "C:/Program Files/Git/usr/bin/core_perl/"
-      - "C:/Program Files/bin/bin/"
-      - "C:/Program Files/bin/Bin/"
-      - "C:/Program Files/bin/"
-      - "C:/Program Files/sbin/bin/"
-      - "C:/Program Files/sbin/Bin/"
-      - "C:/Program Files/sbin/"
-      - "C:/Program Files/bin/"
-      - "C:/Program Files/Bin/"
-      - "C:/Program Files/"
-      - "C:/Program Files (x86)/bin/bin/"
-      - "C:/Program Files (x86)/bin/Bin/"
-      - "C:/Program Files (x86)/bin/"
-      - "C:/Program Files (x86)/sbin/bin/"
-      - "C:/Program Files (x86)/sbin/Bin/"
-      - "C:/Program Files (x86)/sbin/"
-      - "C:/Program Files (x86)/bin/"
-      - "C:/Program Files (x86)/Bin/"
-      - "C:/Program Files (x86)/"
-      - "C:/Program Files/CMake/bin/bin/"
-      - "C:/Program Files/CMake/bin/Bin/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/CMake/sbin/bin/"
-      - "C:/Program Files/CMake/sbin/Bin/"
-      - "C:/Program Files/CMake/sbin/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/CMake/Bin/"
-      - "C:/Program Files/CMake/"
-      - "C:/Program Files (x86)/FRG/bin/bin/"
-      - "C:/Program Files (x86)/FRG/bin/Bin/"
-      - "C:/Program Files (x86)/FRG/bin/"
-      - "C:/Program Files (x86)/FRG/sbin/bin/"
-      - "C:/Program Files (x86)/FRG/sbin/Bin/"
-      - "C:/Program Files (x86)/FRG/sbin/"
-      - "C:/Program Files (x86)/FRG/bin/"
-      - "C:/Program Files (x86)/FRG/Bin/"
-      - "C:/Program Files (x86)/FRG/"
-    searched_directories:
-      - "C:/Users/roeth/bin/bin/h5diff.com"
-      - "C:/Users/roeth/bin/bin/h5diff.exe"
-      - "C:/Users/roeth/bin/bin/h5diff"
-      - "C:/Users/roeth/bin/Bin/h5diff.com"
-      - "C:/Users/roeth/bin/Bin/h5diff.exe"
-      - "C:/Users/roeth/bin/Bin/h5diff"
-      - "C:/Users/roeth/bin/h5diff.com"
-      - "C:/Users/roeth/bin/h5diff.exe"
-      - "C:/Users/roeth/bin/h5diff"
-      - "C:/Program Files/Git/mingw64/bin/bin/h5diff.com"
-      - "C:/Program Files/Git/mingw64/bin/bin/h5diff.exe"
-      - "C:/Program Files/Git/mingw64/bin/bin/h5diff"
-      - "C:/Program Files/Git/mingw64/bin/Bin/h5diff.com"
-      - "C:/Program Files/Git/mingw64/bin/Bin/h5diff.exe"
-      - "C:/Program Files/Git/mingw64/bin/Bin/h5diff"
-      - "C:/Program Files/Git/mingw64/bin/h5diff.com"
-      - "C:/Program Files/Git/mingw64/bin/h5diff.exe"
-      - "C:/Program Files/Git/mingw64/bin/h5diff"
-      - "C:/Program Files/Git/usr/local/bin/bin/h5diff.com"
-      - "C:/Program Files/Git/usr/local/bin/bin/h5diff.exe"
-      - "C:/Program Files/Git/usr/local/bin/bin/h5diff"
-      - "C:/Program Files/Git/usr/local/bin/Bin/h5diff.com"
-      - "C:/Program Files/Git/usr/local/bin/Bin/h5diff.exe"
-      - "C:/Program Files/Git/usr/local/bin/Bin/h5diff"
-      - "C:/Program Files/Git/usr/local/bin/h5diff.com"
-      - "C:/Program Files/Git/usr/local/bin/h5diff.exe"
-      - "C:/Program Files/Git/usr/local/bin/h5diff"
-      - "C:/Program Files/Git/usr/bin/bin/h5diff.com"
-      - "C:/Program Files/Git/usr/bin/bin/h5diff.exe"
-      - "C:/Program Files/Git/usr/bin/bin/h5diff"
-      - "C:/Program Files/Git/usr/bin/Bin/h5diff.com"
-      - "C:/Program Files/Git/usr/bin/Bin/h5diff.exe"
-      - "C:/Program Files/Git/usr/bin/Bin/h5diff"
-      - "C:/Program Files/Git/usr/bin/h5diff.com"
-      - "C:/Program Files/Git/usr/bin/h5diff.exe"
-      - "C:/Program Files/Git/usr/bin/h5diff"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/bin/h5diff.com"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/bin/h5diff.exe"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/bin/h5diff"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/Bin/h5diff.com"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/Bin/h5diff.exe"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/Bin/h5diff"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/h5diff.com"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/h5diff.exe"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/h5diff"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/bin/h5diff.com"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/bin/h5diff.exe"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/bin/h5diff"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/Bin/h5diff.com"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/Bin/h5diff.exe"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/Bin/h5diff"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/h5diff.com"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/h5diff.exe"
-      - "C:/Users/roeth/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/h5diff"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/bin/h5diff.com"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/bin/h5diff.exe"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/bin/h5diff"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/Bin/h5diff.com"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/Bin/h5diff.exe"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/Bin/h5diff"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/h5diff.com"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/h5diff.exe"
-      - "C:/Users/roeth/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/h5diff"
-      - "C:/Users/roeth/micromamba/condabin/bin/h5diff.com"
-      - "C:/Users/roeth/micromamba/condabin/bin/h5diff.exe"
-      - "C:/Users/roeth/micromamba/condabin/bin/h5diff"
-      - "C:/Users/roeth/micromamba/condabin/Bin/h5diff.com"
-      - "C:/Users/roeth/micromamba/condabin/Bin/h5diff.exe"
-      - "C:/Users/roeth/micromamba/condabin/Bin/h5diff"
-      - "C:/Users/roeth/micromamba/condabin/h5diff.com"
-      - "C:/Users/roeth/micromamba/condabin/h5diff.exe"
-      - "C:/Users/roeth/micromamba/condabin/h5diff"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/bin/h5diff.com"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/bin/h5diff.exe"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/bin/h5diff"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/Bin/h5diff.com"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/Bin/h5diff.exe"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/Bin/h5diff"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/h5diff.com"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/h5diff.exe"
-      - "C:/Program Files/Microsoft/jdk-17.0.15.6-hotspot/bin/h5diff"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/bin/h5diff.com"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/bin/h5diff.exe"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/bin/h5diff"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/Bin/h5diff.com"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/Bin/h5diff.exe"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/Bin/h5diff"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/h5diff.com"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/h5diff.exe"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/h5diff"
-      - "C:/Windows/System32/bin/h5diff.com"
-      - "C:/Windows/System32/bin/h5diff.exe"
-      - "C:/Windows/System32/bin/h5diff"
-      - "C:/Windows/System32/Bin/h5diff.com"
-      - "C:/Windows/System32/Bin/h5diff.exe"
-      - "C:/Windows/System32/Bin/h5diff"
-      - "C:/Windows/System32/h5diff.com"
-      - "C:/Windows/System32/h5diff.exe"
-      - "C:/Windows/System32/h5diff"
-      - "C:/Windows/bin/h5diff.com"
-      - "C:/Windows/bin/h5diff.exe"
-      - "C:/Windows/bin/h5diff"
-      - "C:/Windows/Bin/h5diff.com"
-      - "C:/Windows/Bin/h5diff.exe"
-      - "C:/Windows/Bin/h5diff"
-      - "C:/Windows/h5diff.com"
-      - "C:/Windows/h5diff.exe"
-      - "C:/Windows/h5diff"
-      - "C:/Windows/System32/wbem/bin/h5diff.com"
-      - "C:/Windows/System32/wbem/bin/h5diff.exe"
-      - "C:/Windows/System32/wbem/bin/h5diff"
-      - "C:/Windows/System32/wbem/Bin/h5diff.com"
-      - "C:/Windows/System32/wbem/Bin/h5diff.exe"
-      - "C:/Windows/System32/wbem/Bin/h5diff"
-      - "C:/Windows/System32/wbem/h5diff.com"
-      - "C:/Windows/System32/wbem/h5diff.exe"
-      - "C:/Windows/System32/wbem/h5diff"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/bin/h5diff.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/bin/h5diff.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/bin/h5diff"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/Bin/h5diff.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/Bin/h5diff.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/Bin/h5diff"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/h5diff.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/h5diff.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/h5diff"
-      - "C:/Windows/System32/OpenSSH/bin/h5diff.com"
-      - "C:/Windows/System32/OpenSSH/bin/h5diff.exe"
-      - "C:/Windows/System32/OpenSSH/bin/h5diff"
-      - "C:/Windows/System32/OpenSSH/Bin/h5diff.com"
-      - "C:/Windows/System32/OpenSSH/Bin/h5diff.exe"
-      - "C:/Windows/System32/OpenSSH/Bin/h5diff"
-      - "C:/Windows/System32/OpenSSH/h5diff.com"
-      - "C:/Windows/System32/OpenSSH/h5diff.exe"
-      - "C:/Windows/System32/OpenSSH/h5diff"
-      - "C:/Program Files/Git/cmd/bin/h5diff.com"
-      - "C:/Program Files/Git/cmd/bin/h5diff.exe"
-      - "C:/Program Files/Git/cmd/bin/h5diff"
-      - "C:/Program Files/Git/cmd/Bin/h5diff.com"
-      - "C:/Program Files/Git/cmd/Bin/h5diff.exe"
-      - "C:/Program Files/Git/cmd/Bin/h5diff"
-      - "C:/Program Files/Git/cmd/h5diff.com"
-      - "C:/Program Files/Git/cmd/h5diff.exe"
-      - "C:/Program Files/Git/cmd/h5diff"
-      - "C:/Program Files/nodejs/bin/h5diff.com"
-      - "C:/Program Files/nodejs/bin/h5diff.exe"
-      - "C:/Program Files/nodejs/bin/h5diff"
-      - "C:/Program Files/nodejs/Bin/h5diff.com"
-      - "C:/Program Files/nodejs/Bin/h5diff.exe"
-      - "C:/Program Files/nodejs/Bin/h5diff"
-      - "C:/Program Files/nodejs/h5diff.com"
-      - "C:/Program Files/nodejs/h5diff.exe"
-      - "C:/Program Files/nodejs/h5diff"
-      - "C:/ProgramData/chocolatey/bin/bin/h5diff.com"
-      - "C:/ProgramData/chocolatey/bin/bin/h5diff.exe"
-      - "C:/ProgramData/chocolatey/bin/bin/h5diff"
-      - "C:/ProgramData/chocolatey/bin/Bin/h5diff.com"
-      - "C:/ProgramData/chocolatey/bin/Bin/h5diff.exe"
-      - "C:/ProgramData/chocolatey/bin/Bin/h5diff"
-      - "C:/ProgramData/chocolatey/bin/h5diff.com"
-      - "C:/ProgramData/chocolatey/bin/h5diff.exe"
-      - "C:/ProgramData/chocolatey/bin/h5diff"
-      - "C:/Program Files/Wolfram Research/WolframScript/bin/h5diff.com"
-      - "C:/Program Files/Wolfram Research/WolframScript/bin/h5diff.exe"
-      - "C:/Program Files/Wolfram Research/WolframScript/bin/h5diff"
-      - "C:/Program Files/Wolfram Research/WolframScript/Bin/h5diff.com"
-      - "C:/Program Files/Wolfram Research/WolframScript/Bin/h5diff.exe"
-      - "C:/Program Files/Wolfram Research/WolframScript/Bin/h5diff"
-      - "C:/Program Files/Wolfram Research/WolframScript/h5diff.com"
-      - "C:/Program Files/Wolfram Research/WolframScript/h5diff.exe"
-      - "C:/Program Files/Wolfram Research/WolframScript/h5diff"
-      - "C:/Program Files/CMake/bin/bin/h5diff.com"
-      - "C:/Program Files/CMake/bin/bin/h5diff.exe"
-      - "C:/Program Files/CMake/bin/bin/h5diff"
-      - "C:/Program Files/CMake/bin/Bin/h5diff.com"
-      - "C:/Program Files/CMake/bin/Bin/h5diff.exe"
-      - "C:/Program Files/CMake/bin/Bin/h5diff"
-      - "C:/Program Files/CMake/bin/h5diff.com"
-      - "C:/Program Files/CMake/bin/h5diff.exe"
-      - "C:/Program Files/CMake/bin/h5diff"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/bin/h5diff.com"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/bin/h5diff.exe"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/bin/h5diff"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/Bin/h5diff.com"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/Bin/h5diff.exe"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/Bin/h5diff"
-      - "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/h5diff.com"
-    found: "C:/Program Files/HDF_Group/HDF5/1.14.6/bin/h5diff.exe"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\local\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Program Files\\Git\\mingw64\\bin"
-        - "C:\\Program Files\\Git\\usr\\bin"
-        - "C:\\Users\\roeth\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
-        - "C:\\Users\\roeth\\micromamba\\condabin"
-        - "C:\\Program Files\\Microsoft\\jdk-17.0.15.6-hotspot\\bin"
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
-        - "C:\\WINDOWS\\System32\\OpenSSH"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\nodejs"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Wolfram Research\\WolframScript"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files\\HDF_Group\\HDF5\\1.14.6\\bin"
-        - "C:\\Program Files\\LLVM\\bin"
-        - "C:\\Program Files (x86)\\LLVM\\bin"
-        - "C:\\Program Files\\dotnet"
-        - "C:\\Program Files\\PowerShell\\7"
-        - "C:\\Users\\roeth\\AppData\\Local\\micromamba"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312\\Scripts"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Python\\Python312"
-        - "C:\\Users\\roeth\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Program Files\\JetBrains\\PyCharm 2023.1\\bin"
-        - "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2023.2.2\\bin"
-        - "C:\\Users\\roeth\\AppData\\Local\\Pandoc"
-        - "C:\\texlive\\2024\\bin\\windows"
-        - "C:\\Users\\roeth\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\Users\\roeth\\AppData\\Roaming\\npm"
-        - "C:\\Users\\roeth\\AppData\\Local\\Android\\Sdk\\platform-tools"
-        - "C:\\MinGW\\bin"
-        - "C:\\Users\\roeth\\vcpkg"
-        - "C:\\Users\\roeth\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
-        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
-        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/FRG"
-      CMAKE_SYSTEM_PREFIX_PATH:
-        - "C:/Program Files"
-        - "C:/Program Files (x86)"
-        - "C:/Program Files/CMake"
-        - "C:/Program Files (x86)/FRG"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-3RDJoJ"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-3RDJoJ"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-3RDJoJ'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b28c2/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_b28c2.dir/build.make CMakeFiles/cmTC_b28c2.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-3RDJoJ'
+        Building CXX object CMakeFiles/cmTC_b28c2.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/g++   -std=c++20 -o CMakeFiles/cmTC_b28c2.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_b28c2.dir/build.make:78: CMakeFiles/cmTC_b28c2.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-3RDJoJ'
+        gmake: *** [Makefile:127: cmTC_b28c2/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:19 (find_package)"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-EQ40yp"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-EQ40yp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-EQ40yp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_85a40/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_85a40.dir/build.make CMakeFiles/cmTC_85a40.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-EQ40yp'
+        Building CXX object CMakeFiles/cmTC_85a40.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/g++   -std=c++20 -o CMakeFiles/cmTC_85a40.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_85a40.dir/build.make:78: CMakeFiles/cmTC_85a40.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-EQ40yp'
+        gmake: *** [Makefile:127: cmTC_85a40/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:19 (find_package)"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-1XkJnu"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-1XkJnu"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-1XkJnu'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_540d4/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_540d4.dir/build.make CMakeFiles/cmTC_540d4.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-1XkJnu'
+        Building CXX object CMakeFiles/cmTC_540d4.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/g++   -std=c++20 -o CMakeFiles/cmTC_540d4.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_540d4.dir/build.make:78: CMakeFiles/cmTC_540d4.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-1XkJnu'
+        gmake: *** [Makefile:127: cmTC_540d4/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:19 (find_package)"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-kmqhiF"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-kmqhiF"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-kmqhiF'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_96fe0/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_96fe0.dir/build.make CMakeFiles/cmTC_96fe0.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-kmqhiF'
+        Building CXX object CMakeFiles/cmTC_96fe0.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/g++   -std=c++20 -o CMakeFiles/cmTC_96fe0.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_96fe0.dir/build.make:78: CMakeFiles/cmTC_96fe0.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-kmqhiF'
+        gmake: *** [Makefile:127: cmTC_96fe0/fast] Error 2
+        
+      exitCode: 2
 ...

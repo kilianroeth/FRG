@@ -61,8 +61,8 @@ std::vector<double> step(const std::vector<double>& V, double k, double dt, cons
 
 // save current potential --------------
 
-void save_V(const std::vector<double>& V, const std::string filename, const Params& p);
-void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename);
+void save_V(const std::vector<double>& V, const std::string& filename, const Params& p);
+void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<std::vector<double>>& rhs_snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename);
 
 // Integrate complete RG flow ----------
 

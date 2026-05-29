@@ -25,7 +25,7 @@ int main() {
     save_V(dV_vals, "results/V_classical_prime.txt",p);
     save_V(ddV_vals, "results/V_classical_doubleprime.txt",p);
     save_V(RHS_vals, "results/RHS.txt",p);
-    integrate_flow(V, -0.0001,p);
+    integrate_flow(V, -0.0001, p, "results/flow.csv", 100);
 
     return 0;
 }

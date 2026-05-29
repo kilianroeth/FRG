@@ -1,6 +1,8 @@
 # FRG
 
-Trying to implement some FRG numerics from scratch
+Trying to implement some FRG numerics from scratch.
+
+Currently zeroth order LPA approximation of ϕ4 theory in d=3 dimensions.
 
 ## build & Run
 

@@ -30,7 +30,7 @@ std::vector<double> V_classical(const Params& p) {
 }
 
 double V_min_classical(const Params& p) {
-    return -6.0*p.m2/p.lambda;
+    return -3.0*p.m2/p.lambda;
 }
 
 // Compute RHS -------------------------
@@ -79,7 +79,7 @@ std::vector<double> step(const std::vector<double>& V, double k, double dt, cons
 
 // save current potential --------------
 
-void save_V(const std::vector<double>& V, const std::string filename, const Params& p) {
+void save_V(const std::vector<double>& V, const std::string& filename, const Params& p) {
     std::ofstream file(filename);
     if (!file) { std::cerr << "[ERROR] Cannot open " << filename << "\n"; }
 
@@ -92,7 +92,7 @@ void save_V(const std::vector<double>& V, const std::string filename, const Para
     file.close();
 }
 
-void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename) {
+void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<std::vector<double>>& rhs_snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename) {
     std::ofstream file(filename);
     if (!file) { std::cerr << "[ERROR] Cannot open " << filename << "\n"; }
 
@@ -101,21 +101,30 @@ void save_all(const std::vector<std::vector<double>>& snapshots, const std::vect
     file << "# m2 = " << p.m2 << ", lambda = " << p.lambda << "\n";
     file << "# rho_max = " << p.rho_max << ", n_rho = " << p.n_rho << "\n";
 
-    // header
+    // V block
+    file << "# block: V\n";
     file << "rho";
-    for (double k : k_values) {
-        file << ", k = " << std::fixed << std::setprecision(6) << k;
-    }
+    for (double k : k_values)
+        file << ", k=" << std::fixed << std::setprecision(6) << k;
     file << "\n";
-
     file << std::scientific << std::setprecision(10);
-
-    // data rows
     for (size_t i = 0; i < p.n_rho; ++i) {
-        file << p.rho_at(i);
-        for (const auto& V : snapshots) {
+        file << i * p.drho();
+        for (const auto& V : snapshots)
             file << ", " << V[i];
-        }
+        file << "\n";
+    }
+
+    // RHS
+    file << "# block: RHS\n";
+    file << "rho";
+    for (double k : k_values)
+        file << ", k=" << std::fixed << std::setprecision(6) << k;
+    file << "\n";
+    for (size_t i = 0; i < p.n_rho; ++i) {
+        file << i * p.drho();
+        for (const auto& R : rhs_snapshots)
+            file << ", " << R[i];
         file << "\n";
     }
 
@@ -143,23 +152,26 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
     }
 
     std::vector<std::vector<double>> snapshots;
+    std::vector<std::vector<double>> rhs_snapshots;
     std::vector<double> k_values;
 
     std::vector<double> V = V_init;
+    size_t next_snap = 0;
     for (size_t i = 0; i < N; ++i) {
         double t = p.t_start + i*(p.t_end - p.t_start)/(N - 1);
         double k = exp(t);
 
-        if (!snap_indices.empty() && i == snap_indices.front()) {
+        if (next_snap < snap_indices.size() && i == snap_indices[next_snap]) {
             snapshots.push_back(V);
+            rhs_snapshots.push_back(RHS(V, k, p));
             k_values.push_back(k);
-            snap_indices.erase(snap_indices.begin());
+            ++next_snap;
         }
 
         if (i + 1 < N) {
             V = step(V, k, dt_t, p);
         }
     }
-    save_all(snapshots, k_values, p, filename);
+    save_all(snapshots, rhs_snapshots, k_values, p, filename);
 }
 

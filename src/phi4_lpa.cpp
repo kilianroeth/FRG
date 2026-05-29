@@ -3,43 +3,47 @@
 
 // Finite difference derivatives -------
 
-double dV(const std::vector<double>& V, size_t i) {
-    if (i == 0) { return (V[1] - V[0])/D_RHO; }
-    if (i == N_RHO - 1) { return (V[N_RHO-1] - V[N_RHO-2])/D_RHO; }
-    return (V[i+1] - V[i-1])/(2*D_RHO);
+double dV(const std::vector<double>& V, size_t i, const Params& p) {
+    if (i == 0) { return (V[1] - V[0])/p.drho(); }
+    if (i == p.n_rho - 1) { return (V[p.n_rho-1] - V[p.n_rho-2])/p.drho(); }
+    return (V[i+1] - V[i-1])/(2*p.drho());
 }
 
-double ddV(const std::vector<double>& V, size_t i) {
-    if (i == 0) { return (V[2] - 2.0*V[1] + V[0])/(D_RHO*D_RHO); }
-    if (i == N_RHO - 1) { return (V[N_RHO-1] - 2.0*V[N_RHO-2] + V[N_RHO-3])/(D_RHO*D_RHO); }
-    return (V[i+1] - 2.0*V[i] + V[i-1])/(D_RHO*D_RHO);
+double ddV(const std::vector<double>& V, size_t i, const Params& p) {
+    if (i == 0) { return (V[2] - 2.0*V[1] + V[0])/(p.drho()*p.drho()); }
+    if (i == p.n_rho - 1) { return (V[p.n_rho-1] - 2.0*V[p.n_rho-2] + V[p.n_rho-3])/(p.drho()*p.drho()); }
+    return (V[i+1] - 2.0*V[i] + V[i-1])/(p.drho()*p.drho());
 }
 
 // classical potential -----------------
-std::vector<double> V_classical() {
+std::vector<double> V_classical(const Params& p) {
     std::vector<double> V;
-    V.reserve(N_RHO);
+    V.reserve(p.n_rho);
     double rho;
 
-    for (size_t i = 0; i < N_RHO; ++i) {
-        rho = i * D_RHO;
-        V.push_back(M2*rho + LAMBDA/6.0*rho*rho);
+    for (size_t i = 0; i < p.n_rho; ++i) {
+        rho = i * p.drho();
+        V.push_back(p.m2*rho + p.lambda/6.0*rho*rho);
     }
 
     return V;
 }
 
+double V_min_classical(const Params& p) {
+    return -6.0*p.m2/p.lambda;
+}
+
 // Compute RHS -------------------------
 
-std::vector<double> RHS(const std::vector<double>& V, double k) {
-    std::vector<double> RHS_vals(N_RHO);
+std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p) {
+    std::vector<double> RHS_vals(p.n_rho);
 
     double prefactor = k*k*k/(6.0*M_PI*M_PI);
     // std::cout << "k = " << k << std::endl;
 
-    for (size_t i = 0; i < N_RHO; ++i) {
-        const double rho = i * D_RHO;
-        double denom = (1.0 + (dV(V, i) + 2.0*rho*ddV(V, i))/(k*k));
+    for (size_t i = 0; i < p.n_rho; ++i) {
+        const double rho = i * p.drho();
+        double denom = (1.0 + (dV(V, i, p) + 2.0*rho*ddV(V, i, p))/(k*k));
         if (k == 0) {
             denom = 1.0;
         }
@@ -47,6 +51,9 @@ std::vector<double> RHS(const std::vector<double>& V, double k) {
             std::cerr << "[WARNING] |denom| = " << denom << "rho = " << rho << std::endl;
             denom = 1e-5;
         }
+        // if (denom < 0) {
+        //     std::cout << "[WARNING] Γ(2) < 0 at k = " << k << ",  = " << rho << "\n";
+        // }
         RHS_vals[i] = prefactor / denom;
     }
 
@@ -55,16 +62,16 @@ std::vector<double> RHS(const std::vector<double>& V, double k) {
 
 // Integrate RG time step --------------
 
-std::vector<double> step(const std::vector<double>& V, double k, double dt) {
-    std::vector<double> V_next(N_RHO);
+std::vector<double> step(const std::vector<double>& V, double k, double dt, const Params& p) {
+    std::vector<double> V_next(p.n_rho);
     if (dt >= 0) {
         std::cerr << "[ERROR] dt must be negative" << std::endl;
         return V_next;
     }
 
-    std::vector<double> RHS_vals = RHS(V, k);
+    std::vector<double> RHS_vals = RHS(V, k, p);
     // std::cout << "RHS_0 = " << RHS_vals[0] << "\nRHS_15 = " << RHS_vals[15] <<  std::endl;
-    for (size_t i = 0; i < N_RHO; ++i) {
+    for (size_t i = 0; i < p.n_rho; ++i) {
         V_next[i] = V[i] + dt * RHS_vals[i];
     }
     return V_next;
@@ -72,46 +79,70 @@ std::vector<double> step(const std::vector<double>& V, double k, double dt) {
 
 // save current potential --------------
 
-void save_V(const std::vector<double>& V, const std::string filename) {
+void save_V(const std::vector<double>& V, const std::string filename, const Params& p) {
     std::ofstream file(filename);
+    if (!file) { std::cerr << "[ERROR] Cannot open " << filename << "\n"; }
 
     file << "ρ = 1/2 φ², V(ρ)\n";
     for (size_t i = 0; i < V.size(); ++i) {
-        file << i*D_RHO << ", " << V[i] <<"\n";
+        file << p.rho_at(i) << ", " << V[i] <<"\n";
     }
     file << std::endl;
 
     file.close();
 }
 
+void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<double>& k_values, const Params& p, std::string& filename) {
+    std::ofstream file(filename);
+    if (!file) { std::cerr << "[ERROR] Cannot open " << filename << "\n"; }
+
+    // metadata
+    file << "# Wetterich LPA flow, phi^4, d=3\n";
+    file << "# m2 = " << p.m2 << ", lambda = " << p.lambda << "\n";
+    file << "# rho_max = " << p.rho_max << ", n_rho = " << p.n_rho << "\n";
+
+    // header
+    file << "rho";
+    for (double k : k_values) {
+        file << ", k = " << std::fixed << std::setprecision(6) << k;
+    }
+    file << "\n";
+
+    file << std::scientific << std::setprecision(10);
+
+    // data rows
+    for (size_t i = 0; i < p.n_rho; ++i) {
+        file << p.rho_at(i);
+        for (const auto& V : snapshots) {
+            file << ", " << V[i];
+        }
+        file << "\n";
+    }
+
+    std::cout << "Saved " << snapshots.size() << " snapshots -> " << filename << "\n";
+
+}
+
 // Integrate complete RG flow ----------
 
-void integrate_flow(const std::vector<double>& V_init, double dt) {
+void integrate_flow(const std::vector<double>& V_init, double dt, const Params& p) {
     if (dt >= 0) {
         std::cerr << "[ERROR] dt must be negative" << std::endl;
         return;
     }
-    const double total_t = T_START - T_END;
+    const double total_t = p.t_start - p.t_end;
     size_t N = static_cast<size_t>(std::ceil(total_t / std::abs(dt))) + 1;
     double dt_t = -total_t / (N - 1);
     std::vector<double> V = V_init;
     for (size_t i = 0; i < N; ++i) {
-        double t = T_START + i*(T_END - T_START)/(N - 1);
+        double t = p.t_start + i*(p.t_end - p.t_start)/(N - 1);
         double k = exp(t);
 
-        // if (i < 200) {
-        // double denom0 = 1.0 + (dV(V,0) + 0.0*ddV(V,0)) / (k*k);
-        // std::cerr << "i=" << i << " k=" << k 
-        //           << " denom0=" << denom0 
-        //           << " V[0]=" << V[0] 
-        //           << " V[1]=" << V[1] << "\n";
-        // }
-
         if (i % 100 == 0) {
-            save_V(V, "results/V_" + std::to_string(std::abs(t)) + ".txt");
+            save_V(V, "results/V_" + std::to_string(std::abs(t)) + ".txt", p);
         }
         if (i + 1 < N) {
-            V = step(V, k, dt_t);
+            V = step(V, k, dt_t, p);
         }
     }
 }

@@ -12,7 +12,7 @@
 #include <string>
 
 /**
- * @brief phi4_lpa.cpp
+ * @brief phi4_lpa.hpp
  * 
  * We want to solve the Wetterich equation for φ4 theory in the LPA approximation, i.e. in a zeroth order derivative expansion
  * 
@@ -30,56 +30,40 @@
 // Paramters ---------------------------
 
 struct Params {
-    double m2;
-    double λ;
-
-    double t_start;
-    double t_end;
-
-    double n_rho;
-    double rho_max;
+    double m2               = -1./(9*M_PI*M_PI);
+    double lambda           = 1.0;
+    double t_start          = 0.0;
+    double t_end            = -15.0;
+    size_t n_rho            = 1000;
+    double rho_max          = 0.5;
+    double drho() const     { return rho_max / (n_rho - 1); } 
+    double rho_at(size_t i) const { return i * drho(); }
 };
 
-static double M2            = -1/(9*M_PI*M_PI);     // classical mass paramters
-static double LAMBDA        = 1.0;      // classical coupling paramter  
-
-// RG times t = ln(k/Λ)
-static double T_START       = 0.0;
-static double T_END         = -15.0;
-
-// rho grid
-static size_t N_RHO         = 1000;                     // number of rho grid points
-static double RHO_MAX       = 0.5;                      // maximal value for rho
-static double D_RHO         = RHO_MAX / (N_RHO - 1);    // rho spacing
-
-class Solver {
-    private:
-
-    public:
-        Params m_params;
-};
 
 // Finite difference derivatives -------
 
-double dV(const std::vector<double>& V, size_t i);
-double ddV(const std::vector<double>& V, size_t i);
+double dV(const std::vector<double>& V, size_t i, const Params& p);
+double ddV(const std::vector<double>& V, size_t i, const Params& p);
 
 // classical potential -----------------
 
-std::vector<double> V_classical();
+std::vector<double> V_classical(const Params& p);
+double V_min_classical(const Params& p);
 
 // Compute RHS -------------------------
 
-std::vector<double> RHS(const std::vector<double>& V, double k);
+std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p);
 
 // Integrate RG time step --------------
 
-std::vector<double> step(const std::vector<double>& V, double k, double dt);
+std::vector<double> step(const std::vector<double>& V, double k, double dt, const Params& p);
 
 // save current potential --------------
 
-void save_V(const std::vector<double>& V, const std::string filename);
+void save_V(const std::vector<double>& V, const std::string filename, const Params& p);
+void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<double>& k_values, const Params& p, std::string& filename);
 
 // Integrate complete RG flow ----------
 
-void integrate_flow(const std::vector<double>& V_init, double dt);
+void integrate_flow(const std::vector<double>& V_init, double dt, const Params& p);

@@ -3,6 +3,7 @@
 
 CMakeFiles/FRG.dir/src/main.cpp.o: /home/kilian/Code/FRG/src/main.cpp \
   /home/kilian/Code/FRG/include/phi4_lpa.hpp \
+  /home/kilian/Code/FRG/include/utils.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -69,6 +70,7 @@ CMakeFiles/FRG.dir/src/main.cpp.o: /home/kilian/Code/FRG/src/main.cpp \
   /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/13/bits/stl_iterator_base_types.h \
   /usr/include/c++/13/bits/stl_pair.h \
+  /usr/include/c++/13/bits/stl_relops.h \
   /usr/include/c++/13/bits/stl_uninitialized.h \
   /usr/include/c++/13/bits/stl_vector.h \
   /usr/include/c++/13/bits/streambuf.tcc \
@@ -133,6 +135,7 @@ CMakeFiles/FRG.dir/src/main.cpp.o: /home/kilian/Code/FRG/src/main.cpp \
   /usr/include/c++/13/tuple \
   /usr/include/c++/13/type_traits \
   /usr/include/c++/13/typeinfo \
+  /usr/include/c++/13/utility \
   /usr/include/c++/13/vector \
   /usr/include/ctype.h \
   /usr/include/endian.h \
@@ -246,6 +249,7 @@ CMakeFiles/FRG.dir/src/main.cpp.o: /home/kilian/Code/FRG/src/main.cpp \
 
 CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
   /home/kilian/Code/FRG/include/phi4_lpa.hpp \
+  /home/kilian/Code/FRG/include/utils.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -312,6 +316,7 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
   /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/13/bits/stl_iterator_base_types.h \
   /usr/include/c++/13/bits/stl_pair.h \
+  /usr/include/c++/13/bits/stl_relops.h \
   /usr/include/c++/13/bits/stl_uninitialized.h \
   /usr/include/c++/13/bits/stl_vector.h \
   /usr/include/c++/13/bits/streambuf.tcc \
@@ -376,6 +381,7 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
   /usr/include/c++/13/tuple \
   /usr/include/c++/13/type_traits \
   /usr/include/c++/13/typeinfo \
+  /usr/include/c++/13/utility \
   /usr/include/c++/13/vector \
   /usr/include/ctype.h \
   /usr/include/endian.h \
@@ -530,8 +536,6 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
@@ -630,7 +634,7 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
 
 /usr/include/c++/13/tr1/special_function_util.h:
 
-/usr/include/c++/13/cstdlib:
+/usr/include/c++/13/tr1/poly_hermite.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
@@ -639,6 +643,16 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
 /usr/include/c++/13/bits/fstream.tcc:
 
 /usr/include/c++/13/bits/specfun.h:
+
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
+
+/usr/include/libintl.h:
+
+/usr/include/c++/13/tr1/poly_laguerre.tcc:
+
+/usr/include/c++/13/bits/basic_string.h:
+
+/usr/include/c++/13/utility:
 
 /usr/include/c++/13/bits/locale_facets_nonio.tcc:
 
@@ -676,9 +690,15 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
 
 /usr/include/c++/13/bits/char_traits.h:
 
-/home/kilian/Code/FRG/src/main.cpp:
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h:
 
-/usr/include/c++/13/bits/locale_conv.h:
+/usr/include/c++/13/bits/ios_base.h:
+
+/usr/include/x86_64-linux-gnu/sys/single_threaded.h:
+
+/usr/include/c++/13/type_traits:
+
+/usr/include/c++/13/tr1/hypergeometric.tcc:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h:
 
@@ -694,20 +714,6 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
 
 /usr/include/c++/13/bits/stl_vector.h:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h:
-
-/usr/include/c++/13/bits/ios_base.h:
-
-/usr/include/x86_64-linux-gnu/sys/single_threaded.h:
-
-/usr/include/c++/13/type_traits:
-
-/usr/include/c++/13/tr1/hypergeometric.tcc:
-
-/usr/include/c++/13/bits/sstream.tcc:
-
-/usr/include/c++/13/cwctype:
-
 /usr/include/c++/13/bits/predefined_ops.h:
 
 /usr/include/c++/13/bits/ranges_cmp.h:
@@ -715,10 +721,6 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
 /usr/include/c++/13/iosfwd:
 
 /usr/include/c++/13/cwchar:
-
-/usr/include/c++/13/bits/ranges_util.h:
-
-/usr/include/asm-generic/errno-base.h:
 
 /usr/include/x86_64-linux-gnu/bits/math-vector.h:
 
@@ -733,12 +735,6 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
 /usr/include/c++/13/bit:
 
 /usr/include/c++/13/bits/basic_string.tcc:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
-
-/usr/include/c++/13/bits/ptr_traits.h:
 
 /usr/include/c++/13/debug/debug.h:
 
@@ -763,6 +759,22 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
 /usr/include/errno.h:
 
 /usr/include/c++/13/bits/functional_hash.h:
+
+/usr/include/c++/13/bits/ranges_util.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+/home/kilian/Code/FRG/include/utils.hpp:
+
+/home/kilian/Code/FRG/src/main.cpp:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
+
+/usr/include/c++/13/bits/ptr_traits.h:
+
+/usr/include/c++/13/bits/locale_conv.h:
 
 /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
 
@@ -816,13 +828,11 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
 
 /usr/include/c++/13/istream:
 
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
+/usr/include/c++/13/cwctype:
 
-/usr/include/libintl.h:
+/usr/include/c++/13/bits/sstream.tcc:
 
-/usr/include/c++/13/bits/basic_string.h:
-
-/usr/include/c++/13/tr1/poly_laguerre.tcc:
+/usr/include/c++/13/cstdlib:
 
 /usr/include/c++/13/bits/stl_algobase.h:
 
@@ -855,6 +865,10 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
 /usr/include/c++/13/compare:
 
 /usr/include/c++/13/bits/stl_iterator_base_types.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
+
+/usr/include/c++/13/bits/stl_relops.h:
 
 /usr/include/c++/13/locale:
 
@@ -971,5 +985,3 @@ CMakeFiles/FRG.dir/src/phi4_lpa.cpp.o: /home/kilian/Code/FRG/src/phi4_lpa.cpp \
 /usr/include/c++/13/tr1/gamma.tcc:
 
 /usr/include/c++/13/tr1/legendre_function.tcc:
-
-/usr/include/c++/13/tr1/poly_hermite.tcc:

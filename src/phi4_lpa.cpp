@@ -47,9 +47,9 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
         if (k == 0) {
             denom = 1.0;
         }
-        if (std::abs(denom) < 1e-5) {
+        if (std::abs(denom) < 1e-12) {
             std::cerr << "[WARNING] |denom| = " << denom << ", rho = " << rho << std::endl;
-            denom = 1e-5;
+            denom = 1e-12;
         }
         // if (denom < 0) {
         //     std::cout << "[WARNING] Γ(2) < 0 at k = " << k << ",  = " << rho << "\n";
@@ -190,8 +190,7 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
         snap_indices.push_back(idx);
     }
 
-    std::vector<std::vector<double>> snapshots;
-    std::vector<std::vector<double>> rhs_snapshots;
+    std::vector<std::vector<double>> snapshots, rhs_snapshots;
     std::vector<double> k_values;
 
     std::vector<double> V = V_init;
@@ -199,6 +198,7 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
     for (size_t i = 0; i < N; ++i) {
         double t = p.t_start + i*(p.t_end - p.t_start)/(N - 1);
         double k = exp(t);
+        progressBar(i + 1, N);
 
         if (next_snap < snap_indices.size() && i == snap_indices[next_snap]) {
             snapshots.push_back(V);
@@ -218,10 +218,87 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
 // Adaptive integrator using RK4 + step-doubling
 void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename, int n_snapshots, double atol, double rtol) {
     if (dt_init >= 0) {
-        std::cerr << "[ERROR] dt must be negative" << std::endl;
+        std::cerr << "[ERROR] dt_init must be negative" << std::endl;
         return;
     }
 
-    // save_all(snapshots, rhs_snapshots, k_values, p, filename);
+    std::vector<double> snapshot_times(n_snapshots);
+    for (int s = 0; s <n_snapshots; ++s) {
+        snapshot_times[s] = p.t_start + static_cast<double>(s) / (n_snapshots - 1) * (p.t_end - p.t_start);
+    }
+
+    std::vector<std::vector<double>> snapshots, rhs_snapshots;
+    std::vector<double> k_values;
+
+    double t = p.t_start;
+    double dt = dt_init;
+    std::vector<double> V = V_init;
+    size_t next_snapshot = 0;
+
+    const double safety = 0.9;
+    const double min_dt = -1e-12;
+    const double max_dt = -0.1;
+
+    while ((dt < 0 && t > p.t_end) || (dt > 0 && t < p.t_end)) {
+        if (next_snapshot < snapshot_times.size() && ((dt < 0 && t <= snapshot_times[next_snapshot]) || (dt > 0 && t >= snapshot_times[next_snapshot]))) {
+            double k = exp(t);
+            snapshots.push_back(V);
+            rhs_snapshots.push_back(RHS(V,k,p));
+            k_values.push_back(k);
+            ++next_snapshot;
+            continue;
+        }
+
+        // limit dt so we don't overshoot at the end
+        double dt_to_end = p.t_end - t;
+        if (dt < 0) {
+            dt = std::max(dt, dt_to_end);
+        }
+        else {
+            dt = std::min(dt, dt_to_end);
+        }
+
+        double k = std::exp(t);
+        std::vector<double> V_big = step_rk4(V, k, dt, p);
+
+        double dt_half = dt / 2.0;
+        std::vector<double> V_half = step_rk4(V, k, dt_half, p);
+        std::vector<double> V_small = step_rk4(V_half, std::exp(t + dt_half), dt_half, p);
+        
+        double err_max = 0.0;
+        for (size_t i = 0; i < V.size(); ++i) {
+            double sc = atol + rtol * std::max(std::abs(V_big[i]), std::abs(V_small[i]));
+            double e = std::abs(V_small[i] - V_big[i]) / sc;
+            err_max = std::max(err_max, e);
+        }
+
+        if (err_max <= 1.0) {
+            // accept
+            t += dt;
+            V = V_small;
+        }
+
+        // adapt dt
+        double factor = safety * std::pow(1.0 / std::max(err_max, 1e-16), 0.2);
+        factor = std::min(5.0, std::max(0.1, factor));
+        dt *= factor;
+
+        // ensure that dt is negative
+        if (dt > 0) {
+            dt = - std::abs(dt);
+        }
+
+        // clamp dt
+        if (dt < max_dt) dt = max_dt;
+        if (dt > min_dt) dt = min_dt;
+    }
+
+    double k_final = std::exp(p.t_end);
+    snapshots.push_back(V);
+    rhs_snapshots.push_back(RHS(V, k_final, p));
+    k_values.push_back(k_final);
+
+    // write snapshots to file
+    save_all(snapshots, rhs_snapshots, k_values, p, filename);
 }
 

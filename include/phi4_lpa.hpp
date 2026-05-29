@@ -11,6 +11,8 @@
 #endif
 #include <string>
 
+#include "utils.hpp"
+
 /**
  * @brief phi4_lpa.hpp
  * 

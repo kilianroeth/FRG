@@ -66,4 +66,11 @@ void save_all(const std::vector<std::vector<double>>& snapshots, const std::vect
 
 // Integrate complete RG flow ----------
 
+// Simple dt forward step integrator
 void integrate_flow(const std::vector<double>& V_init, double dt, const Params& p, const std::string& filename = "results/flow.csv", int n_snapshots = 100);
+
+// Adaptive integrator (RK4 with step-doubling error estimate)
+void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename = "results/flow_adaptive.csv", int n_snapshots = 100, double atol = 1e-8, double rtol = 1e-6);
+
+// RK4 step used by adaptive integrator
+std::vector<double> step_rk4(const std::vector<double>& V, double k, double dt, const Params& p);

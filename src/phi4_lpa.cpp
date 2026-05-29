@@ -48,7 +48,7 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
             denom = 1.0;
         }
         if (std::abs(denom) < 1e-5) {
-            std::cerr << "[WARNING] |denom| = " << denom << "rho = " << rho << std::endl;
+            std::cerr << "[WARNING] |denom| = " << denom << ", rho = " << rho << std::endl;
             denom = 1e-5;
         }
         // if (denom < 0) {
@@ -62,6 +62,7 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
 
 // Integrate RG time step --------------
 
+// Simple forward euler
 std::vector<double> step(const std::vector<double>& V, double k, double dt, const Params& p) {
     std::vector<double> V_next(p.n_rho);
     if (dt >= 0) {
@@ -74,6 +75,44 @@ std::vector<double> step(const std::vector<double>& V, double k, double dt, cons
     for (size_t i = 0; i < p.n_rho; ++i) {
         V_next[i] = V[i] + dt * RHS_vals[i];
     }
+    return V_next;
+}
+
+// Classical RK4 step (accounts for k(t)=exp(t) so we advance k by dt via multiplication)
+std::vector<double> step_rk4(const std::vector<double>& V, double k, double dt, const Params& p) {
+    std::vector<double> V_next(p.n_rho);
+
+    // k1
+    std::vector<double> k1 = RHS(V, k, p);
+
+    double k_mid = k * exp(dt/2.0);
+    double k_end = k * exp(dt);
+
+    std::vector<double> V_temp(p.n_rho), k2, k3, k4;
+
+    // k2
+    for (size_t i = 0; i < p.n_rho; ++i) {
+        V_temp[i] = V[i] + 0.5 * dt  * k1[1];
+    }
+    k2 = RHS(V_temp, k_mid, p);
+
+    // k3
+    for (size_t i = 0; i < p.n_rho; ++i) {
+        V_temp[i] = V[i] + 0.5 * dt  * k2[1];
+    }
+    k3 = RHS(V_temp, k_mid, p);
+
+    // k4
+    for (size_t i = 0; i < p.n_rho; ++i) {
+        V_temp[i] = V[i] + dt * k3[1];
+    }
+    k4 = RHS(V_temp, k_end, p);
+
+
+    for (size_t i = 0; i < p.n_rho; ++i) {
+        V_next[i] = V[i] + dt * (k1[i] + 2.0*k2[i] + 2.0*k3[i] + k4[i]) / 6.0;
+    }
+
     return V_next;
 }
 
@@ -173,5 +212,16 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
         }
     }
     save_all(snapshots, rhs_snapshots, k_values, p, filename);
+}
+
+
+// Adaptive integrator using RK4 + step-doubling
+void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename, int n_snapshots, double atol, double rtol) {
+    if (dt_init >= 0) {
+        std::cerr << "[ERROR] dt must be negative" << std::endl;
+        return;
+    }
+
+    // save_all(snapshots, rhs_snapshots, k_values, p, filename);
 }
 

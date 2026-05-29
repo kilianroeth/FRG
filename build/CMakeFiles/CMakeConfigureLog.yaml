@@ -307,3 +307,299 @@ events:
         
       exitCode: 2
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:19 (find_package)"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-O8qht6"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-O8qht6"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-O8qht6'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_bfa7f/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_bfa7f.dir/build.make CMakeFiles/cmTC_bfa7f.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-O8qht6'
+        Building CXX object CMakeFiles/cmTC_bfa7f.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++   -std=c++20 -o CMakeFiles/cmTC_bfa7f.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_bfa7f.dir/build.make:78: CMakeFiles/cmTC_bfa7f.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-O8qht6'
+        gmake: *** [Makefile:127: cmTC_bfa7f/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:19 (find_package)"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-bB1R81"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-bB1R81"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-bB1R81'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b3651/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_b3651.dir/build.make CMakeFiles/cmTC_b3651.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-bB1R81'
+        Building CXX object CMakeFiles/cmTC_b3651.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++   -std=c++20 -o CMakeFiles/cmTC_b3651.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_b3651.dir/build.make:78: CMakeFiles/cmTC_b3651.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-bB1R81'
+        gmake: *** [Makefile:127: cmTC_b3651/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:19 (find_package)"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-qlYSbs"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-qlYSbs"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-qlYSbs'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_5804c/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_5804c.dir/build.make CMakeFiles/cmTC_5804c.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-qlYSbs'
+        Building CXX object CMakeFiles/cmTC_5804c.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++   -std=c++20 -o CMakeFiles/cmTC_5804c.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_5804c.dir/build.make:78: CMakeFiles/cmTC_5804c.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-qlYSbs'
+        gmake: *** [Makefile:127: cmTC_5804c/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:19 (find_package)"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-dOBgv5"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-dOBgv5"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-dOBgv5'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ef817/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_ef817.dir/build.make CMakeFiles/cmTC_ef817.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-dOBgv5'
+        Building CXX object CMakeFiles/cmTC_ef817.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++   -std=c++20 -o CMakeFiles/cmTC_ef817.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_ef817.dir/build.make:78: CMakeFiles/cmTC_ef817.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-dOBgv5'
+        gmake: *** [Makefile:127: cmTC_ef817/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:19 (find_package)"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-gBxhPl"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-gBxhPl"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-gBxhPl'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d9a7e/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_d9a7e.dir/build.make CMakeFiles/cmTC_d9a7e.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-gBxhPl'
+        Building CXX object CMakeFiles/cmTC_d9a7e.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++   -std=c++20 -o CMakeFiles/cmTC_d9a7e.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_d9a7e.dir/build.make:78: CMakeFiles/cmTC_d9a7e.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-gBxhPl'
+        gmake: *** [Makefile:127: cmTC_d9a7e/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:19 (find_package)"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-XnRIaj"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-XnRIaj"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-XnRIaj'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_548e0/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_548e0.dir/build.make CMakeFiles/cmTC_548e0.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-XnRIaj'
+        Building CXX object CMakeFiles/cmTC_548e0.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++   -std=c++20 -o CMakeFiles/cmTC_548e0.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_548e0.dir/build.make:78: CMakeFiles/cmTC_548e0.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-XnRIaj'
+        gmake: *** [Makefile:127: cmTC_548e0/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:19 (find_package)"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-UvGhYo"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-UvGhYo"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-UvGhYo'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_7a7a2/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_7a7a2.dir/build.make CMakeFiles/cmTC_7a7a2.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-UvGhYo'
+        Building CXX object CMakeFiles/cmTC_7a7a2.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++   -std=c++20 -o CMakeFiles/cmTC_7a7a2.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_7a7a2.dir/build.make:78: CMakeFiles/cmTC_7a7a2.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-UvGhYo'
+        gmake: *** [Makefile:127: cmTC_7a7a2/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:238 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindHDF5.cmake:608 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:19 (find_package)"
+    directories:
+      source: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-cIJfTl"
+      binary: "/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-cIJfTl"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-cIJfTl'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_06d59/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_06d59.dir/build.make CMakeFiles/cmTC_06d59.dir/build
+        gmake[1]: Entering directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-cIJfTl'
+        Building CXX object CMakeFiles/cmTC_06d59.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++   -std=c++20 -o CMakeFiles/cmTC_06d59.dir/cmake_hdf5_test.cxx.o -c /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        /home/kilian/Code/FRG/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx:1:10: fatal error: hdf5.h: No such file or directory
+            1 | #include <hdf5.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_06d59.dir/build.make:78: CMakeFiles/cmTC_06d59.dir/cmake_hdf5_test.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/kilian/Code/FRG/build/CMakeFiles/CMakeScratch/TryCompile-cIJfTl'
+        gmake: *** [Makefile:127: cmTC_06d59/fast] Error 2
+        
+      exitCode: 2
+...

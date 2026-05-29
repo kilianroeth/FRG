@@ -10,7 +10,7 @@ int main() {
     p.m2 = -0.015;
     p.lambda = 1.0;
     p.t_start = 0.0;
-    p.t_end = -15.0;
+    p.t_end = -5.0;
 
     
     std::vector<double> V = V_classical(p);

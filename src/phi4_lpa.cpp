@@ -92,7 +92,7 @@ void save_V(const std::vector<double>& V, const std::string filename, const Para
     file.close();
 }
 
-void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<double>& k_values, const Params& p, std::string& filename) {
+void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename) {
     std::ofstream file(filename);
     if (!file) { std::cerr << "[ERROR] Cannot open " << filename << "\n"; }
 
@@ -125,25 +125,41 @@ void save_all(const std::vector<std::vector<double>>& snapshots, const std::vect
 
 // Integrate complete RG flow ----------
 
-void integrate_flow(const std::vector<double>& V_init, double dt, const Params& p) {
+void integrate_flow(const std::vector<double>& V_init, double dt, const Params& p, const std::string& filename, int n_snapshots) {
     if (dt >= 0) {
         std::cerr << "[ERROR] dt must be negative" << std::endl;
         return;
     }
+
     const double total_t = p.t_start - p.t_end;
     size_t N = static_cast<size_t>(std::ceil(total_t / std::abs(dt))) + 1;
     double dt_t = -total_t / (N - 1);
+
+    std::vector<size_t> snap_indices;
+    for (int s = 0; s < n_snapshots; ++s) {
+        double frac = static_cast<double>(s) / (n_snapshots - 1);
+        size_t idx = static_cast<size_t>(std::round(frac * (N - 1)));
+        snap_indices.push_back(idx);
+    }
+
+    std::vector<std::vector<double>> snapshots;
+    std::vector<double> k_values;
+
     std::vector<double> V = V_init;
     for (size_t i = 0; i < N; ++i) {
         double t = p.t_start + i*(p.t_end - p.t_start)/(N - 1);
         double k = exp(t);
 
-        if (i % 100 == 0) {
-            save_V(V, "results/V_" + std::to_string(std::abs(t)) + ".txt", p);
+        if (!snap_indices.empty() && i == snap_indices.front()) {
+            snapshots.push_back(V);
+            k_values.push_back(k);
+            snap_indices.erase(snap_indices.begin());
         }
+
         if (i + 1 < N) {
             V = step(V, k, dt_t, p);
         }
     }
+    save_all(snapshots, k_values, p, filename);
 }
 

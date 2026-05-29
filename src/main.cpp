@@ -5,7 +5,7 @@
 int main() {
 
     Params p;
-    p.n_rho = 5000;
+    p.n_rho = 1000;
     p.rho_max = 0.5;
     p.m2 = -1.0/(9.0*M_PI*M_PI);
     p.lambda = 1.0;
@@ -25,7 +25,7 @@ int main() {
     save_V(dV_vals, "results/V_classical_prime.txt",p);
     save_V(ddV_vals, "results/V_classical_doubleprime.txt",p);
     save_V(RHS_vals, "results/RHS.txt",p);
-    integrate_flow(V, -0.00001,p);
+    integrate_flow(V, -0.0001,p);
 
     return 0;
 }

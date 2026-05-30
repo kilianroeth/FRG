@@ -10,6 +10,7 @@
     constexpr double M_PI = 3.14159265358979323846;
 #endif
 #include <string>
+#include <algorithm>
 
 #include "utils.hpp"
 
@@ -59,20 +60,25 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
 
 // Integrate RG time step --------------
 
+// Simple Euler time step
 std::vector<double> step(const std::vector<double>& V, double k, double dt, const Params& p);
+// RK4 step used by adaptive integrator
+std::vector<double> step_rk4(const std::vector<double>& V, double k, double dt, const Params& p);
 
 // save current potential --------------
 
 void save_V(const std::vector<double>& V, const std::string& filename, const Params& p);
 void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<std::vector<double>>& rhs_snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename);
+void save_dt_hist(std::vector<double>& dt_values, const std::string& filename);
 
 // Integrate complete RG flow ----------
 
 // Simple dt forward step integrator
 void integrate_flow(const std::vector<double>& V_init, double dt, const Params& p, const std::string& filename = "results/flow.csv", int n_snapshots = 100);
-
 // Adaptive integrator (RK4 with step-doubling error estimate)
-void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename = "results/flow_adaptive.csv", int n_snapshots = 100, double atol = 1e-8, double rtol = 1e-6);
+void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename = "results/flow_adaptive.csv", int n_snapshots = 100, double absolute_tolerance = 1e-8, double relative_tolerance = 1e-8);
 
-// RK4 step used by adaptive integrator
-std::vector<double> step_rk4(const std::vector<double>& V, double k, double dt, const Params& p);
+// compute the error between two states at same RG time t
+// RMS of error of each array entry
+// the error of each array entry is computed via the difference of V1[i] and V2[i] divided by a scale that is scale = absolute_tolerance + relative_tolerance * max(V1[i],V2[i])
+double compute_error(const std::vector<double>& V1, const std::vector<double>& V2, double absolute_tolerance = 1e-6, double relative_tolerance = 1e-6);

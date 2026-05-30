@@ -78,39 +78,38 @@ std::vector<double> step(const std::vector<double>& V, double k, double dt, cons
     return V_next;
 }
 
-// Classical RK4 step (accounts for k(t)=exp(t) so we advance k by dt via multiplication)
+// Classical RK4 step
 std::vector<double> step_rk4(const std::vector<double>& V, double k, double dt, const Params& p) {
     std::vector<double> V_next(p.n_rho);
 
-    // k1
-    std::vector<double> k1 = RHS(V, k, p);
+    // first step
+    std::vector<double> K1 = RHS(V, k, p);
 
-    double k_mid = k * exp(dt/2.0);
-    double k_end = k * exp(dt);
+    std::vector<double> K2, K3, K4;
+    std::vector<double> V_temp = V;
+    double k_half = k*exp(dt/2.0);
+    double k_next = k*exp(dt);
 
-    std::vector<double> V_temp(p.n_rho), k2, k3, k4;
-
-    // k2
+    // second step at dt/2
     for (size_t i = 0; i < p.n_rho; ++i) {
-        V_temp[i] = V[i] + 0.5 * dt  * k1[1];
+        V_temp[i] = V[i] + dt/2.0 * K1[i];
     }
-    k2 = RHS(V_temp, k_mid, p);
+    K2 = RHS(V_temp, k_half, p);
 
-    // k3
+    // third step at dt/2
     for (size_t i = 0; i < p.n_rho; ++i) {
-        V_temp[i] = V[i] + 0.5 * dt  * k2[1];
+        V_temp[i] = V[i] + dt/2.0 * K2[i];
     }
-    k3 = RHS(V_temp, k_mid, p);
+    K3 = RHS(V_temp, k_half, p);
 
-    // k4
+    // fourth step at dt
     for (size_t i = 0; i < p.n_rho; ++i) {
-        V_temp[i] = V[i] + dt * k3[1];
+        V_temp[i] = V[i] + dt * K3[i];
     }
-    k4 = RHS(V_temp, k_end, p);
-
+    K4 = RHS(V_temp, k_next, p);
 
     for (size_t i = 0; i < p.n_rho; ++i) {
-        V_next[i] = V[i] + dt * (k1[i] + 2.0*k2[i] + 2.0*k3[i] + k4[i]) / 6.0;
+        V_next[i] = V[i] + dt/6.0 * (K1[i] + 2.0 * K2[i] + 2.0 * K3[i] + K4[i]);
     }
 
     return V_next;
@@ -133,7 +132,7 @@ void save_V(const std::vector<double>& V, const std::string& filename, const Par
 
 void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<std::vector<double>>& rhs_snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename) {
     std::ofstream file(filename);
-    if (!file) { std::cerr << "[ERROR] Cannot open " << filename << "\n"; }
+    if (!file) { std::cerr << "[ERROR] Cannot open " << filename << "\n"; return; }
 
     // metadata
     file << "# Wetterich LPA flow, phi^4, d=3\n";
@@ -168,7 +167,17 @@ void save_all(const std::vector<std::vector<double>>& snapshots, const std::vect
     }
 
     std::cout << "Saved " << snapshots.size() << " snapshots -> " << filename << "\n";
+}
 
+void save_dt_hist(std::vector<double>& dt_values, const std::string& filename) {
+    std::ofstream file(filename);
+    if (!file) { std::cerr << "[ERROR] Cannot open" << filename << "\n"; return; }
+    
+    // metadata
+    file << "#time steps dt for adaptive RK4 time stepper\n";
+    for (double dt : dt_values) {
+        file << dt << "\n";
+    }
 }
 
 // Integrate complete RG flow ----------
@@ -216,89 +225,107 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
 
 
 // Adaptive integrator using RK4 + step-doubling
-void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename, int n_snapshots, double atol, double rtol) {
+void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename, int n_snapshots, double absolute_tolerance, double relative_tolerance) {
     if (dt_init >= 0) {
         std::cerr << "[ERROR] dt_init must be negative" << std::endl;
         return;
     }
 
-    std::vector<double> snapshot_times(n_snapshots);
-    for (int s = 0; s <n_snapshots; ++s) {
-        snapshot_times[s] = p.t_start + static_cast<double>(s) / (n_snapshots - 1) * (p.t_end - p.t_start);
-    }
-
     std::vector<std::vector<double>> snapshots, rhs_snapshots;
+    // target times for snapshots
+    std::vector<double> snap_targets(n_snapshots);
+    for (int s = 0; s < n_snapshots; ++s) {
+        double fraction = static_cast<double>(s) / (n_snapshots - 1);
+        snap_targets[s] = p.t_start + fraction * (p.t_end - p.t_start);
+    }
+    int next_snap = 0;
     std::vector<double> k_values;
+    std::vector<double> dt_values;
+    
+    std::vector<double> V = V_init;
 
     double t = p.t_start;
     double dt = dt_init;
-    std::vector<double> V = V_init;
-    size_t next_snapshot = 0;
+    double sign = (dt > 0.0) ? 1.0 : -1.0;
 
-    const double safety = 0.9;
-    const double min_dt = -1e-12;
-    const double max_dt = -0.1;
+    snapshots.push_back(V);
+    rhs_snapshots.push_back(RHS(V, exp(t), p));
+    k_values.push_back(exp(t));
+    ++next_snap;
 
-    while ((dt < 0 && t > p.t_end) || (dt > 0 && t < p.t_end)) {
-        if (next_snapshot < snapshot_times.size() && ((dt < 0 && t <= snapshot_times[next_snapshot]) || (dt > 0 && t >= snapshot_times[next_snapshot]))) {
-            double k = exp(t);
-            snapshots.push_back(V);
-            rhs_snapshots.push_back(RHS(V,k,p));
-            k_values.push_back(k);
-            ++next_snapshot;
-            continue;
+    // acceptance statistics
+    int n_accepted = 0, n_rejected = 0;
+
+    while (sign * t < sign * p.t_end) {
+        // avoid overshooting
+        if (sign * (t + dt) > sign * p.t_end) {
+            dt = p.t_end - t;
         }
 
-        // limit dt so we don't overshoot at the end
-        double dt_to_end = p.t_end - t;
-        if (dt < 0) {
-            dt = std::max(dt, dt_to_end);
+        // full step
+        double k = exp(t);
+        std::vector<double> V_full = step_rk4(V, k, dt, p);
+
+        // two half steps
+        double k_half = k * exp(dt/2.0);
+        std::vector<double> V_mid = step_rk4(V, k, dt/2.0, p);
+        std::vector<double> V_half = step_rk4(V_mid, k_half, dt/2.0, p);
+
+        // estimate error
+        double error = compute_error(V_full, V_half, absolute_tolerance, relative_tolerance);
+
+        // check if error is small enough
+        if (error < 1.0) {
+            V = V_half;
+            t += dt;
+            dt_values.push_back(dt);
+            ++n_accepted;
+
+            while (next_snap < n_snapshots && sign * t >= sign * snap_targets[next_snap]) {
+                snapshots.push_back(V);
+                rhs_snapshots.push_back(RHS(V, exp(t), p));
+                k_values.push_back(exp(t));
+                ++next_snap;
+            }
         }
         else {
-            dt = std::min(dt, dt_to_end);
+            ++n_rejected;
         }
 
-        double k = std::exp(t);
-        std::vector<double> V_big = step_rk4(V, k, dt, p);
-
-        double dt_half = dt / 2.0;
-        std::vector<double> V_half = step_rk4(V, k, dt_half, p);
-        std::vector<double> V_small = step_rk4(V_half, std::exp(t + dt_half), dt_half, p);
-        
-        double err_max = 0.0;
-        for (size_t i = 0; i < V.size(); ++i) {
-            double sc = atol + rtol * std::max(std::abs(V_big[i]), std::abs(V_small[i]));
-            double e = std::abs(V_small[i] - V_big[i]) / sc;
-            err_max = std::max(err_max, e);
-        }
-
-        if (err_max <= 1.0) {
-            // accept
-            t += dt;
-            V = V_small;
-        }
-
-        // adapt dt
-        double factor = safety * std::pow(1.0 / std::max(err_max, 1e-16), 0.2);
-        factor = std::min(5.0, std::max(0.1, factor));
+        // update time step dt, safety factor 0.9
+        double factor = (error > 0) ? std::clamp(0.9 * std::pow(1.0/error, 1.0/4.0), 0.1, 5.0) : 5.0;
         dt *= factor;
 
-        // ensure that dt is negative
-        if (dt > 0) {
-            dt = - std::abs(dt);
+        if (std::abs(dt) < 1e-15) {
+            std::cerr << "[ERROR] dt too small, aboritng\n";
+            break;
         }
-
-        // clamp dt
-        if (dt < max_dt) dt = max_dt;
-        if (dt > min_dt) dt = min_dt;
     }
 
-    double k_final = std::exp(p.t_end);
-    snapshots.push_back(V);
-    rhs_snapshots.push_back(RHS(V, k_final, p));
-    k_values.push_back(k_final);
-
-    // write snapshots to file
+    std::cout << "Accepted: " << n_accepted << ", Rejected: " << n_rejected << "\n";
     save_all(snapshots, rhs_snapshots, k_values, p, filename);
+    save_dt_hist(dt_values, "results/dt_values.txt");
+}
+
+double compute_error(const std::vector<double>& V1, const std::vector<double>& V2, double absolute_tolerance, double relative_tolerance) {
+    if (V1.size() != V2.size()) {
+        std::cerr << "Arrays don't have the samve size. V1.size() = " << V1.size() << ", V2.size() = " << V2.size() << "\n";
+        throw std::runtime_error("V1 and V2 size mismach");
+    }
+    
+    // sum of squared errors of each array entry
+    double squared_errors = 0.0;
+
+    // iterate over all entries
+    for (size_t i = 0; i < V1.size(); ++i) {
+        // scale = a_tol + r_rol * max(V1,V2)
+        double scale = absolute_tolerance + relative_tolerance * std::max(std::abs(V1[i]), std::abs(V2[i]));
+        double error = std::abs(V1[i] - V2[i]) / scale;
+        // if error < 1, we are within the tolerances
+        squared_errors += error * error;
+    }
+
+    // return RMS of sum of array entries
+    return sqrt(squared_errors / V1.size());
 }
 

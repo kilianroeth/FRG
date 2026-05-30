@@ -4,15 +4,31 @@
 // Finite difference derivatives -------
 
 double dV(const std::vector<double>& V, size_t i, const Params& p) {
+    // interior: 4th order finite difference
+    if (i >= 2 && i <= p.n_rho - 3)  {
+        return (-V[i+2] + 8.0*V[i+1] - 8.0*V[i-1] + V[i-2])/(12.0*p.drho());
+    }
+    // one point from boundary: 2nd order finite difference
+    if (i == 1 || i == p.n_rho - 2) {
+        return (V[i+1] - V[i-1])/(2*p.drho());
+    }
+    // boundary: 1st order one sided
     if (i == 0) { return (V[1] - V[0])/p.drho(); }
     if (i == p.n_rho - 1) { return (V[p.n_rho-1] - V[p.n_rho-2])/p.drho(); }
-    return (V[i+1] - V[i-1])/(2*p.drho());
 }
 
 double ddV(const std::vector<double>& V, size_t i, const Params& p) {
+    // interions: 4th order finite difference
+    if (i >= 2 && i <= p.n_rho - 3) {
+        return (-V[i+2] + 16.0*V[i+1] - 30.0*V[i] + 16.0*V[i-1] - V[i-2])/(12.0*p.drho()*p.drho());
+    }
+    // one point from boundary: 2nd order finite difference
+    if (i == 1 || i == p.n_rho - 2) {
+        return (V[i+1] - 2.0*V[i] + V[i-1])/(p.drho()*p.drho());
+    }
+    // boundary: 1st order one sided
     if (i == 0) { return (V[2] - 2.0*V[1] + V[0])/(p.drho()*p.drho()); }
     if (i == p.n_rho - 1) { return (V[p.n_rho-1] - 2.0*V[p.n_rho-2] + V[p.n_rho-3])/(p.drho()*p.drho()); }
-    return (V[i+1] - 2.0*V[i] + V[i-1])/(p.drho()*p.drho());
 }
 
 // classical potential -----------------

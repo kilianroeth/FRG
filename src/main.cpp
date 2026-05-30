@@ -5,7 +5,7 @@
 int main() {
 
     Params p;
-    p.n_rho = 10000;
+    p.n_rho = 20000;
     p.rho_max = 0.5;
     p.m2 = -0.025;
     p.lambda = 1.0;

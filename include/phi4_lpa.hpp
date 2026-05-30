@@ -11,6 +11,7 @@
 #endif
 #include <string>
 #include <algorithm>
+#include <omp.h>
 
 #include "utils.hpp"
 
@@ -77,7 +78,7 @@ void save_m2_flow(const std::vector<double>& m2_values, const std::vector<double
 // Simple dt forward step integrator
 void integrate_flow(const std::vector<double>& V_init, double dt, const Params& p, const std::string& filename = "results/flow.csv", int n_snapshots = 100);
 // Adaptive integrator (RK4 with step-doubling error estimate)
-void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename = "results/flow_adaptive.csv", int n_snapshots = 100, double absolute_tolerance = 1e-8, double relative_tolerance = 1e-8);
+void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename = "results/flow_adaptive.csv", int n_snapshots = 100, double absolute_tolerance = 1e-8, double relative_tolerance = 1e-8, bool show_progress_bar = true);
 
 // compute the error between two states at same RG time t
 // RMS of error of each array entry

@@ -66,6 +66,7 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
             denom = 1.0;
         }
         if (std::abs(denom) < 1e-12) {
+            #pragma omp critical
             std::cerr << "[WARNING] |denom| = " << denom << ", rho = " << rho << std::endl;
             denom = 1e-12;
         }
@@ -84,6 +85,7 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
 std::vector<double> step(const std::vector<double>& V, double k, double dt, const Params& p) {
     std::vector<double> V_next(p.n_rho);
     if (dt >= 0) {
+        #pragma omp critical
         std::cerr << "[ERROR] dt must be negative" << std::endl;
         return V_next;
     }
@@ -267,12 +269,12 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
 
 
 // Adaptive integrator using RK4 + step-doubling
-void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename, int n_snapshots, double absolute_tolerance, double relative_tolerance) {
+void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename, int n_snapshots, double absolute_tolerance, double relative_tolerance, bool show_progress_bar) {
     if (dt_init >= 0) {
         std::cerr << "[ERROR] dt_init must be negative" << std::endl;
         return;
     }
-    std::cout << "Solving flow equation with adaptive time step...\n";
+    if(show_progress_bar) { std::cout << "Solving flow equation with adaptive time step...\n"; }
 
     std::vector<std::vector<double>> snapshots, rhs_snapshots;
     // target times for snapshots
@@ -327,8 +329,10 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
             ++n_accepted;
 
             // progress bar
-            double progress = std::abs(t - p.t_start) / std::abs(p.t_end - p.t_start);
-            progressBar(static_cast<size_t>(progress * 1000), 1000);
+            if (show_progress_bar) {
+                double progress = std::abs(t - p.t_start) / std::abs(p.t_end - p.t_start);
+                progressBar(static_cast<size_t>(progress * 1000), 1000);
+            }
 
             while (next_snap < n_snapshots && sign * t >= sign * snap_targets[next_snap]) {
                 snapshots.push_back(V);
@@ -347,6 +351,7 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
         dt *= factor;
 
         if (std::abs(dt) < 1e-15) {
+            #pragma omp critical
             std::cerr << "[ERROR] dt too small, aborting\n";
             break;
         }
@@ -354,12 +359,15 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
 
     std::cout << "Accepted: " << n_accepted << ", Rejected: " << n_rejected << "\n";
     save_all(snapshots, rhs_snapshots, k_values, p, filename);
-    save_dt_hist(dt_values, k_values, "results/dt_values.txt");
-    save_m2_flow(m2_values, k_values, "results/m2_flow.txt");
+    if (!filename.empty()) {
+        save_dt_hist(dt_values, k_values, "results/dt_values.txt");
+        save_m2_flow(m2_values, k_values, "results/m2_flow.txt");
+    }
 }
 
 double compute_error(const std::vector<double>& V1, const std::vector<double>& V2, double absolute_tolerance, double relative_tolerance) {
     if (V1.size() != V2.size()) {
+        #pragma omp critical
         std::cerr << "Arrays don't have the samve size. V1.size() = " << V1.size() << ", V2.size() = " << V2.size() << "\n";
         throw std::runtime_error("V1 and V2 size mismach");
     }
@@ -408,23 +416,36 @@ void sweep_m2(const Params& p_base, const std::vector<double>& m2_values, const 
     std::cout << "#############################\n";
     std::cout << "Sweep mass parameter\n";
     std::cout << "#############################\n";
-    
-    for (size_t i = 0; i < m2_values.size(); ++i) {
+
+    int N = m2_values.size();
+    std::vector<double> m2_IR_results(N), rho_min_results(N);
+
+    #pragma omp parallel for schedule (dynamic)
+    for (int i = 0; i < N; ++i) {
         Params p = p_base;
         p.m2 = m2_values[i];
 
-        std::cout << "\n[sweep] m2_UV = " << p.m2 << " (" << i+1 << "/" << m2_values.size() << ")\n"; 
         std::vector<double> V = V_classical(p);
-        integrate_flow_adaptive(V, dt_init, p, "", 0, absolute_tolerance, relative_tolerance);
+        integrate_flow_adaptive(V, dt_init, p, "", 0, absolute_tolerance, relative_tolerance, false);
 
         double m2_IR = compute_m2(V, p);
         double rho_min = p.rho_at(find_min(V));
+        m2_IR_results[i] = m2_IR;
+        rho_min_results[i] = rho_min;
 
-        file << m2_IR << ", " << rho_min << "\n";
-        std::cout << "m2_IR = " << m2_IR << ", rho_min = " << rho_min << "\n";
+        #pragma omp critical
+        {
+            std::cout   << "[sweep] m2_UV = " << p.m2
+                        << ", m2_IR = " << m2_IR
+                        << ", rho_min = " << rho_min 
+                        << " (" << i << "/" << N << ")\n";
+        }
+    }
+
+    for (int i = 0; i < N; ++i) {
+        file << m2_values[i] << ", " << m2_IR_results[i] << ", " << rho_min_results[i] << "\n";
     }
 
     file.close();
-    std::cout << "Saved m2 flow ->" << filename << "\n";
-
+    std::cout << "Saved m2 flow -> " << filename << "\n";
 }

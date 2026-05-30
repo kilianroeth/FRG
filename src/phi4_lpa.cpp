@@ -15,6 +15,7 @@ double dV(const std::vector<double>& V, size_t i, const Params& p) {
     // boundary: 1st order one sided
     if (i == 0) { return (V[1] - V[0])/p.drho(); }
     if (i == p.n_rho - 1) { return (V[p.n_rho-1] - V[p.n_rho-2])/p.drho(); }
+    return 0;
 }
 
 double ddV(const std::vector<double>& V, size_t i, const Params& p) {
@@ -29,6 +30,7 @@ double ddV(const std::vector<double>& V, size_t i, const Params& p) {
     // boundary: 1st order one sided
     if (i == 0) { return (V[2] - 2.0*V[1] + V[0])/(p.drho()*p.drho()); }
     if (i == p.n_rho - 1) { return (V[p.n_rho-1] - 2.0*V[p.n_rho-2] + V[p.n_rho-3])/(p.drho()*p.drho()); }
+    return 0;
 }
 
 // classical potential -----------------
@@ -147,6 +149,7 @@ void save_V(const std::vector<double>& V, const std::string& filename, const Par
 }
 
 void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<std::vector<double>>& rhs_snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename) {
+    if (filename.empty()) { return; }
     std::ofstream file(filename);
     if (!file) { std::cerr << "[ERROR] Cannot open " << filename << "\n"; return; }
 
@@ -187,29 +190,31 @@ void save_all(const std::vector<std::vector<double>>& snapshots, const std::vect
     std::cout << "Saved " << snapshots.size() << " snapshots -> " << filename << "\n";
 }
 
-void save_dt_hist(const std::vector<double>& dt_values, const std::string& filename) {
+void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double>& k_values, const std::string& filename) {
     std::ofstream file(filename);
     if (!file) { std::cerr << "[ERROR] Cannot open" << filename << "\n"; return; }
     
     // metadata
-    file << "#time steps dt for adaptive RK4 time stepper\n";
+    file << "# time steps dt for adaptive RK4 time stepper\n";
+    file << "# k, dt\n";
     // data
-    for (double dt : dt_values) {
-        file << dt << "\n";
+    for (size_t i = 0; i < dt_values.size(); ++i) {
+        file << k_values[i] << ", " << dt_values[i] << "\n";
     }
 
     file.close();
 }
 
-void save_m2_flow(const std::vector<double>& m2_values, const std::string& filename) {
+void save_m2_flow(const std::vector<double>& m2_values, const std::vector<double>& k_values, const std::string& filename) {
     std::ofstream file(filename);
     if (!file) { std::cerr << "[ERROR] Cannot open" << filename << "\n"; return; }
 
     // metadata
     file << "# flow of m2\n";
+    file << "# k, m2\n";
     // data
     for (size_t i = 0; i < m2_values.size(); ++i) {
-        file << m2_values[i] << "\n";
+        file << k_values[i] << ", " << m2_values[i] << "\n";
     }
 
     file.close();
@@ -342,15 +347,15 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
         dt *= factor;
 
         if (std::abs(dt) < 1e-15) {
-            std::cerr << "[ERROR] dt too small, aboritng\n";
+            std::cerr << "[ERROR] dt too small, aborting\n";
             break;
         }
     }
 
     std::cout << "Accepted: " << n_accepted << ", Rejected: " << n_rejected << "\n";
     save_all(snapshots, rhs_snapshots, k_values, p, filename);
-    save_dt_hist(dt_values, "results/dt_values.txt");
-    save_m2_flow(m2_values, "results/m2_flow.txt");
+    save_dt_hist(dt_values, k_values, "results/dt_values.txt");
+    save_m2_flow(m2_values, k_values, "results/m2_flow.txt");
 }
 
 double compute_error(const std::vector<double>& V1, const std::vector<double>& V2, double absolute_tolerance, double relative_tolerance) {
@@ -395,3 +400,31 @@ double compute_m2(const std::vector<double>& V, const Params& p) {
     }
 }
 
+void sweep_m2(const Params& p_base, const std::vector<double>& m2_values, const std::string& filename, double dt_init, double absolute_tolerance, double relative_tolerance) {
+    std::ofstream file(filename); 
+    if (!file) { std::cerr << "[ERROR] Cannot open" << filename << "\n"; return; }
+    file << "# m2_UV, m2_IR, rho_min\n";
+
+    std::cout << "#############################\n";
+    std::cout << "Sweep mass parameter\n";
+    std::cout << "#############################\n";
+    
+    for (size_t i = 0; i < m2_values.size(); ++i) {
+        Params p = p_base;
+        p.m2 = m2_values[i];
+
+        std::cout << "\n[sweep] m2_UV = " << p.m2 << " (" << i+1 << "/" << m2_values.size() << ")\n"; 
+        std::vector<double> V = V_classical(p);
+        integrate_flow_adaptive(V, dt_init, p, "", 0, absolute_tolerance, relative_tolerance);
+
+        double m2_IR = compute_m2(V, p);
+        double rho_min = p.rho_at(find_min(V));
+
+        file << m2_IR << ", " << rho_min << "\n";
+        std::cout << "m2_IR = " << m2_IR << ", rho_min = " << rho_min << "\n";
+    }
+
+    file.close();
+    std::cout << "Saved m2 flow ->" << filename << "\n";
+
+}

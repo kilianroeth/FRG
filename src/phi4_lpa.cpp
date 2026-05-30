@@ -169,16 +169,30 @@ void save_all(const std::vector<std::vector<double>>& snapshots, const std::vect
     std::cout << "Saved " << snapshots.size() << " snapshots -> " << filename << "\n";
 }
 
-void save_dt_hist(std::vector<double>& dt_values, const std::string& filename) {
+void save_dt_hist(const std::vector<double>& dt_values, const std::string& filename) {
     std::ofstream file(filename);
     if (!file) { std::cerr << "[ERROR] Cannot open" << filename << "\n"; return; }
     
     // metadata
     file << "#time steps dt for adaptive RK4 time stepper\n";
+    // data
     for (double dt : dt_values) {
         file << dt << "\n";
     }
 }
+
+void save_m2_flow(const std::vector<double>& m2_values, const std::string& filename) {
+    std::ofstream file(filename);
+    if (!file) { std::cerr << "[ERROR] Cannot open" << filename << "\n"; return; }
+
+    // metadata
+    file << "# flow of m2\n";
+    // data
+    for (size_t i = 0; i < m2_values.size(); ++i) {
+        file << m2_values[i] << "\n";
+    }
+}
+
 
 // Integrate complete RG flow ----------
 
@@ -281,6 +295,10 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
             dt_values.push_back(dt);
             ++n_accepted;
 
+            // progress bar
+            double progress = std::abs(t - p.t_start) / std::abs(p.t_end - p.t_start);
+            progressBar(static_cast<size_t>(progress * 1000), 1000);
+
             while (next_snap < n_snapshots && sign * t >= sign * snap_targets[next_snap]) {
                 snapshots.push_back(V);
                 rhs_snapshots.push_back(RHS(V, exp(t), p));
@@ -327,5 +345,26 @@ double compute_error(const std::vector<double>& V1, const std::vector<double>& V
 
     // return RMS of sum of array entries
     return sqrt(squared_errors / V1.size());
+}
+
+size_t find_min(const std::vector<double>& V) {
+    size_t i_min = 0;
+    for (size_t i = 0; i < V.size(); ++i) {
+        if(V[i] < V[i_min]) {
+            i_min = i;
+        }
+    }
+    return i_min;
+}
+
+double m2(const std::vector<double>& V, size_t i, const Params& p) {
+    double m2;
+    if (i == 0) {
+        return dV(V, i, p);
+    }
+    else {
+        return 2.0 * p.rho_at(i) * ddV(V, i, p);
+    }
+    return m2;
 }
 

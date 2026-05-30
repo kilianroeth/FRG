@@ -69,7 +69,8 @@ std::vector<double> step_rk4(const std::vector<double>& V, double k, double dt, 
 
 void save_V(const std::vector<double>& V, const std::string& filename, const Params& p);
 void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<std::vector<double>>& rhs_snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename);
-void save_dt_hist(std::vector<double>& dt_values, const std::string& filename);
+void save_dt_hist(const std::vector<double>& dt_values, const std::string& filename);
+void save_m2_flow(const std::vector<double>& m2_values, const std::string& filename);
 
 // Integrate complete RG flow ----------
 
@@ -82,3 +83,7 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
 // RMS of error of each array entry
 // the error of each array entry is computed via the difference of V1[i] and V2[i] divided by a scale that is scale = absolute_tolerance + relative_tolerance * max(V1[i],V2[i])
 double compute_error(const std::vector<double>& V1, const std::vector<double>& V2, double absolute_tolerance = 1e-6, double relative_tolerance = 1e-6);
+
+// compute the mass, i.e. the curvature at the minimum
+size_t find_min(const std::vector<double>& V);
+double m2(const std::vector<double>& V, size_t i, const Params& p);

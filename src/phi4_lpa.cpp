@@ -231,7 +231,7 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
         return;
     }
 
-    std::vector<std::vector<double>> snapshots, rhs_snapshots;
+    std::vector<std::vector<double>> snapshots, rhs_snapshots, m2_snapshots;
     // target times for snapshots
     std::vector<double> snap_targets(n_snapshots);
     for (int s = 0; s < n_snapshots; ++s) {

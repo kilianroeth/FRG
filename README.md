@@ -9,7 +9,7 @@ Numerical implementation of the Wetterich equation in the Loacl Potential Approx
 We want to solve the flow equation for the effective potential $V_k(\rho)$
 
 $$
-\partial V_k(\rho) = \frac{1}{6 \pi^2} \frac{k^3}{1+ \frac{V'_k(\rho) + 2 \rho V''_k(\rho)}{k^2}}
+\partial_t V_k(\rho) = \frac{1}{6 \pi^2} \frac{k^3}{1+ \frac{V'_k(\rho) + 2 \rho V''_k(\rho)}{k^2}}
 $$
 
 where $t = \log(k/\Lambda)$ is the RG-time and $\rho = \frac{1}{2} \phi^2$ is the $O(N)$ invariant field. The flow runs from the cutoff scale $\Lambda$ where $V_{\Lambda}$ is the classical potential and all quantum fluctuations are suppressed to $k=0$ where all quantum fluctutations are present. (UV: t = 0, IR: t $\to -\infty$).
@@ -25,7 +25,7 @@ $$
 | Paramter | |
 | ---------| - |
 | `m2` | Mass paramter $m^2$ at the UV scale. Negative $\to$ broken phase |
-| `\lamda` | Quartic coupling at the UV scale. |
+| `lamda` | Quartic coupling at the UV scale. |
 | `t_start` | RG time in the UV (t_start = 0) |
 | `t_end` | RG time in the IR (eg. -15.0 so $k_{IR} = e^{-15}$) |
 | `n_rho` | Number of grid points in rho |

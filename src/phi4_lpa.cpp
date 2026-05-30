@@ -166,6 +166,8 @@ void save_all(const std::vector<std::vector<double>>& snapshots, const std::vect
         file << "\n";
     }
 
+    file.close();
+
     std::cout << "Saved " << snapshots.size() << " snapshots -> " << filename << "\n";
 }
 
@@ -179,6 +181,8 @@ void save_dt_hist(const std::vector<double>& dt_values, const std::string& filen
     for (double dt : dt_values) {
         file << dt << "\n";
     }
+
+    file.close();
 }
 
 void save_m2_flow(const std::vector<double>& m2_values, const std::string& filename) {
@@ -191,6 +195,8 @@ void save_m2_flow(const std::vector<double>& m2_values, const std::string& filen
     for (size_t i = 0; i < m2_values.size(); ++i) {
         file << m2_values[i] << "\n";
     }
+
+    file.close();
 }
 
 
@@ -201,6 +207,7 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
         std::cerr << "[ERROR] dt must be negative" << std::endl;
         return;
     }
+    std::cout << "Solving flow equation...\n";
 
     const double total_t = p.t_start - p.t_end;
     size_t N = static_cast<size_t>(std::ceil(total_t / std::abs(dt))) + 1;
@@ -244,8 +251,9 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
         std::cerr << "[ERROR] dt_init must be negative" << std::endl;
         return;
     }
+    std::cout << "Solving flow equation with adaptive time step...\n";
 
-    std::vector<std::vector<double>> snapshots, rhs_snapshots, m2_snapshots;
+    std::vector<std::vector<double>> snapshots, rhs_snapshots;
     // target times for snapshots
     std::vector<double> snap_targets(n_snapshots);
     for (int s = 0; s < n_snapshots; ++s) {
@@ -255,6 +263,7 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
     int next_snap = 0;
     std::vector<double> k_values;
     std::vector<double> dt_values;
+    std::vector<double> m2_values;
     
     std::vector<double> V = V_init;
 
@@ -265,6 +274,7 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
     snapshots.push_back(V);
     rhs_snapshots.push_back(RHS(V, exp(t), p));
     k_values.push_back(exp(t));
+    m2_values.push_back(compute_m2(V, p));
     ++next_snap;
 
     // acceptance statistics
@@ -303,6 +313,7 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
                 snapshots.push_back(V);
                 rhs_snapshots.push_back(RHS(V, exp(t), p));
                 k_values.push_back(exp(t));
+                m2_values.push_back(compute_m2(V, p));
                 ++next_snap;
             }
         }
@@ -323,6 +334,7 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
     std::cout << "Accepted: " << n_accepted << ", Rejected: " << n_rejected << "\n";
     save_all(snapshots, rhs_snapshots, k_values, p, filename);
     save_dt_hist(dt_values, "results/dt_values.txt");
+    save_m2_flow(m2_values, "results/m2_flow.txt");
 }
 
 double compute_error(const std::vector<double>& V1, const std::vector<double>& V2, double absolute_tolerance, double relative_tolerance) {
@@ -357,14 +369,13 @@ size_t find_min(const std::vector<double>& V) {
     return i_min;
 }
 
-double m2(const std::vector<double>& V, size_t i, const Params& p) {
-    double m2;
-    if (i == 0) {
-        return dV(V, i, p);
+double compute_m2(const std::vector<double>& V, const Params& p) {
+    size_t idx_min = find_min(V);
+    if (idx_min == 0) {
+        return dV(V, idx_min, p);
     }
     else {
-        return 2.0 * p.rho_at(i) * ddV(V, i, p);
+        return 2.0 * p.rho_at(idx_min) * ddV(V, idx_min, p);
     }
-    return m2;
 }
 

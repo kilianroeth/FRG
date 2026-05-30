@@ -5,7 +5,7 @@
 int main() {
 
     Params p;
-    p.n_rho = 1000;
+    p.n_rho = 10000;
     p.rho_max = 0.5;
     p.m2 = -0.025;
     p.lambda = 1.0;
@@ -25,8 +25,7 @@ int main() {
     save_V(dV_vals, "results/V_classical_prime.txt",p);
     save_V(ddV_vals, "results/V_classical_doubleprime.txt",p);
     save_V(RHS_vals, "results/RHS.txt",p);
-    // integrate_flow(V, -0.0001, p, "results/flow.csv", 100);
-    integrate_flow_adaptive(V, -0.0001, p, "results/flow_adaptive.csv", 100, 1e-8, 1e-8);
+    integrate_flow_adaptive(V, -0.0001, p, "results/flow_adaptive.csv", 100, 1e-10, 1e-10);
 
     return 0;
 }

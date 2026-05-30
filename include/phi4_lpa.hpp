@@ -86,4 +86,4 @@ double compute_error(const std::vector<double>& V1, const std::vector<double>& V
 
 // compute the mass, i.e. the curvature at the minimum
 size_t find_min(const std::vector<double>& V);
-double m2(const std::vector<double>& V, size_t i, const Params& p);
+double compute_m2(const std::vector<double>& V, const Params& p);

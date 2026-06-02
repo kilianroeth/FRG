@@ -88,12 +88,12 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, double k, const Pa
 
     for (size_t i= 0; i < p.n_rho; ++i) {
         const double rho = i * p.drho();
-        double denom = (1.0 + (dV(u, i, p) + 2.0*rho*ddV(u, i, p))/(k*k));
+        double denom = (1.0 + (dV(u, i, p) + 2.0*rho*ddV(u, i, p)));
         if (std::abs(denom) < 1e-12) {
             #pragma omp critical 
             std::cerr << "[WARNING] |denom| = " << denom << ", rho = " << rho << std::endl;
         }
-        RHS_vals[i] = prefactor / denom;
+        RHS_vals[i] = prefactor / denom - 3.0 * u[i] - 1.0 * rho * dV(u, i, p);
     }
     return RHS_vals;
 }

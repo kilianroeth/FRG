@@ -75,9 +75,29 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
         // }
         RHS_vals[i] = prefactor / denom;
     }
-
     return RHS_vals;
 }
+
+// dimensionless quantities
+// ̄ρ = k^2-d ρ
+// u = k^-d V_k(k^d-2 ̄ρ)
+std::vector<double> RHS_dimless(const std::vector<double>& u, double k, const Params& p) {
+    std::vector<double> RHS_vals(p.n_rho);
+
+    double prefactor = 1/(6.0*M_PI*M_PI);
+
+    for (size_t i= 0; i < p.n_rho; ++i) {
+        const double rho = i * p.drho();
+        double denom = (1.0 + (dV(u, i, p) + 2.0*rho*ddV(u, i, p))/(k*k));
+        if (std::abs(denom) < 1e-12) {
+            #pragma omp critical 
+            std::cerr << "[WARNING] |denom| = " << denom << ", rho = " << rho << std::endl;
+        }
+        RHS_vals[i] = prefactor / denom;
+    }
+    return RHS_vals;
+}
+
 
 // Integrate RG time step --------------
 

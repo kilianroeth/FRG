@@ -6,7 +6,7 @@
 // General flow equation structurs: ∂_t f(state,t) = RHS(state,t)
 // with t = ln(k/Λ) the RG time
 
-using RHSfunc = std::function<std::vector<double>(const std::vector<double>&, double t)>;
+using RHSfunc = std::function<std::vector<double>(const std::vector<double>&, double)>;
 
 struct StepperConfig {
     double abs_tol      = 1e-8;     // absolute tolerance for adaptive time step error acceptance

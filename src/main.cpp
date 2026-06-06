@@ -29,9 +29,9 @@ int main() {
     save_V(RHS_vals, "results/RHS.txt",p);
 
     std::vector<double> m2_values = linspace(0.05,-0.05,20);
-    sweep_m2(p, m2_values, "results/m2_sweep.txt", -0.0001, 1e-11, 1e-11);
+    // sweep_m2(p, m2_values, "results/m2_sweep.txt", -0.0001, 1e-10, 1e-10);
 
-    integrate_flow_adaptive(V, -0.0001, p, "results/flow_adaptive.csv", 100, 1e-11, 1e-11);
+    integrate_flow_adaptive(V, -0.0001, p, "results/flow_adaptive.csv", 100, 1e-12, 1e-12);
 
     return 0;
 }

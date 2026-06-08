@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include "utils.hpp"
+
 class Grid {
     private:
         std::vector<double> m_rho_vals;     // stores the rho grid
@@ -10,7 +12,11 @@ class Grid {
         bool    m_rho_uniform;              // linear grid / log grid
         double  m_d_rho;                    // rho grid spacing for linear grid
         double  m_n_rho;                    // number of rho points for the linear grid
+        double  m_rho_min_pot;              // log grid: smallest 10^pot
+        double  m_rho_max_pot;              // log grid largest 10^pot
         double  m_n10_rho;                  // number of rho points per decade for the log grid
+
+        void update_grid();
 
     public:
         double d1(const std::vector<double>& u, size_t i);
@@ -28,6 +34,8 @@ class Grid {
         void set_d_rho(double d_rho);
         void set_n_rho(double n_rho);
         void set_n10_rho(double n10_rho);
+        void set_rho_min_pot(double rho_min_pot);
+        void set_rho_max_pot(double rho_max_pot);
         
         // getters
         // ------------------------------

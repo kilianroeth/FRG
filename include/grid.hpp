@@ -24,8 +24,19 @@ class Grid {
         void set_rho_vals(std::vector<double> rho_vals);
         void set_rho_min(double rho_min);
         void set_rho_max(double rho_max);
+        void set_rho_uniform(bool rho_uniform);
         void set_d_rho(double d_rho);
         void set_n_rho(double n_rho);
         void set_n10_rho(double n10_rho);
         
+        // getters
+        // ------------------------------
+        std::vector<double> rho_vals() { return m_rho_vals; }
+        double rho_min() { return m_rho_min; }
+        double rho_max() { return m_rho_max; }
+        bool is_uniform() { return m_rho_uniform; }
+        double d_rho() { return m_d_rho; }
+        double n_rho() { return m_n_rho; }
+        double n10_rho() { return m_n10_rho; }
+
 };

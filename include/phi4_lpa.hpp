@@ -45,6 +45,7 @@ struct Params {
     double rho_max          = 0.5;
     double drho() const     { return rho_max / (n_rho - 1); } 
     double rho_at(size_t i) const { return i * drho(); }
+    Grid grid;
 };
 
 

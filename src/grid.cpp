@@ -33,6 +33,11 @@ void Grid::set_rho_max(double rho_max) {
     m_rho_max = rho_max;
 }
 
+void Grid::set_rho_uniform(bool rho_uniform) {
+    m_rho_uniform = rho_uniform;
+}
+
+
 void Grid::set_d_rho(double d_rho) {
     m_d_rho = d_rho;
 }

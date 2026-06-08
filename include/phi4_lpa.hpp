@@ -14,6 +14,8 @@
 #include <omp.h>
 
 #include "utils.hpp"
+#include "grid.hpp"
+#include "integrator.hpp"
 
 /**
  * @brief phi4_lpa.hpp
@@ -34,8 +36,9 @@
 // Paramters ---------------------------
 
 struct Params {
-    double m2               = -1./(9*M_PI*M_PI);
-    double lambda           = 1.0;
+    double m2               = -1./(9*M_PI*M_PI);                // UV scale mass parameter
+    double lambda           = 1.0;                              // UV scale coupling constant
+    size_t N                = 1.0;                              // Number of fields
     double t_start          = 0.0;
     double t_end            = -15.0;
     size_t n_rho            = 1000;

@@ -17,3 +17,4 @@ struct StepperConfig {
     double factor_min   = 0.1;      // lower bound for scaling factor
     bool show_progress  = true;     // print progress
 };
+

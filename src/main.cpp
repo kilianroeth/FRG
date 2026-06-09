@@ -9,7 +9,7 @@ int main() {
     Params p;
     p.n_rho = 250;
     p.rho_max = 0.5;
-    p.m2 = -0.025;
+    p.m2 = -0.02;
     p.lambda = 1.0;
     p.t_start = 0.0;
     p.t_end = -10.0;

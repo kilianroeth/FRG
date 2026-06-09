@@ -31,7 +31,7 @@ int main() {
     std::vector<double> m2_values = linspace(0.05,-0.05,20);
     // sweep_m2(p, m2_values, "results/m2_sweep.txt", -0.0001, 1e-10, 1e-10);
 
-    integrate_flow_adaptive(V, -0.0001, p, "results/flow_adaptive.csv", 100, 1e-8, 1e-8);
+    integrate_flow_adaptive(V, -0.0001, p, "results/flow_adaptive.csv", 100, 1e-9, 1e-9);
 
     return 0;
 }

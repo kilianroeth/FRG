@@ -88,7 +88,7 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
 // compute the error between two states at same RG time t
 // RMS of error of each array entry
 // the error of each array entry is computed via the difference of V1[i] and V2[i] divided by a scale that is scale = absolute_tolerance + relative_tolerance * max(V1[i],V2[i])
-double compute_error(const std::vector<double>& V1, const std::vector<double>& V2, double absolute_tolerance = 1e-6, double relative_tolerance = 1e-6);
+// double compute_error(const std::vector<double>& V1, const std::vector<double>& V2, double absolute_tolerance = 1e-6, double relative_tolerance = 1e-6);
 
 // compute the mass, i.e. the curvature at the minimum
 size_t find_min(const std::vector<double>& V);

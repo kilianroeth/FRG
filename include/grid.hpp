@@ -26,8 +26,7 @@ class Grid {
         std::vector<double> d1(const std::vector<double>& u);
         std::vector<double> d2(const std::vector<double>& u);
 
-        // setters
-        // ------------------------------
+        // setters ------------------------------
         void set_rho_vals(std::vector<double> rho_vals);
         void set_rho_min(double rho_min);
         void set_rho_max(double rho_max);
@@ -38,8 +37,7 @@ class Grid {
         void set_rho_min_pot(double rho_min_pot);
         void set_rho_max_pot(double rho_max_pot);
         
-        // getters
-        // ------------------------------
+        // getters ------------------------------
         std::vector<double> rho_vals() { return m_rho_vals; }
         double rho_min() { return m_rho_min; }
         double rho_max() { return m_rho_max; }

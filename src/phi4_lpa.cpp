@@ -385,28 +385,28 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
     }
 }
 
-double compute_error(const std::vector<double>& V1, const std::vector<double>& V2, double absolute_tolerance, double relative_tolerance) {
-    if (V1.size() != V2.size()) {
-        #pragma omp critical
-        std::cerr << "Arrays don't have the samve size. V1.size() = " << V1.size() << ", V2.size() = " << V2.size() << "\n";
-        throw std::runtime_error("V1 and V2 size mismach");
-    }
+// double compute_error(const std::vector<double>& V1, const std::vector<double>& V2, double absolute_tolerance, double relative_tolerance) {
+//     if (V1.size() != V2.size()) {
+//         #pragma omp critical
+//         std::cerr << "Arrays don't have the samve size. V1.size() = " << V1.size() << ", V2.size() = " << V2.size() << "\n";
+//         throw std::runtime_error("V1 and V2 size mismach");
+//     }
     
-    // sum of squared errors of each array entry
-    double squared_errors = 0.0;
+//     // sum of squared errors of each array entry
+//     double squared_errors = 0.0;
 
-    // iterate over all entries
-    for (size_t i = 0; i < V1.size(); ++i) {
-        // scale = a_tol + r_rol * max(V1,V2)
-        double scale = absolute_tolerance + relative_tolerance * std::max(std::abs(V1[i]), std::abs(V2[i]));
-        double error = std::abs(V1[i] - V2[i]) / scale;
-        // if error < 1, we are within the tolerances
-        squared_errors += error * error;
-    }
+//     // iterate over all entries
+//     for (size_t i = 0; i < V1.size(); ++i) {
+//         // scale = a_tol + r_rol * max(V1,V2)
+//         double scale = absolute_tolerance + relative_tolerance * std::max(std::abs(V1[i]), std::abs(V2[i]));
+//         double error = std::abs(V1[i] - V2[i]) / scale;
+//         // if error < 1, we are within the tolerances
+//         squared_errors += error * error;
+//     }
 
-    // return RMS of sum of array entries
-    return sqrt(squared_errors / V1.size());
-}
+//     // return RMS of sum of array entries
+//     return sqrt(squared_errors / V1.size());
+// }
 
 size_t find_min(const std::vector<double>& V) {
     size_t i_min = 0;

@@ -1,5 +1,8 @@
 #include "grid.hpp"
 
+// dervatives -------------------------------------
+
+
 double Grid::d1(const std::vector<double>& u, size_t i) {
     double d1;
     if (m_rho_uniform) {
@@ -92,6 +95,8 @@ std::vector<double> Grid::d2(const std::vector<double>& u) {
     return result;
 }
 
+// grid updater -------------------------------------
+
 void Grid::update_grid() {
     if (m_rho_uniform) {
         m_rho_vals = linspace(m_rho_min, m_rho_max, m_n_rho);
@@ -102,8 +107,7 @@ void Grid::update_grid() {
 
 }
 
-// setters
-// --------------------
+// setters --------------------
 
 void Grid::set_rho_vals(std::vector<double> rho_vals) {
     m_rho_vals = rho_vals;

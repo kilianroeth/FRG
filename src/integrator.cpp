@@ -102,6 +102,31 @@ std::vector<double> integrate_adaptive(
                         ++next_snap;
                     }
                 }
+
+                if(cfg.show_progress) {
+                    double progress = std::abs(t - t_start) / std::abs(t_end - t_start);
+                    progressBar(static_cast<size_t>(progress * 1000), 1000);
+                }
+            }
+            else {
+                ++n_rejected;
+            }
+
+            // rescale dt - rk4 is a fourth order methods, so exponents is 1/4
+            double factor = (error > 0)
+                ? std::clamp(cfg.safety * std::pow(1.0/error, 0.25), cfg.factor_min, cfg.factor_max)
+                :cfg.factor_max;
+            dt *= factor;
+
+            if (std::abs(dt) < cfg.dt_min) {
+                std::cerr << "[ERROR] dt below minimum, aboritng\n";
+                break;
             }
         }
+
+        if (cfg.show_progress) {
+            std::cout << "\nAccepted: " << n_accepted << ", Rejected: " << n_rejected << "\n";
+        }
+
+        return V;
     }

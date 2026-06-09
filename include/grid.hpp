@@ -46,5 +46,7 @@ class Grid {
         double d_rho() { return m_d_rho; }
         double n_rho() { return m_n_rho; }
         double n10_rho() { return m_n10_rho; }
+        double rho_min_pot() { return m_rho_min_pot; }
+        double rho_max_pot() { return m_rho_max_pot; }
 
 };

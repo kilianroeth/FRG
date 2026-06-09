@@ -2,11 +2,43 @@
 
 double Grid::d1(const std::vector<double>& u, size_t i) {
     double d1;
+    if (m_rho_uniform) {
+        // interior: 4th order finite difference
+        if (i >= 2 && i <= m_n_rho - 3)  {
+            return (-u[i+2] + 8.0*u[i+1] - 8.0*u[i-1] + u[i-2])/(12.0*m_d_rho);
+        }
+        // one point from boundary: 2nd order finite difference
+        if (i == 1 || i == m_n_rho - 2) {
+            return (u[i+1] - u[i-1])/(2*m_d_rho);
+        }
+        // boundary: 1st order one sided
+        if (i == 0) { return (u[1] - u[0])/m_n_rho; }
+        if (i == m_n_rho - 1) { return (u[m_n_rho-1] - u[m_n_rho-2])/m_n_rho; }
+    }
+    else {
+
+    }
     return d1;
 }
 
 double Grid::d2(const std::vector<double>& u, size_t i) {
     double d2;
+    if (m_rho_uniform) {
+            // interions: 4th order finite difference
+        if (i >= 2 && i <= m_n_rho - 3) {
+            return (-u[i+2] + 16.0*u[i+1] - 30.0*u[i] + 16.0*u[i-1] - u[i-2])/(12.0*m_d_rho*m_d_rho);
+        }
+        // one point from boundary: 2nd order finite difference
+        if (i == 1 || i == m_n_rho - 2) {
+            return (u[i+1] - 2.0*u[i] + u[i-1])/(m_d_rho*m_d_rho);
+        }
+        // boundary: 1st order one sided
+        if (i == 0) { return (u[2] - 2.0*u[1] + u[0])/(m_d_rho*m_d_rho); }
+        if (i == m_n_rho - 1) { return (u[m_n_rho-1] - 2.0*u[m_n_rho-2] + u[m_n_rho-3])/(m_d_rho*m_d_rho); }
+    }
+    else {
+
+    }
     return d2;
 }
 
@@ -40,7 +72,7 @@ void Grid::set_rho_vals(std::vector<double> rho_vals) {
 }
 
 void Grid::set_rho_min(double rho_min) {
-    m_rho_max = rho_min;
+    m_rho_min = rho_min;
     update_grid();
 }
 

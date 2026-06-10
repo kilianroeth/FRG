@@ -3,7 +3,7 @@
 // dervatives -------------------------------------
 
 
-double Grid::d1(const std::vector<double>& u, size_t i) {
+double Grid::d1(const std::vector<double>& u, size_t i) const {
     double d1;
     if (m_rho_uniform) {
         // interior: 4th order finite difference
@@ -40,7 +40,7 @@ double Grid::d1(const std::vector<double>& u, size_t i) {
     return d1;
 }
 
-double Grid::d2(const std::vector<double>& u, size_t i) {
+double Grid::d2(const std::vector<double>& u, size_t i) const {
     double d2;
     if (m_rho_uniform) {
         // interions: 4th order finite difference
@@ -79,7 +79,7 @@ double Grid::d2(const std::vector<double>& u, size_t i) {
 
 
 
-std::vector<double> Grid::d1(const std::vector<double>& u) {
+std::vector<double> Grid::d1(const std::vector<double>& u) const {
     std::vector<double> result(u.size());
     for (size_t i = 0; i < u.size(); ++i) {
         result[i] = d1(u,i);
@@ -87,7 +87,7 @@ std::vector<double> Grid::d1(const std::vector<double>& u) {
     return result;
 }
 
-std::vector<double> Grid::d2(const std::vector<double>& u) {
+std::vector<double> Grid::d2(const std::vector<double>& u) const {
     std::vector<double> result(u.size());
     for (size_t i = 0; i < u.size(); ++i) {
         result[i] = d2(u,i);
@@ -134,7 +134,7 @@ void Grid::set_d_rho(double d_rho) {
     update_grid();
 }
 
-void Grid::set_n_rho(double n_rho) {
+void Grid::set_n_rho(size_t n_rho) {
     m_n_rho = n_rho;
     update_grid();
 }

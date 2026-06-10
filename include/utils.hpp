@@ -35,6 +35,7 @@ std::vector<T> logspace(T min, T max, size_t N10) {
     return logspace;
 }
 
+// prints a progress bar
 inline void progressBar(size_t current, size_t total, size_t width = 50, std::ostream& os = std::cerr) {
     if (total == 0) {
         os << "\r[" << std::string(width, '-') << "] 100%" << std::flush;

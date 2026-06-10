@@ -41,18 +41,9 @@ struct Params {
     size_t N                = 1.0;                              // Number of fields
     double t_start          = 0.0;
     double t_end            = -15.0;
-    size_t n_rho            = 1000;
-    double rho_max          = 0.5;
-    double drho() const     { return rho_max / (n_rho - 1); } 
-    double rho_at(size_t i) const { return i * drho(); }
     Grid grid;
 };
 
-
-// Finite difference derivatives -------
-
-double dV(const std::vector<double>& V, size_t i, const Params& p);
-double ddV(const std::vector<double>& V, size_t i, const Params& p);
 
 // classical potential -----------------
 

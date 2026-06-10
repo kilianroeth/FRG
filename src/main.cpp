@@ -6,9 +6,11 @@
 
 int main() {
 
+    Grid grid;
+    grid.set_rho_vals(linspace(0.0,0.5,500));
+
     Params p;
-    p.n_rho = 500;
-    p.rho_max = 0.5;
+    p.grid = grid;
     p.m2 = -0.025;
     p.lambda = 1.0;
     p.t_start = 0.0;
@@ -21,8 +23,8 @@ int main() {
     std::cout << "Classical minimum: V_min = " << V_min_classical(p) << std::endl;
     std::vector<double> dV_vals(V.size()), ddV_vals(V.size());
     for (size_t i = 0; i < V.size(); ++i) {
-        dV_vals[i] = dV(V,i,p);
-        ddV_vals[i] = ddV(V,i,p);
+        dV_vals[i] = grid.d1(V,i);
+        ddV_vals[i] = grid.d2(V,i);
     }
     std::vector<double> RHS_vals = RHS(V,1,p);
     save_V(V, "results/V_classical.txt",p);
@@ -30,7 +32,7 @@ int main() {
     save_V(ddV_vals, "results/V_classical_doubleprime.txt",p);
     save_V(RHS_vals, "results/RHS.txt",p);
 
-    integrate_flow_adaptive(V, -0.0001, p, "results/flow_adaptive.csv", 100, 1e-10, 1e-10);
+    integrate_flow_adaptive(V, -0.0001, p, "results/flow_adaptive.csv", 100, 1e-10, 1e-10, true);
 
     return 0;
 }

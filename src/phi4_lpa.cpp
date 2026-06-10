@@ -1,46 +1,14 @@
 #include "phi4_lpa.hpp"
 
 
-// Finite difference derivatives -------
-
-double dV(const std::vector<double>& V, size_t i, const Params& p) {
-    // interior: 4th order finite difference
-    if (i >= 2 && i <= p.n_rho - 3)  {
-        return (-V[i+2] + 8.0*V[i+1] - 8.0*V[i-1] + V[i-2])/(12.0*p.drho());
-    }
-    // one point from boundary: 2nd order finite difference
-    if (i == 1 || i == p.n_rho - 2) {
-        return (V[i+1] - V[i-1])/(2*p.drho());
-    }
-    // boundary: 1st order one sided
-    if (i == 0) { return (V[1] - V[0])/p.drho(); }
-    if (i == p.n_rho - 1) { return (V[p.n_rho-1] - V[p.n_rho-2])/p.drho(); }
-    return 0;
-}
-
-double ddV(const std::vector<double>& V, size_t i, const Params& p) {
-    // interions: 4th order finite difference
-    if (i >= 2 && i <= p.n_rho - 3) {
-        return (-V[i+2] + 16.0*V[i+1] - 30.0*V[i] + 16.0*V[i-1] - V[i-2])/(12.0*p.drho()*p.drho());
-    }
-    // one point from boundary: 2nd order finite difference
-    if (i == 1 || i == p.n_rho - 2) {
-        return (V[i+1] - 2.0*V[i] + V[i-1])/(p.drho()*p.drho());
-    }
-    // boundary: 1st order one sided
-    if (i == 0) { return (V[2] - 2.0*V[1] + V[0])/(p.drho()*p.drho()); }
-    if (i == p.n_rho - 1) { return (V[p.n_rho-1] - 2.0*V[p.n_rho-2] + V[p.n_rho-3])/(p.drho()*p.drho()); }
-    return 0;
-}
-
 // classical potential -----------------
 std::vector<double> V_classical(const Params& p) {
     std::vector<double> V;
-    V.reserve(p.n_rho);
+    V.reserve(p.grid.n_rho());
     double rho;
 
-    for (size_t i = 0; i < p.n_rho; ++i) {
-        rho = i * p.drho();
+    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
+        rho = i * p.grid.d_rho();
         V.push_back(p.m2*rho + p.lambda/6.0*rho*rho);
     }
 
@@ -54,14 +22,14 @@ double V_min_classical(const Params& p) {
 // Compute RHS -------------------------
 
 std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p) {
-    std::vector<double> RHS_vals(p.n_rho);
+    std::vector<double> RHS_vals(p.grid.n_rho());
 
     double prefactor = k*k*k/(6.0*M_PI*M_PI);
     // std::cout << "k = " << k << std::endl;
 
-    for (size_t i = 0; i < p.n_rho; ++i) {
-        const double rho = i * p.drho();
-        double denom = (1.0 + (dV(V, i, p) + 2.0*rho*ddV(V, i, p))/(k*k));
+    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
+        const double rho = i * p.grid.d_rho();
+        double denom = (1.0 + (p.grid.d1(V, i) + 2.0*rho*p.grid.d2(V, i))/(k*k));
         if (k == 0) {
             denom = 1.0;
         }
@@ -82,18 +50,18 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
 // ̄ρ = k^2-d ρ
 // u = k^-d V_k(k^d-2 ̄ρ)
 std::vector<double> RHS_dimless(const std::vector<double>& u, double k, const Params& p) {
-    std::vector<double> RHS_vals(p.n_rho);
+    std::vector<double> RHS_vals(p.grid.n_rho());
 
     double prefactor = 1/(6.0*M_PI*M_PI);
 
-    for (size_t i= 0; i < p.n_rho; ++i) {
-        const double rho = i * p.drho();
-        double denom = (1.0 + (dV(u, i, p) + 2.0*rho*ddV(u, i, p)));
+    for (size_t i= 0; i < p.grid.n_rho(); ++i) {
+        const double rho = i * p.grid.d_rho();
+        double denom = (1.0 + (p.grid.d1(u, i) + 2.0*rho*p.grid.d2(u, i)));
         if (std::abs(denom) < 1e-12) {
             #pragma omp critical 
             std::cerr << "[WARNING] |denom| = " << denom << ", rho = " << rho << std::endl;
         }
-        RHS_vals[i] = prefactor / denom - 3.0 * u[i] - 1.0 * rho * dV(u, i, p);
+        RHS_vals[i] = prefactor / denom - 3.0 * u[i] - 1.0 * rho * p.grid.d1(u, i);
     }
     return RHS_vals;
 }
@@ -103,7 +71,7 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, double k, const Pa
 
 // Simple forward euler
 std::vector<double> step(const std::vector<double>& V, double k, double dt, const Params& p) {
-    std::vector<double> V_next(p.n_rho);
+    std::vector<double> V_next(p.grid.n_rho());
     if (dt >= 0) {
         #pragma omp critical
         std::cerr << "[ERROR] dt must be negative" << std::endl;
@@ -112,7 +80,7 @@ std::vector<double> step(const std::vector<double>& V, double k, double dt, cons
 
     std::vector<double> RHS_vals = RHS(V, k, p);
     // std::cout << "RHS_0 = " << RHS_vals[0] << "\nRHS_15 = " << RHS_vals[15] <<  std::endl;
-    for (size_t i = 0; i < p.n_rho; ++i) {
+    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
         V_next[i] = V[i] + dt * RHS_vals[i];
     }
     return V_next;
@@ -120,7 +88,7 @@ std::vector<double> step(const std::vector<double>& V, double k, double dt, cons
 
 // Classical RK4 step
 std::vector<double> step_rk4(const std::vector<double>& V, double k, double dt, const Params& p) {
-    std::vector<double> V_next(p.n_rho);
+    std::vector<double> V_next(p.grid.n_rho());
 
     // first step
     std::vector<double> K1 = RHS(V, k, p);
@@ -131,24 +99,24 @@ std::vector<double> step_rk4(const std::vector<double>& V, double k, double dt, 
     double k_next = k*exp(dt);
 
     // second step at dt/2
-    for (size_t i = 0; i < p.n_rho; ++i) {
+    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
         V_temp[i] = V[i] + dt/2.0 * K1[i];
     }
     K2 = RHS(V_temp, k_half, p);
 
     // third step at dt/2
-    for (size_t i = 0; i < p.n_rho; ++i) {
+    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
         V_temp[i] = V[i] + dt/2.0 * K2[i];
     }
     K3 = RHS(V_temp, k_half, p);
 
     // fourth step at dt
-    for (size_t i = 0; i < p.n_rho; ++i) {
+    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
         V_temp[i] = V[i] + dt * K3[i];
     }
     K4 = RHS(V_temp, k_next, p);
 
-    for (size_t i = 0; i < p.n_rho; ++i) {
+    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
         V_next[i] = V[i] + dt/6.0 * (K1[i] + 2.0 * K2[i] + 2.0 * K3[i] + K4[i]);
     }
 
@@ -163,7 +131,7 @@ void save_V(const std::vector<double>& V, const std::string& filename, const Par
 
     file << "ρ = 1/2 φ², V(ρ)\n";
     for (size_t i = 0; i < V.size(); ++i) {
-        file << p.rho_at(i) << ", " << V[i] <<"\n";
+        file << p.grid.rho_vals(i) << ", " << V[i] <<"\n";
     }
     file << std::endl;
 
@@ -178,7 +146,7 @@ void save_all(const std::vector<std::vector<double>>& snapshots, const std::vect
     // metadata
     file << "# Wetterich LPA flow, phi^4, d=3\n";
     file << "# m2 = " << p.m2 << ", lambda = " << p.lambda << "\n";
-    file << "# rho_max = " << p.rho_max << ", n_rho = " << p.n_rho << "\n";
+    file << "# rho_max = " << p.grid.rho_max() << ", n_rho = " << p.grid.n_rho() << "\n";
 
     // V block
     file << "# block: V\n";
@@ -187,8 +155,8 @@ void save_all(const std::vector<std::vector<double>>& snapshots, const std::vect
         file << ", k=" << std::fixed << std::setprecision(6) << k;
     file << "\n";
     file << std::scientific << std::setprecision(10);
-    for (size_t i = 0; i < p.n_rho; ++i) {
-        file << i * p.drho();
+    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
+        file << i * p.grid.d_rho();
         for (const auto& V : snapshots)
             file << ", " << V[i];
         file << "\n";
@@ -200,8 +168,8 @@ void save_all(const std::vector<std::vector<double>>& snapshots, const std::vect
     for (double k : k_values)
         file << ", k=" << std::fixed << std::setprecision(6) << k;
     file << "\n";
-    for (size_t i = 0; i < p.n_rho; ++i) {
-        file << i * p.drho();
+    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
+        file << i * p.grid.d_rho();
         for (const auto& R : rhs_snapshots)
             file << ", " << R[i];
         file << "\n";

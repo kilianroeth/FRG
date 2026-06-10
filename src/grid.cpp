@@ -15,7 +15,7 @@ double Grid::d1(const std::vector<double>& u, size_t i) {
             return (u[i+1] - u[i-1])/(2*m_d_rho);
         }
         // boundary: 1st order one sided
-        if (i == 0) { return (u[1] - u[0])/m_n_rho; }
+        if (i == 0) { return (u[1] - u[0])/m_d_rho; }
         if (i == m_n_rho - 1) { return (u[m_n_rho-1] - u[m_n_rho-2])/m_d_rho; }
     }
     // for log grid we have a non uniform spacing in rho, but a uniform spacing in t = log(rho), du / drho = du / dt * dt / drho = du / dt 1 / rho
@@ -82,7 +82,7 @@ double Grid::d2(const std::vector<double>& u, size_t i) {
 std::vector<double> Grid::d1(const std::vector<double>& u) {
     std::vector<double> result(u.size());
     for (size_t i = 0; i < u.size(); ++i) {
-        result[i] = d1(u,1);
+        result[i] = d1(u,i);
     }
     return result;
 }
@@ -90,7 +90,7 @@ std::vector<double> Grid::d1(const std::vector<double>& u) {
 std::vector<double> Grid::d2(const std::vector<double>& u) {
     std::vector<double> result(u.size());
     for (size_t i = 0; i < u.size(); ++i) {
-        result[i] = d2(u,2);
+        result[i] = d2(u,i);
     }
     return result;
 }

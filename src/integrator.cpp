@@ -53,7 +53,7 @@ std::vector<double> step_rk4(const std::vector<double>& state, double t, double 
     auto k4 = rhs(tmp, t + dt);
 
     for (size_t i = 0; i < N; ++i) {
-        next[i] = 1./6. * (k1[i] + 2.*k2[2] + 2.*k3[i] + k4[i]);
+        next[i] = 1./6. * (k1[i] + 2.*k2[i] + 2.*k3[i] + k4[i]);
     }
 
     return next;

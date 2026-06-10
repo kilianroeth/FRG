@@ -9,10 +9,12 @@ int main() {
     Params p;
     p.n_rho = 500;
     p.rho_max = 0.5;
-    p.m2 = -0.02;
+    p.m2 = -0.025;
     p.lambda = 1.0;
     p.t_start = 0.0;
     p.t_end = -10.0;
+
+    StepperConfig cfg;
 
     
     std::vector<double> V = V_classical(p);
@@ -27,9 +29,6 @@ int main() {
     save_V(dV_vals, "results/V_classical_prime.txt",p);
     save_V(ddV_vals, "results/V_classical_doubleprime.txt",p);
     save_V(RHS_vals, "results/RHS.txt",p);
-
-    std::vector<double> m2_values = linspace(0.05,-0.05,20);
-    // sweep_m2(p, m2_values, "results/m2_sweep.txt", -0.0001, 1e-10, 1e-10);
 
     integrate_flow_adaptive(V, -0.0001, p, "results/flow_adaptive.csv", 100, 1e-10, 1e-10);
 

@@ -227,21 +227,6 @@ void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double
     file.close();
 }
 
-void save_m2_flow(const std::vector<double>& m2_values, const std::vector<double>& k_values, const std::string& filename) {
-    std::ofstream file(filename);
-    if (!file) { std::cerr << "[ERROR] Cannot open" << filename << "\n"; return; }
-
-    // metadata
-    file << "# flow of m2\n";
-    file << "# k, m2\n";
-    // data
-    for (size_t i = 0; i < m2_values.size(); ++i) {
-        file << k_values[i] << ", " << m2_values[i] << "\n";
-    }
-
-    file.close();
-}
-
 
 // Integrate complete RG flow ----------
 
@@ -305,9 +290,7 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
     }
     int next_snap = 0;
     std::vector<double> k_values;
-    std::vector<double> dt_values;
-    std::vector<double> m2_values;
-    
+    std::vector<double> dt_values;    
     std::vector<double> V = V_init;
 
     double t = p.t_start;
@@ -317,7 +300,6 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
     snapshots.push_back(V);
     rhs_snapshots.push_back(RHS(V, exp(t), p));
     k_values.push_back(exp(t));
-    m2_values.push_back(compute_m2(V, p));
     ++next_snap;
 
     // acceptance statistics
@@ -358,7 +340,6 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
                 snapshots.push_back(V);
                 rhs_snapshots.push_back(RHS(V, exp(t), p));
                 k_values.push_back(exp(t));
-                m2_values.push_back(compute_m2(V, p));
                 ++next_snap;
             }
         }
@@ -381,68 +362,5 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
     save_all(snapshots, rhs_snapshots, k_values, p, filename);
     if (!filename.empty()) {
         save_dt_hist(dt_values, k_values, "results/dt_values.txt");
-        save_m2_flow(m2_values, k_values, "results/m2_flow.txt");
     }
-}
-
-size_t find_min(const std::vector<double>& V) {
-    size_t i_min = 0;
-    for (size_t i = 0; i < V.size(); ++i) {
-        if(V[i] < V[i_min]) {
-            i_min = i;
-        }
-    }
-    return i_min;
-}
-
-double compute_m2(const std::vector<double>& V, const Params& p) {
-    size_t idx_min = find_min(V);
-    if (idx_min == 0) {
-        return dV(V, idx_min, p);
-    }
-    else {
-        return 2.0 * p.rho_at(idx_min) * ddV(V, idx_min, p);
-    }
-}
-
-void sweep_m2(const Params& p_base, const std::vector<double>& m2_values, const std::string& filename, double dt_init, double absolute_tolerance, double relative_tolerance) {
-    std::ofstream file(filename); 
-    if (!file) { std::cerr << "[ERROR] Cannot open" << filename << "\n"; return; }
-    file << "# m2_UV, m2_IR, rho_min\n";
-
-    std::cout << "#############################\n";
-    std::cout << "Sweep mass parameter\n";
-    std::cout << "#############################\n";
-
-    int N = m2_values.size();
-    std::vector<double> m2_IR_results(N), rho_min_results(N);
-
-    #pragma omp parallel for schedule (dynamic)
-    for (int i = 0; i < N; ++i) {
-        Params p = p_base;
-        p.m2 = m2_values[i];
-
-        std::vector<double> V = V_classical(p);
-        integrate_flow_adaptive(V, dt_init, p, "", 0, absolute_tolerance, relative_tolerance, false);
-
-        double m2_IR = compute_m2(V, p);
-        double rho_min = p.rho_at(find_min(V));
-        m2_IR_results[i] = m2_IR;
-        rho_min_results[i] = rho_min;
-
-        #pragma omp critical
-        {
-            std::cout   << "[sweep] m2_UV = " << p.m2
-                        << ", m2_IR = " << m2_IR
-                        << ", rho_min = " << rho_min 
-                        << " (" << i << "/" << N << ")\n";
-        }
-    }
-
-    for (int i = 0; i < N; ++i) {
-        file << m2_values[i] << ", " << m2_IR_results[i] << ", " << rho_min_results[i] << "\n";
-    }
-
-    file.close();
-    std::cout << "Saved m2 flow -> " << filename << "\n";
 }

@@ -76,7 +76,6 @@ std::vector<double> step_rk4(const std::vector<double>& V, double k, double dt, 
 void save_V(const std::vector<double>& V, const std::string& filename, const Params& p);
 void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<std::vector<double>>& rhs_snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename);
 void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double>& k_values, const std::string& filename);
-void save_m2_flow(const std::vector<double>& m2_values, const std::vector<double>& k_values, const std::string& filename);
 
 // Integrate complete RG flow ----------
 
@@ -84,10 +83,3 @@ void save_m2_flow(const std::vector<double>& m2_values, const std::vector<double
 void integrate_flow(const std::vector<double>& V_init, double dt, const Params& p, const std::string& filename = "results/flow.csv", int n_snapshots = 100);
 // Adaptive integrator (RK4 with step-doubling error estimate)
 void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename = "results/flow_adaptive.csv", int n_snapshots = 100, double absolute_tolerance = 1e-8, double relative_tolerance = 1e-8, bool show_progress_bar = true);
-
-// compute the mass, i.e. the curvature at the minimum
-size_t find_min(const std::vector<double>& V);
-double compute_m2(const std::vector<double>& V, const Params& p);
-
-// sweep initial m2_UV and flow to m2_IR, save initial m2_UV and m2_IR
-void sweep_m2(const Params& p_base, const std::vector<double>& m2_values, const std::string& filename, double dt_init, double absolute_tolerance = 1e-6, double relative_tolerance = 1e-6);

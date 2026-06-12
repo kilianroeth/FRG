@@ -66,19 +66,6 @@ void save_V(const std::vector<double>& V, const std::string& filename, const Par
 void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<std::vector<double>>& rhs_snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename);
 void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double>& k_values, const std::string& filename);
 
-
-// ----------------------------------
-// Refactor the following
-// ----------------------------------
- 
-
-// Integrate RG time step --------------
-
-// Simple Euler time step
-std::vector<double> step(const std::vector<double>& V, double k, double dt, const Params& p);
-// RK4 step used by adaptive integrator
-std::vector<double> step_rk4(const std::vector<double>& V, double k, double dt, const Params& p);
-
 // Integrate complete RG flow ----------
 
 // Simple dt forward step integrator

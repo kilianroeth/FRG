@@ -84,61 +84,6 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, double k, const Pa
 }
 
 
-// Integrate RG time step --------------
-
-// Simple forward euler
-std::vector<double> step(const std::vector<double>& V, double k, double dt, const Params& p) {
-    std::vector<double> V_next(p.grid.n_rho());
-    if (dt >= 0) {
-        #pragma omp critical
-        std::cerr << "[ERROR] dt must be negative" << std::endl;
-        return V_next;
-    }
-
-    std::vector<double> RHS_vals = RHS(V, k, p);
-    // std::cout << "RHS_0 = " << RHS_vals[0] << "\nRHS_15 = " << RHS_vals[15] <<  std::endl;
-    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
-        V_next[i] = V[i] + dt * RHS_vals[i];
-    }
-    return V_next;
-}
-
-// Classical RK4 step
-std::vector<double> step_rk4(const std::vector<double>& V, double k, double dt, const Params& p) {
-    std::vector<double> V_next(p.grid.n_rho());
-
-    // first step
-    std::vector<double> K1 = RHS(V, k, p);
-
-    std::vector<double> K2, K3, K4;
-    std::vector<double> V_temp = V;
-    double k_half = k*exp(dt/2.0);
-    double k_next = k*exp(dt);
-
-    // second step at dt/2
-    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
-        V_temp[i] = V[i] + dt/2.0 * K1[i];
-    }
-    K2 = RHS(V_temp, k_half, p);
-
-    // third step at dt/2
-    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
-        V_temp[i] = V[i] + dt/2.0 * K2[i];
-    }
-    K3 = RHS(V_temp, k_half, p);
-
-    // fourth step at dt
-    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
-        V_temp[i] = V[i] + dt * K3[i];
-    }
-    K4 = RHS(V_temp, k_next, p);
-
-    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
-        V_next[i] = V[i] + dt/6.0 * (K1[i] + 2.0 * K2[i] + 2.0 * K3[i] + K4[i]);
-    }
-
-    return V_next;
-}
 
 // save current potential --------------
 
@@ -222,6 +167,10 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
     }
     std::cout << "Solving flow equation...\n";
 
+    const RHSfunc rhs = [&p](const std::vector<double>& state, double t) {
+        return RHS(state, std::exp(t), p);
+    };
+
     const double total_t = p.t_start - p.t_end;
     size_t N = static_cast<size_t>(std::ceil(total_t / std::abs(dt))) + 1;
     double dt_t = -total_t / (N - 1);
@@ -251,7 +200,7 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
         }
 
         if (i + 1 < N) {
-            V = step(V, k, dt_t, p);
+            V = step_euler(V, t, dt_t, rhs);
         }
     }
     save_all(snapshots, rhs_snapshots, k_values, p, filename);
@@ -267,6 +216,10 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
     if(show_progress_bar) { std::cout << "Solving flow equation with adaptive time step...\n"; }
 
     std::vector<std::vector<double>> snapshots, rhs_snapshots;
+    const RHSfunc rhs = [&p](const std::vector<double>& state, double t) {
+        return RHS(state, std::exp(t), p);
+    };
+
     // target times for snapshots
     std::vector<double> snap_targets(n_snapshots);
     for (int s = 0; s < n_snapshots; ++s) {
@@ -297,13 +250,11 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
         }
 
         // full step
-        double k = exp(t);
-        std::vector<double> V_full = step_rk4(V, k, dt, p);
+        std::vector<double> V_full = step_rk4(V, t, dt, rhs);
 
         // two half steps
-        double k_half = k * exp(dt/2.0);
-        std::vector<double> V_mid = step_rk4(V, k, dt/2.0, p);
-        std::vector<double> V_half = step_rk4(V_mid, k_half, dt/2.0, p);
+        std::vector<double> V_mid = step_rk4(V, t, dt/2.0, rhs);
+        std::vector<double> V_half = step_rk4(V_mid, t + dt/2.0, dt/2.0, rhs);
 
         // estimate error
         double error = compute_error(V_full, V_half, absolute_tolerance, relative_tolerance);

@@ -53,7 +53,7 @@ std::vector<double> step_rk4(const std::vector<double>& state, double t, double 
     auto k4 = rhs(tmp, t + dt);
 
     for (size_t i = 0; i < N; ++i) {
-        next[i] = 1./6. * (k1[i] + 2.*k2[i] + 2.*k3[i] + k4[i]);
+        next[i] = state[i] + dt/6. * (k1[i] + 2.*k2[i] + 2.*k3[i] + k4[i]);
     }
 
     return next;
@@ -97,7 +97,7 @@ std::vector<double> integrate_adaptive(
 
                 // collect snaphost
                 if (snapshots) {
-                    while (next_snap < snap_targets.size() && snap_targets[next_snap]) {
+                    while (next_snap < snap_targets.size() && sign * t >= sign * snap_targets[next_snap]) {
                         snapshots->push_back({t,V});
                         ++next_snap;
                     }

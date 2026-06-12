@@ -7,11 +7,11 @@
 int main() {
 
     Grid grid;
-    grid.set_rho_vals(linspace(0.0,0.5,500));
+    grid.set_rho_vals(linspace(0.,0.5,500));
 
     Params p;
     p.grid = grid;
-    p.m2 = -0.025;
+    p.m2 = -0.02;
     p.d = 3;
     p.N = 4;
     p.lambda = 1.0;
@@ -19,8 +19,8 @@ int main() {
     p.t_end = -10.0;
 
     StepperConfig cfg;
-    cfg.abs_tol = 1e-8;
-    cfg.rel_tol = 1e-8;
+    cfg.abs_tol = 1e-10;
+    cfg.rel_tol = 1e-10;
     cfg.show_progress = true;
 
     

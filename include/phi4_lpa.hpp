@@ -58,7 +58,7 @@ double u_min_classical(const Params& p);
 // Compute RHS -------------------------
 
 std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p);
-std::vector<double> RHS_dimless(const std::vector<double>& u, double k, const Params& p);
+std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p);
 
 // save current potential --------------
 

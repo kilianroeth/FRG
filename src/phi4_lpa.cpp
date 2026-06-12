@@ -68,20 +68,42 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
 // dimensionless quantities
 // ̄ρ = k^2-d ρ
 // u = k^-d V_k(k^d-2 ̄ρ)
-std::vector<double> RHS_dimless(const std::vector<double>& u, double k, const Params& p) {
+std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p) {
     std::vector<double> RHS_vals(p.grid.n_rho());
+    std::vector<double> RHS_remainder(p.grid.n_rho());
+    std::vector<double> goldstone_propagator(p.grid.n_rho());
+    std::vector<double> massive_propagator(p.grid.n_rho());
 
-    double prefactor = 1/(6.0*M_PI*M_PI);
+    double prefactor = Ω(p.d)/(p.d * std::pow(2*M_PI, p.d));
 
-    for (size_t i= 0; i < p.grid.n_rho(); ++i) {
+    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
+        double du = p.grid.d1(u, i);
+        double ddu = p.grid.d2(u, i);
+
         const double rho = i * p.grid.d_rho();
-        double denom = (1.0 + (p.grid.d1(u, i) + 2.0*rho*p.grid.d2(u, i)));
-        if (!std::isfinite(denom) || std::abs(denom) < 1e-12) {
+        // LHS remainings
+        RHS_remainder[i] = p.d * u[i] + (2 - p.d) * rho * du;
+        
+        // goldstone modes
+        double goldstone_denom = 1 + du;
+        if (!std::isfinite(goldstone_denom) || std::abs(goldstone_denom) < 1e-12) {
             #pragma omp critical 
-            std::cerr << "[WARNING] |denom| = " << denom << ", rho = " << rho << std::endl;
-            denom = 1e-12;
+            std::cerr << "[WARNING] |goldstone denom| = " << goldstone_denom << ", rho = " << rho << std::endl;
+            goldstone_denom = 1e-12;
         }
-        RHS_vals[i] = prefactor / denom - 3.0 * u[i] - 1.0 * rho * p.grid.d1(u, i);
+        goldstone_propagator[i] = (p.N - 1)/goldstone_denom;
+
+        // massive modes
+        double massive_denom = 1 + du + 2 * rho * ddu;
+        if (!std::isfinite(massive_denom) || std::abs(massive_denom) < 1e-12) {
+            #pragma omp critical 
+            std::cerr << "[WARNING] |massive denom| = " << massive_denom << ", rho = " << rho << std::endl;
+            massive_denom = 1e-12;
+        }
+        massive_propagator[i] = 1. / massive_denom;
+
+
+        RHS_vals[i] = -RHS_remainder[i] + prefactor * (goldstone_propagator[i] + massive_propagator[i]);
     }
     return RHS_vals;
 }

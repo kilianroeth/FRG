@@ -3,8 +3,7 @@
 
 // classical potential -----------------
 std::vector<double> V_classical(const Params& p) {
-    std::vector<double> V;
-    V.reserve(p.grid.n_rho());
+    std::vector<double> V(p.grid.n_rho());
     double rho;
 
     for (size_t i = 0; i < p.grid.n_rho(); ++i) {
@@ -18,6 +17,24 @@ std::vector<double> V_classical(const Params& p) {
 double V_min_classical(const Params& p) {
     return -3.0*p.m2/p.lambda;
 }
+
+
+std::vector<double> u_classical(const Params& p) {
+    std::vector<double> u(p.grid.n_rho());
+    double rho;
+    double k = exp(p.t_start);
+
+    for (size_t i = 0; i < p.grid.n_rho(); ++i) {
+        rho = std::pow(k,p.d - 2) * i * p.grid.d_rho();
+        u.push_back(std::pow(k, -p.d) * (p.m2*rho + p.lambda/6.0*rho*rho));
+    }
+}
+
+double u_min_classical(const Params& p) {
+    double k = exp(p.t_start);
+    return -std::pow(k, -p.d) * 3.0*p.m2/p.lambda;
+}
+
 
 // Compute RHS -------------------------
 

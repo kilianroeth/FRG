@@ -59,4 +59,3 @@ inline void progressBar(size_t current, size_t total, size_t width = 50, std::os
         os << '\n';
     }
 }
-

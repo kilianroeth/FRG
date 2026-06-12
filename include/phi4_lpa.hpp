@@ -38,7 +38,8 @@
 struct Params {
     double m2               = -1./(9*M_PI*M_PI);                // UV scale mass parameter
     double lambda           = 1.0;                              // UV scale coupling constant
-    size_t N                = 1.0;                              // Number of fields
+    size_t N                = 1;                                // Number of fields
+    size_t d                = 3;                                // spacetime dimension
     double t_start          = 0.0;
     double t_end            = -15.0;
     Grid grid;
@@ -50,10 +51,26 @@ struct Params {
 std::vector<double> V_classical(const Params& p);
 double V_min_classical(const Params& p);
 
+// dimensionless classical potential
+std::vector<double> u_classical(const Params& p);
+double u_min_classical(const Params& p);
+
 // Compute RHS -------------------------
 
 std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p);
 std::vector<double> RHS_dimless(const std::vector<double>& u, double k, const Params& p);
+
+// save current potential --------------
+
+void save_V(const std::vector<double>& V, const std::string& filename, const Params& p);
+void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<std::vector<double>>& rhs_snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename);
+void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double>& k_values, const std::string& filename);
+
+
+// ----------------------------------
+// Refactor the following
+// ----------------------------------
+ 
 
 // Integrate RG time step --------------
 
@@ -61,12 +78,6 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, double k, const Pa
 std::vector<double> step(const std::vector<double>& V, double k, double dt, const Params& p);
 // RK4 step used by adaptive integrator
 std::vector<double> step_rk4(const std::vector<double>& V, double k, double dt, const Params& p);
-
-// save current potential --------------
-
-void save_V(const std::vector<double>& V, const std::string& filename, const Params& p);
-void save_all(const std::vector<std::vector<double>>& snapshots, const std::vector<std::vector<double>>& rhs_snapshots, const std::vector<double>& k_values, const Params& p, const std::string& filename);
-void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double>& k_values, const std::string& filename);
 
 // Integrate complete RG flow ----------
 

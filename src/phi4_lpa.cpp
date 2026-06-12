@@ -8,7 +8,7 @@ std::vector<double> V_classical(const Params& p) {
 
     for (size_t i = 0; i < p.grid.n_rho(); ++i) {
         rho = i * p.grid.d_rho();
-        V.push_back(p.m2*rho + p.lambda/6.0*rho*rho);
+        V[i] = p.m2*rho + p.lambda/6.0*rho*rho;
     }
 
     return V;
@@ -26,8 +26,10 @@ std::vector<double> u_classical(const Params& p) {
 
     for (size_t i = 0; i < p.grid.n_rho(); ++i) {
         rho = std::pow(k,p.d - 2) * i * p.grid.d_rho();
-        u.push_back(std::pow(k, -p.d) * (p.m2*rho + p.lambda/6.0*rho*rho));
+        u[i] = std::pow(k, -p.d) * (p.m2*rho + p.lambda/6.0*rho*rho);
     }
+
+    return u;
 }
 
 double u_min_classical(const Params& p) {
@@ -50,7 +52,7 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
         if (k == 0) {
             denom = 1.0;
         }
-        if (std::abs(denom) < 1e-12) {
+        if (!std::isfinite(denom) || std::abs(denom) < 1e-12) {
             #pragma omp critical
             std::cerr << "[WARNING] |denom| = " << denom << ", rho = " << rho << std::endl;
             denom = 1e-12;
@@ -74,9 +76,10 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, double k, const Pa
     for (size_t i= 0; i < p.grid.n_rho(); ++i) {
         const double rho = i * p.grid.d_rho();
         double denom = (1.0 + (p.grid.d1(u, i) + 2.0*rho*p.grid.d2(u, i)));
-        if (std::abs(denom) < 1e-12) {
+        if (!std::isfinite(denom) || std::abs(denom) < 1e-12) {
             #pragma omp critical 
             std::cerr << "[WARNING] |denom| = " << denom << ", rho = " << rho << std::endl;
+            denom = 1e-12;
         }
         RHS_vals[i] = prefactor / denom - 3.0 * u[i] - 1.0 * rho * p.grid.d1(u, i);
     }
@@ -208,95 +211,53 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
 
 
 // Adaptive integrator using RK4 + step-doubling
-void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const std::string& filename, int n_snapshots, double absolute_tolerance, double relative_tolerance, bool show_progress_bar) {
+void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p, const StepperConfig& cfg, const std::string& filename, int n_snapshots) {
     if (dt_init >= 0) {
         std::cerr << "[ERROR] dt_init must be negative" << std::endl;
         return;
     }
-    if(show_progress_bar) { std::cout << "Solving flow equation with adaptive time step...\n"; }
 
-    std::vector<std::vector<double>> snapshots, rhs_snapshots;
+    std::cout << "Solving flow equation with adaptive time step...\n";
+
     const RHSfunc rhs = [&p](const std::vector<double>& state, double t) {
         return RHS(state, std::exp(t), p);
     };
 
-    // target times for snapshots
     std::vector<double> snap_targets(n_snapshots);
     for (int s = 0; s < n_snapshots; ++s) {
         double fraction = static_cast<double>(s) / (n_snapshots - 1);
         snap_targets[s] = p.t_start + fraction * (p.t_end - p.t_start);
     }
-    int next_snap = 0;
+
+    std::vector<std::pair<double, std::vector<double>>> snapshot_pairs;
+    std::vector<std::pair<double, double>> step_history;
+
+    integrate_adaptive(V_init, p.t_start, p.t_end, dt_init, rhs, cfg, snap_targets, &snapshot_pairs, &step_history);
+
+    std::vector<std::vector<double>> snapshots;
+    std::vector<std::vector<double>> rhs_snapshots;
     std::vector<double> k_values;
-    std::vector<double> dt_values;    
-    std::vector<double> V = V_init;
+    snapshots.reserve(snapshot_pairs.size());
+    rhs_snapshots.reserve(snapshot_pairs.size());
+    k_values.reserve(snapshot_pairs.size());
 
-    double t = p.t_start;
-    double dt = dt_init;
-    double sign = (dt > 0.0) ? 1.0 : -1.0;
-
-    snapshots.push_back(V);
-    rhs_snapshots.push_back(RHS(V, exp(t), p));
-    k_values.push_back(exp(t));
-    ++next_snap;
-
-    // acceptance statistics
-    int n_accepted = 0, n_rejected = 0;
-
-    while (sign * t < sign * p.t_end) {
-        // avoid overshooting
-        if (sign * (t + dt) > sign * p.t_end) {
-            dt = p.t_end - t;
-        }
-
-        // full step
-        std::vector<double> V_full = step_rk4(V, t, dt, rhs);
-
-        // two half steps
-        std::vector<double> V_mid = step_rk4(V, t, dt/2.0, rhs);
-        std::vector<double> V_half = step_rk4(V_mid, t + dt/2.0, dt/2.0, rhs);
-
-        // estimate error
-        double error = compute_error(V_full, V_half, absolute_tolerance, relative_tolerance);
-
-        // check if error is small enough
-        if (error < 1.0) {
-            V = V_half;
-            t += dt;
-            dt_values.push_back(dt);
-            ++n_accepted;
-
-            // progress bar
-            if (show_progress_bar) {
-                double progress = std::abs(t - p.t_start) / std::abs(p.t_end - p.t_start);
-                progressBar(static_cast<size_t>(progress * 1000), 1000);
-            }
-
-            while (next_snap < n_snapshots && sign * t >= sign * snap_targets[next_snap]) {
-                snapshots.push_back(V);
-                rhs_snapshots.push_back(RHS(V, exp(t), p));
-                k_values.push_back(exp(t));
-                ++next_snap;
-            }
-        }
-        else {
-            ++n_rejected;
-        }
-
-        // update time step dt, safety factor 0.9
-        double factor = (error > 0) ? std::clamp(0.9 * std::pow(1.0/error, 1.0/4.0), 0.1, 5.0) : 5.0;
-        dt *= factor;
-
-        if (std::abs(dt) < 1e-15) {
-            #pragma omp critical
-            std::cerr << "[ERROR] dt too small, aborting\n";
-            break;
-        }
+    for (const auto& [t, V] : snapshot_pairs) {
+        snapshots.push_back(V);
+        rhs_snapshots.push_back(RHS(V, std::exp(t), p));
+        k_values.push_back(std::exp(t));
     }
 
-    std::cout << "Accepted: " << n_accepted << ", Rejected: " << n_rejected << "\n";
+    std::vector<double> dt_values;
+    std::vector<double> dt_k_values;
+    dt_values.reserve(step_history.size());
+    dt_k_values.reserve(step_history.size());
+    for (const auto& [t, dt] : step_history) {
+        dt_values.push_back(dt);
+        dt_k_values.push_back(std::exp(t));
+    }
+
     save_all(snapshots, rhs_snapshots, k_values, p, filename);
     if (!filename.empty()) {
-        save_dt_hist(dt_values, k_values, "results/dt_values.txt");
+        save_dt_hist(dt_values, dt_k_values, "results/dt_values.txt");
     }
 }

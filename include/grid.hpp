@@ -8,14 +8,14 @@
 class Grid {
     private:
         std::vector<double> m_rho_vals;     // stores the rho grid
-        double  m_rho_min;                  // smallest rho value
-        double  m_rho_max;                  // largest rho value
+        double  m_rho_min = 0.0;            // smallest rho value
+        double  m_rho_max = 0.0;            // largest rho value
         bool    m_rho_uniform  = true;      // linear grid / log grid
-        double  m_d_rho;                    // rho grid spacing for linear grid
-        size_t  m_n_rho;                    // number of rho points for the linear grid
-        double  m_rho_min_pot;              // log grid: smallest 10^pot
-        double  m_rho_max_pot;              // log grid largest 10^pot
-        double  m_n10_rho;                  // number of rho points per decade for the log grid
+        double  m_d_rho = 1.0;              // rho grid spacing for linear grid
+        size_t  m_n_rho = 0;                // number of rho points for the linear grid
+        double  m_rho_min_pot = 0.0;        // log grid: smallest 10^pot
+        double  m_rho_max_pot = 0.0;        // log grid largest 10^pot
+        double  m_n10_rho = 0.0;            // number of rho points per decade for the log grid
 
         void update_grid();
 

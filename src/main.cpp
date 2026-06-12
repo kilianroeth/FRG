@@ -17,6 +17,9 @@ int main() {
     p.t_end = -10.0;
 
     StepperConfig cfg;
+    cfg.abs_tol = 1e-8;
+    cfg.rel_tol = 1e-8;
+    cfg.show_progress = true;
 
     
     std::vector<double> V = V_classical(p);
@@ -32,7 +35,7 @@ int main() {
     save_V(ddV_vals, "results/V_classical_doubleprime.txt",p);
     save_V(RHS_vals, "results/RHS.txt",p);
 
-    integrate_flow_adaptive(V, -0.0001, p, "results/flow_adaptive.csv", 100, 1e-10, 1e-10, true);
+    integrate_flow_adaptive(V, -0.0001, p, cfg, "results/flow_adaptive.csv", 100);
 
     return 0;
 }

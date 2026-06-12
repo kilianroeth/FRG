@@ -111,6 +111,16 @@ void Grid::update_grid() {
 
 void Grid::set_rho_vals(std::vector<double> rho_vals) {
     m_rho_vals = rho_vals;
+        m_n_rho = m_rho_vals.size();
+        if (!m_rho_vals.empty()) {
+            m_rho_min = m_rho_vals.front();
+            m_rho_max = m_rho_vals.back();
+            m_rho_uniform = true;
+
+            if (m_rho_vals.size() > 1) {
+                m_d_rho = (m_rho_vals.back() - m_rho_vals.front()) / (m_rho_vals.size() - 1);
+            }
+        }
 }
 
 void Grid::set_rho_min(double rho_min) {

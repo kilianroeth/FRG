@@ -68,7 +68,8 @@ std::vector<double> integrate_adaptive(
     const RHSfunc& rhs,
     const StepperConfig& cfg,
     const std::vector<double>& snap_targets,
-    std::vector<std::pair<double, std::vector<double>>>* snapshots) {
+    std::vector<std::pair<double, std::vector<double>>>* snapshots,
+    std::vector<std::pair<double, double>>* step_history) {
         double sign = (t_end > t_start) ? 1.0 : -1.0;
         double dt   = dt_init;
         double t    = t_start;
@@ -90,7 +91,27 @@ std::vector<double> integrate_adaptive(
 
             double error = compute_error(V_full, V_half, cfg.abs_tol, cfg.rel_tol);
 
+            bool finite_step = std::all_of(V_full.begin(), V_full.end(), [](double value) { return std::isfinite(value); })
+                && std::all_of(V_half.begin(), V_half.end(), [](double value) { return std::isfinite(value); })
+                && std::isfinite(error);
+
+            if (!finite_step) {
+                ++n_rejected;
+                dt *= cfg.factor_min;
+
+                if (std::abs(dt) < cfg.dt_min) {
+                    std::cerr << "[ERROR] non-finite step and dt below minimum, aborting\n";
+                    break;
+                }
+
+                continue;
+            }
+
             if (error < 1.0) {
+                if (step_history) {
+                    step_history->push_back({t, dt});
+                }
+
                 V = V_half;
                 t += dt;
                 ++n_accepted;

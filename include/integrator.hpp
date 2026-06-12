@@ -37,4 +37,5 @@ std::vector<double> integrate_adaptive(
     const RHSfunc& rhs,
     const StepperConfig& cfg,
     const std::vector<double>& snap_targets = {},
-    std::vector<std::pair<double, std::vector<double>>>* snapshots = nullptr);
+    std::vector<std::pair<double, std::vector<double>>>* snapshots = nullptr,
+    std::vector<std::pair<double, double>>* step_history = nullptr);

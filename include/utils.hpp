@@ -61,7 +61,6 @@ inline void progressBar(size_t current, size_t total, size_t width = 50, std::os
 }
 
 // compute the volume of a d sphere
-inline double Ω(size_t d) {
-    double n = static_cast<double>(d);
-    return 2.*pow(M_PI,n/2.) / std::tgamma(n/2.);
+inline double Ω(double d) {
+    return 2.*pow(M_PI,d/2.) / std::tgamma(d/2.);
 }

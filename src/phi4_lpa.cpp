@@ -43,24 +43,28 @@ double u_min_classical(const Params& p) {
 std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p) {
     std::vector<double> RHS_vals(p.grid.n_rho());
 
-    double prefactor = k*k*k/(6.0*M_PI*M_PI);
-    // std::cout << "k = " << k << std::endl;
+    double prefactor = Ω(p.d)/std::pow(2*M_PI,p.d) * std::pow(k,p.d + 2.) / p.d; 
 
     for (size_t i = 0; i < p.grid.n_rho(); ++i) {
-        const double rho = i * p.grid.d_rho();
-        double denom = (1.0 + (p.grid.d1(V, i) + 2.0*rho*p.grid.d2(V, i))/(k*k));
-        if (k == 0) {
-            denom = 1.0;
-        }
-        if (!std::isfinite(denom) || std::abs(denom) < 1e-12) {
+        const double rho = p.grid.rho_vals(i);
+
+        // goldstone propagator
+        double denom_goldstone = k*k + p.grid.d1(V, i);
+        if (!std::isfinite(denom_goldstone) || std::abs(denom_goldstone) < 1e-12) {
             #pragma omp critical
-            std::cerr << "[WARNING] |denom| = " << denom << ", rho = " << rho << std::endl;
-            denom = 1e-12;
+            std::cerr << "[WARNING] |denom| = " << denom_goldstone << ", rho = " << rho << std::endl;
+            denom_goldstone = 1e-12;
         }
-        // if (denom < 0) {
-        //     std::cout << "[WARNING] Γ(2) < 0 at k = " << k << ",  = " << rho << "\n";
-        // }
-        RHS_vals[i] = prefactor / denom;
+
+        // massive propagator
+        double denom_massive = k*k + p.grid.d1(V, i) + 2.0 * rho + p.grid.d2(V, i);
+        if (!std::isfinite(denom_massive) || std::abs(denom_massive) < 1e-12) {
+            #pragma omp critical
+            std::cerr << "[WARNING] |denom| = " << denom_massive << ", rho = " << rho << std::endl;
+            denom_massive = 1e-12;
+        }
+
+        RHS_vals[i] = prefactor * ( (p.N - 1) / denom_goldstone + 1. / denom_massive);
     }
     return RHS_vals;
 }

@@ -38,8 +38,8 @@
 struct Params {
     double m2               = -1./(9*M_PI*M_PI);                // UV scale mass parameter
     double lambda           = 1.0;                              // UV scale coupling constant
-    size_t N                = 1;                                // Number of fields
-    size_t d                = 3;                                // spacetime dimension
+    double N                = 1;                                // Number of fields
+    double d                = 3;                                // spacetime dimension
     double t_start          = 0.0;
     double t_end            = -15.0;
     Grid grid;

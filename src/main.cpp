@@ -11,7 +11,7 @@ int main() {
 
     Params p;
     p.grid = grid;
-    p.m2 = -0.02;
+    p.m2 = -0.025;
     p.d = 3;
     p.N = 4;
     p.lambda = 1.0;

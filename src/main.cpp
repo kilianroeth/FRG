@@ -7,11 +7,11 @@
 int main() {
 
     Grid grid;
-    grid.set_rho_vals(linspace(0.,0.5,500));
+    grid.set_rho_vals(linspace(0.,0.75,1000));
 
     Params p;
     p.grid = grid;
-    p.m2 = -0.025;
+    p.m2 = -0.05;
     p.d = 3;
     p.N = 4;
     p.lambda = 1.0;

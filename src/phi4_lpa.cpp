@@ -50,18 +50,18 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
 
         // goldstone propagator
         double denom_goldstone = k*k + p.grid.d1(V, i);
-        if (!std::isfinite(denom_goldstone) || std::abs(denom_goldstone) < 1e-12) {
+        if (!std::isfinite(denom_goldstone) || std::abs(denom_goldstone) < 1e-13) {
             #pragma omp critical
             std::cerr << "[WARNING] |denom| = " << denom_goldstone << ", rho = " << rho << std::endl;
-            denom_goldstone = 1e-12;
+            denom_goldstone = 1e-13;
         }
 
         // massive propagator
         double denom_massive = k*k + p.grid.d1(V, i) + 2.0 * rho + p.grid.d2(V, i);
-        if (!std::isfinite(denom_massive) || std::abs(denom_massive) < 1e-12) {
+        if (!std::isfinite(denom_massive) || std::abs(denom_massive) < 1e-13) {
             #pragma omp critical
             std::cerr << "[WARNING] |denom| = " << denom_massive << ", rho = " << rho << std::endl;
-            denom_massive = 1e-12;
+            denom_massive = 1e-13;
         }
 
         RHS_vals[i] = prefactor * ( (p.N - 1) / denom_goldstone + 1. / denom_massive);

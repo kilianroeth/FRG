@@ -4,7 +4,7 @@
 
 double compute_error(const std::vector<double>& u1, const std::vector<double>& u2, double absolute_tolerance, double relative_tolerance) {
     if (u1.size() != u2.size()) {
-        std::cerr << "Arrays don't have the samve size. V1.size() = " << u1.size() << ", V2.size() = " << u2.size() << "\n";
+        std::cerr << "Arrays don't have the same size. V1.size() = " << u1.size() << ", V2.size() = " << u2.size() << "\n";
         throw std::runtime_error("V1 and V2 size mismatch");
     }
     
@@ -140,7 +140,7 @@ std::vector<double> integrate_adaptive(
             dt *= factor;
 
             if (std::abs(dt) < cfg.dt_min) {
-                std::cerr << "[ERROR] dt below minimum, aboritng\n";
+                std::cerr << "[ERROR] dt below minimum, aborting\n";
                 break;
             }
         }

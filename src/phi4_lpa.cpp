@@ -172,7 +172,7 @@ void save_all(const std::vector<std::vector<double>>& snapshots, const std::vect
 
 void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double>& k_values, const std::string& filename) {
     std::ofstream file(filename);
-    if (!file) { std::cerr << "[ERROR] Cannot open" << filename << "\n"; return; }
+    if (!file) { std::cerr << "[ERROR] Cannot open " << filename << "\n"; return; }
     
     // metadata
     file << "# time steps dt for adaptive RK4 time stepper\n";

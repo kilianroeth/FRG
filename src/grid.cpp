@@ -71,7 +71,7 @@ double Grid::d2(const std::vector<double>& u, size_t i) const {
         if (i == 0) { d2u_dt2 =  (u[2] - 2.0*u[1] + u[0])/(dt*dt); }
         if (i == m_n_rho - 1) { d2u_dt2 = (u[m_n_rho-1] - 2.0*u[m_n_rho-2] + u[m_n_rho-3])/(dt*dt); }
 
-        return d2u_dt2 / rho;
+        return d2u_dt2 / rho*rho - d1(u, i);
 
     }
     return d2;

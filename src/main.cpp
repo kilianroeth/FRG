@@ -24,20 +24,20 @@ int main() {
     cfg.show_progress = true;
 
     
-    std::vector<double> V = V_classical(p);
+    std::vector<double> V_init = V_classical(p);
     std::cout << "Classical minimum: V_min = " << V_min_classical(p) << std::endl;
-    std::vector<double> dV_vals(V.size()), ddV_vals(V.size());
-    for (size_t i = 0; i < V.size(); ++i) {
-        dV_vals[i] = grid.d1(V,i);
-        ddV_vals[i] = grid.d2(V,i);
+    std::vector<double> dV_vals(V_init.size()), ddV_vals(V_init.size());
+    for (size_t i = 0; i < V_init.size(); ++i) {
+        dV_vals[i] = grid.d1(V_init,i);
+        ddV_vals[i] = grid.d2(V_init,i);
     }
-    std::vector<double> RHS_vals = RHS(V,1,p);
-    save_V(V, "results/V_classical.txt",p);
+    std::vector<double> RHS_vals = RHS(V_init,1,p);
+    save_V(V_init, "results/V_classical.txt",p);
     save_V(dV_vals, "results/V_classical_prime.txt",p);
     save_V(ddV_vals, "results/V_classical_doubleprime.txt",p);
     save_V(RHS_vals, "results/RHS.txt",p);
 
-    integrate_flow_adaptive(V, -0.0001, p, cfg, "results/flow_adaptive.csv", 100);
+    integrate_flow_adaptive(V_init, -0.0001, p, cfg, "results/flow_adaptive.csv", 100);
 
     return 0;
 }

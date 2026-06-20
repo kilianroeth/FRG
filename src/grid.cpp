@@ -4,7 +4,7 @@
 
 
 double Grid::d1(const std::vector<double>& u, size_t i) const {
-    double d1;
+    double d1 = 0;
     if (m_rho_uniform) {
         // interior: 4th order finite difference
         if (i >= 2 && i <= m_n_rho - 3)  {
@@ -41,7 +41,7 @@ double Grid::d1(const std::vector<double>& u, size_t i) const {
 }
 
 double Grid::d2(const std::vector<double>& u, size_t i) const {
-    double d2;
+    double d2 = 0;
     if (m_rho_uniform) {
         // interions: 4th order finite difference
         if (i >= 2 && i <= m_n_rho - 3) {

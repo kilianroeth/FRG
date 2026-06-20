@@ -74,7 +74,10 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p) {
     std::vector<double> goldstone_propagator(p.grid.n_rho());
     std::vector<double> massive_propagator(p.grid.n_rho());
 
-    double prefactor = Ω(p.d)/(p.d * std::pow(2*M_PI, p.d));
+    const double d = static_cast<double>(p.d);
+    const double N = static_cast<double>(p.N);
+
+    double prefactor = Ω(d)/(d * std::pow(2*M_PI, d));
 
     for (size_t i = 0; i < p.grid.n_rho(); ++i) {
         double du = p.grid.d1(u, i);
@@ -82,7 +85,7 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p) {
 
         const double rho = i * p.grid.d_rho();
         // LHS remainings
-        RHS_remainder[i] = p.d * u[i] + (2 - p.d) * rho * du;
+        RHS_remainder[i] = d * u[i] + (2 - d) * rho * du;
         
         // goldstone modes
         double goldstone_denom = 1 + du;
@@ -91,7 +94,7 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p) {
             std::cerr << "[WARNING] |goldstone denom| = " << goldstone_denom << ", rho = " << rho << std::endl;
             goldstone_denom = 1e-12;
         }
-        goldstone_propagator[i] = (p.N - 1)/goldstone_denom;
+        goldstone_propagator[i] = (N > 1) ? (N - 1) / goldstone_denom : 0.0;
 
         // massive modes
         double massive_denom = 1 + du + 2 * rho * ddu;
@@ -103,7 +106,7 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p) {
         massive_propagator[i] = 1. / massive_denom;
 
 
-        RHS_vals[i] = -RHS_remainder[i] + prefactor * (goldstone_propagator[i] + massive_propagator[i]);
+        RHS_vals[i] = - RHS_remainder[i] + prefactor * (goldstone_propagator[i] + massive_propagator[i]);
     }
     return RHS_vals;
 }
@@ -283,4 +286,3 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
         save_dt_hist(dt_values, dt_k_values, "results/dt_values.txt");
     }
 }
-

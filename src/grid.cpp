@@ -58,20 +58,20 @@ double Grid::d2(const std::vector<double>& u, size_t i) const {
     else {
         double dt = std::log(10.0) / m_n10_rho;
         double rho = m_rho_vals[i];
-        double du_dt;
+        double d2u_dt2;
         // interions: 4th order finite difference
         if (i >= 2 && i <= m_n_rho - 3) {
-            du_dt = (-u[i+2] + 16.0*u[i+1] - 30.0*u[i] + 16.0*u[i-1] - u[i-2])/(12.0*dt*dt);
+            d2u_dt2 = (-u[i+2] + 16.0*u[i+1] - 30.0*u[i] + 16.0*u[i-1] - u[i-2])/(12.0*dt*dt);
         }
         // one point from boundary: 2nd order finite difference
         if (i == 1 || i == m_n_rho - 2) {
-            du_dt = (u[i+1] - 2.0*u[i] + u[i-1])/(dt*dt);
+            d2u_dt2 = (u[i+1] - 2.0*u[i] + u[i-1])/(dt*dt);
         }
         // boundary: 1st order one sided
-        if (i == 0) { du_dt =  (u[2] - 2.0*u[1] + u[0])/(dt*dt); }
-        if (i == m_n_rho - 1) { du_dt = (u[m_n_rho-1] - 2.0*u[m_n_rho-2] + u[m_n_rho-3])/(dt*dt); }
+        if (i == 0) { d2u_dt2 =  (u[2] - 2.0*u[1] + u[0])/(dt*dt); }
+        if (i == m_n_rho - 1) { d2u_dt2 = (u[m_n_rho-1] - 2.0*u[m_n_rho-2] + u[m_n_rho-3])/(dt*dt); }
 
-        return du_dt / rho;
+        return d2u_dt2 / rho;
 
     }
     return d2;

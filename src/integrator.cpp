@@ -14,8 +14,8 @@ double compute_error(const std::vector<double>& u1, const std::vector<double>& u
     // iterate over all entries
     for (size_t i = 0; i < u1.size(); ++i) {
         // scale = a_tol + r_rol * max(V1,V2)
-        double scale = absolute_tolerance + relative_tolerance * std::max(std::abs(u1[i]), std::abs(u2[i]));
-        double error = std::abs(u1[i] - u2[i]) / scale;
+        double tolerance = absolute_tolerance + relative_tolerance * std::max(std::abs(u1[i]), std::abs(u2[i]));
+        double error = std::abs(u1[i] - u2[i]) / tolerance;
         // if error < 1, we are within the tolerances
         squared_errors += error * error;
     }

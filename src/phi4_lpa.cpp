@@ -57,7 +57,7 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
         }
 
         // massive propagator
-        double denom_massive = k*k + p.grid.d1(V, i) + 2.0 * rho + p.grid.d2(V, i);
+        double denom_massive = k*k + p.grid.d1(V, i) + 2.0 * rho * p.grid.d2(V, i);
         if (!std::isfinite(denom_massive) || std::abs(denom_massive) < 1e-13) {
             #pragma omp critical
             std::cerr << "[WARNING] |denom| = " << denom_massive << ", rho = " << rho << std::endl;

@@ -29,7 +29,7 @@ usage() {
 
 for arg in "$@"; do
     case $arg in
-        --run)      RUN=true ;;
+        --run|-r)      RUN=true ;;
         --release)  BUILD_TYPE="Release" ;;
         --clean)    CLEAN=true ;;
         -h|--help)  usage;;

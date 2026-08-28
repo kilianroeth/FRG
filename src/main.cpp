@@ -1,18 +1,17 @@
-#include <iostream>
 #include <chrono>
+#include <iostream>
 
 #include "phi4_lpa.hpp"
 #include "utils.hpp"
 
-int main()
-{
+int main() {
 
     Grid grid;
     grid.set_rho_vals(linspace(0., 0.75, 1000));
 
     Params p;
     p.grid = grid;
-    p.m2 = -0.05;
+    p.m2 = -0.075;
     p.d = 3;
     p.N = 4;
     p.lambda = 1.0;
@@ -27,8 +26,7 @@ int main()
     std::vector<double> V_init = V_classical(p);
     std::cout << "Classical minimum: V_min = " << V_min_classical(p) << std::endl;
     std::vector<double> dV_vals(V_init.size()), ddV_vals(V_init.size());
-    for (size_t i = 0; i < V_init.size(); ++i)
-    {
+    for(size_t i = 0; i < V_init.size(); ++i) {
         dV_vals[i] = grid.d1(V_init, i);
         ddV_vals[i] = grid.d2(V_init, i);
     }

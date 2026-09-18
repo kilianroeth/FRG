@@ -37,6 +37,7 @@ double u_min_classical(const Params& p) {
 
 // Compute RHS -------------------------
 
+// computes RHS of Wetterich equation
 std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p) {
     std::vector<double> RHS_vals(p.grid.n_rho());
 
@@ -49,8 +50,10 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
         double denom_goldstone = k * k + p.grid.d1(V, i);
         if(!std::isfinite(denom_goldstone) || std::abs(denom_goldstone) < 1e-13) {
 #pragma omp critical
-            std::cerr << "[WARNING] |denom| = " << denom_goldstone << ", rho = " << rho
-                      << std::endl;
+            if(p.warning_level >= 1) {
+                std::cerr << "[WARNING] |goldstone denom| = " << denom_goldstone
+                          << ", rho = " << rho << std::endl;
+            }
             denom_goldstone = 1e-13;
         }
 
@@ -58,7 +61,10 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
         double denom_massive = k * k + p.grid.d1(V, i) + 2.0 * rho * p.grid.d2(V, i);
         if(!std::isfinite(denom_massive) || std::abs(denom_massive) < 1e-13) {
 #pragma omp critical
-            std::cerr << "[WARNING] |denom| = " << denom_massive << ", rho = " << rho << std::endl;
+            if(p.warning_level >= 1) {
+                std::cerr << "[WARNING] |massive denom| = " << denom_massive << ", rho = " << rho
+                          << std::endl;
+            }
             denom_massive = 1e-13;
         }
 
@@ -70,9 +76,10 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
 // dimensionless quantities
 // ̄ρ = k^2-d ρ
 // u = k^-d V_k(k^d-2 ̄ρ)
+// computes RHS of Wetterich equation minus all terms of the LHS that is not the RG-time derivative
 std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p) {
     std::vector<double> RHS_vals(p.grid.n_rho());
-    std::vector<double> RHS_remainder(p.grid.n_rho());
+    std::vector<double> LHS_remainder(p.grid.n_rho());
     std::vector<double> goldstone_propagator(p.grid.n_rho());
     std::vector<double> massive_propagator(p.grid.n_rho());
 
@@ -87,14 +94,16 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p) {
 
         const double rho = i * p.grid.d_rho();
         // LHS remainings
-        RHS_remainder[i] = d * u[i] + (2 - d) * rho * du;
+        LHS_remainder[i] = d * u[i] + (2 - d) * rho * du;
 
         // goldstone modes
         double goldstone_denom = 1 + du;
         if(!std::isfinite(goldstone_denom) || std::abs(goldstone_denom) < 1e-12) {
 #pragma omp critical
-            std::cerr << "[WARNING] |goldstone denom| = " << goldstone_denom << ", rho = " << rho
-                      << std::endl;
+            if(p.warning_level >= 1) {
+                std::cerr << "[WARNING] |goldstone denom| = " << abs(goldstone_denom)
+                          << ", rho = " << rho << std::endl;
+            }
             goldstone_denom = 1e-12;
         }
         goldstone_propagator[i] = (N > 1) ? (N - 1) / goldstone_denom : 0.0;
@@ -103,14 +112,16 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p) {
         double massive_denom = 1 + du + 2 * rho * ddu;
         if(!std::isfinite(massive_denom) || std::abs(massive_denom) < 1e-12) {
 #pragma omp critical
-            std::cerr << "[WARNING] |massive denom| = " << massive_denom << ", rho = " << rho
-                      << std::endl;
+            if(p.warning_level >= 1) {
+                std::cerr << "[WARNING] |massive denom| = " << abs(massive_denom)
+                          << ", rho = " << rho << std::endl;
+            }
             massive_denom = 1e-12;
         }
         massive_propagator[i] = 1. / massive_denom;
 
         RHS_vals[i] =
-            -RHS_remainder[i] + prefactor * (goldstone_propagator[i] + massive_propagator[i]);
+            -LHS_remainder[i] + prefactor * (goldstone_propagator[i] + massive_propagator[i]);
     }
     return RHS_vals;
 }

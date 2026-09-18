@@ -11,12 +11,13 @@ int main() {
 
     Params p;
     p.grid = grid;
-    p.m2 = -0.075;
+    p.m2 = -0.08;
     p.d = 3;
     p.N = 4;
     p.lambda = 1.0;
     p.t_start = 0.0;
     p.t_end = -10.0;
+    p.warning_level = 0;
 
     StepperConfig cfg;
     cfg.abs_tol = 1e-10;

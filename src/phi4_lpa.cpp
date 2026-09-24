@@ -312,6 +312,9 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
 
     save_all(snapshots, rhs_snapshots, k_values, p, filename);
     if(!filename.empty()) {
-        save_dt_hist(dt_values, dt_k_values, "results/dt_values.txt");
+        save_dt_hist(
+            dt_values, dt_k_values,
+            "results/phi4/dt_values.txt"); // TODO use the first part of string of filename of
+                                           // integrate_flow_adaptive to have a dynamical directory
     }
 }

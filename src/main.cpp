@@ -32,12 +32,12 @@ int main() {
         ddV_vals[i] = grid.d2(V_init, i);
     }
     std::vector<double> RHS_vals = RHS(V_init, 1, p);
-    save_V(V_init, "results/V_classical.txt", p);
-    save_V(dV_vals, "results/V_classical_prime.txt", p);
-    save_V(ddV_vals, "results/V_classical_doubleprime.txt", p);
-    save_V(RHS_vals, "results/RHS.txt", p);
+    save_V(V_init, "results/phi4/V_classical.txt", p);
+    save_V(dV_vals, "results/phi4/V_classical_prime.txt", p);
+    save_V(ddV_vals, "results/phi4/V_classical_doubleprime.txt", p);
+    save_V(RHS_vals, "results/phi4/RHS.txt", p);
 
-    integrate_flow_adaptive(V_init, -0.0001, p, cfg, "results/flow_adaptive.csv", 100);
+    integrate_flow_adaptive(V_init, -0.0001, p, cfg, "results/phi4/flow_adaptive.csv", 100);
 
     return 0;
 }

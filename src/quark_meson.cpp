@@ -25,7 +25,8 @@ double V_min_classical(const Params& p) {
 
 // Compute RHS ------------------------
 
-std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p, const Grid& grid) {
+void RHS(const std::vector<double>& V, double k, std::vector<double>& out, const Params& p,
+         const Grid& grid) {
     std::vector<double> RHS_vals(grid.n_rho());
 
     phi4::Params phi4_p;
@@ -38,15 +39,16 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p,
     phi4_p.warning_level = p.warning_level;
 
     double prefactor_quarks = 4 * p.Nc * Ω(p.d);
+    double prefactor = prefactor_quarks / pow(2 * M_PI, p.d) * pow(k, p.d + 2) / p.d;
+    double k2 = k * k;
 
-    RHS_vals = phi4::RHS(V, k, phi4_p, grid);
+    phi4::RHS(V, k, out, phi4_p, grid);
+
+#pragma omp parallel for
     for(size_t i = 0; i < grid.n_rho(); ++i) {
         const double rho = grid.rho_vals(i);
-        RHS_vals[i] -= prefactor_quarks / pow(2 * M_PI, p.d) * pow(k, p.d + 2) / p.d * (1) /
-                       (k * k + p.h * p.h * rho);
+        RHS_vals[i] -= prefactor / (k2 + p.h * p.h * rho);
     }
-
-    return RHS_vals;
 }
 
 // save current potential --------------
@@ -189,8 +191,9 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
 
     std::cout << "Solving flow equation with adaptive time step...\n";
 
-    const RHSfunc rhs = [&p, &grid](const std::vector<double>& state, double t) {
-        return RHS(state, std::exp(t), p, grid);
+    const RHSfunc rhs = [&p, &grid](const std::vector<double>& state, double t,
+                                    std::vector<double>& out) {
+        RHS(state, std::exp(t), out, p, grid);
     };
 
     std::vector<double> snap_targets(n_snapshots);
@@ -212,9 +215,11 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
     rhs_snapshots.reserve(snapshot_pairs.size());
     k_values.reserve(snapshot_pairs.size());
 
+    std::vector<double> rhs_buf(grid.n_rho());
     for(const auto& [t, V] : snapshot_pairs) {
         snapshots.push_back(V);
-        rhs_snapshots.push_back(RHS(V, std::exp(t), p, grid));
+        RHS(V, std::exp(t), rhs_buf, p, grid);
+        rhs_snapshots.push_back(rhs_buf);
         k_values.push_back(std::exp(t));
     }
 
@@ -281,12 +286,13 @@ void sweep_params(const std::vector<double>& m2, const std::vector<double>& lamb
                 p_sweep.h = h[i_h];
 
                 double dt_init = -0.0001;
-                const std::vector<double>& V_init = V_classical(p_sweep, grid);
+                const std::vector<double> V_init = V_classical(p_sweep, grid);
 
-                const RHSfunc rhs = [&p_sweep, &grid](const std::vector<double>& state, double t) {
-                    return RHS(state, std::exp(t), p_sweep, grid);
+                const RHSfunc rhs = [&p_sweep, &grid](const std::vector<double>& state, double t,
+                                                      std::vector<double>& out) {
+                    RHS(state, std::exp(t), out, p_sweep, grid);
                 };
-                // std::cout << "Solving flow equation...\n";
+
                 std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
                 std::vector<double> V = integrate_adaptive(V_init, p_sweep.t_start, p_sweep.t_end,
                                                            dt_init, rhs, cfg, {}, nullptr, nullptr);
@@ -306,6 +312,7 @@ void sweep_params(const std::vector<double>& m2, const std::vector<double>& lamb
                     double avg_time = total_comp_time / done;
                     int remaining_sweeps = number_of_sweeps - done;
                     double remaining_time = avg_time * remaining_sweeps;
+
                     std::cout << "---------- [" << done << "/" << number_of_sweeps
                               << "] ----------\n";
                     std::cout << "m2 = " << p_sweep.m2 << ", lambda = " << p_sweep.lambda

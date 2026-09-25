@@ -29,44 +29,46 @@ double compute_error(const std::vector<double>& u1, const std::vector<double>& u
 
 // time stepper -------------------------------------
 
-std::vector<double> step_euler(const std::vector<double>& state, double t, double dt,
-                               const RHSfunc& rhs) {
-    auto f = rhs(state, t);
-    size_t N = state.size();
-    std::vector<double> next(N);
+void step_euler(const std::vector<double>& state, double t, double dt, const RHSfunc& rhs,
+                std::vector<double>& out, std::vector<double>& scratch_k) {
+    const size_t N = state.size();
+    rhs(state, t, scratch_k);
     for(size_t i = 0; i < N; ++i) {
-        next[i] = state[i] + dt * f[i];
+        out[i] = state[i] + dt * scratch_k[i];
     }
-    return next;
 }
 
-std::vector<double> step_rk4(const std::vector<double>& state, double t, double dt,
-                             const RHSfunc& rhs) {
+void step_rk4(const std::vector<double>& state, double t, double dt, const RHSfunc& rhs,
+              std::vector<double>& out, RK4Scratch& scratch) {
     size_t N = state.size();
-    std::vector<double> tmp(N), next(N);
-
-    auto k1 = rhs(state, t);
-
-    for(size_t i = 0; i < N; ++i) {
-        tmp[i] = state[i] + dt / 2. * k1[i];
-    }
-    auto k2 = rhs(tmp, t + dt / 2.);
-
-    for(size_t i = 0; i < N; ++i) {
-        tmp[i] = state[i] + dt / 2. * k2[i];
-    }
-    auto k3 = rhs(tmp, t + dt / 2.);
-
-    for(size_t i = 0; i < N; ++i) {
-        tmp[i] = state[i] + dt * k3[i];
-    }
-    auto k4 = rhs(tmp, t + dt);
-
-    for(size_t i = 0; i < N; ++i) {
-        next[i] = state[i] + dt / 6. * (k1[i] + 2. * k2[i] + 2. * k3[i] + k4[i]);
+    if(out.size() != N) {
+        out.resize(N);
     }
 
-    return next;
+    // step 1
+    rhs(state, t, scratch.k1);
+    for(size_t i = 0; i < N; ++i) {
+        scratch.tmp[i] = state[i] + dt / 2. * scratch.k1[i];
+    }
+
+    // step 2
+    rhs(scratch.tmp, t + 0.5 * dt, scratch.k2);
+    for(size_t i = 0; i < N; ++i) {
+        scratch.tmp[i] = state[i] + dt / 2. * scratch.k2[i];
+    }
+    // step 3
+    rhs(scratch.tmp, t + 0.5 * dt, scratch.k3);
+    for(size_t i = 0; i < N; ++i) {
+        scratch.tmp[i] = state[i] + dt * scratch.k3[i];
+    }
+
+    // step 4
+    rhs(scratch.tmp, t + dt, scratch.k4);
+    for(size_t i = 0; i < N; ++i) {
+        out[i] =
+            state[i] +
+            dt / 6. * (scratch.k1[i] + 2. * scratch.k2[i] + 2. * scratch.k3[i] + scratch.k4[i]);
+    }
 }
 
 // adaptive flow integrator -----------------------------
@@ -81,6 +83,10 @@ integrate_adaptive(const std::vector<double>& state_init, double t_start, double
     double dt = dt_init;
     double t = t_start;
     auto V = state_init;
+    const size_t N = state_init.size();
+
+    // Pre-allocate all scratch space
+    AdaptiveScratch scratch(N);
 
     size_t next_snap = 0;
     int n_accepted = 0, n_rejected = 0;
@@ -91,14 +97,16 @@ integrate_adaptive(const std::vector<double>& state_init, double t_start, double
             dt = t_end - t;
         }
 
-        // full step and two half steps to compare dt and dt/2 deviation
-        auto V_full = step_rk4(V, t, dt, rhs);
-        auto V_mid = step_rk4(V, t, dt / 2., rhs);
-        auto V_half = step_rk4(V_mid, t + dt / 2., dt / 2., rhs);
+        // Compute full step and half steps
+        step_rk4(V, t, dt, rhs, scratch.V_full, scratch.rk4_scratch);
+        step_rk4(V, t, dt * 0.5, rhs, scratch.V_mid, scratch.rk4_scratch);
 
-        double error = compute_error(V_full, V_half, cfg.abs_tol, cfg.rel_tol);
+        std::vector<double>& V_half = scratch.V_half;
+        step_rk4(scratch.V_mid, t + dt * 0.5, dt * 0.5, rhs, V_half, scratch.rk4_scratch);
 
-        bool finite_step = std::all_of(V_full.begin(), V_full.end(),
+        double error = compute_error(scratch.V_full, V_half, cfg.abs_tol, cfg.rel_tol);
+
+        bool finite_step = std::all_of(scratch.V_full.begin(), scratch.V_full.end(),
                                        [](double value) { return std::isfinite(value); }) &&
                            std::all_of(V_half.begin(), V_half.end(),
                                        [](double value) { return std::isfinite(value); }) &&

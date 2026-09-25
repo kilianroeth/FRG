@@ -60,8 +60,9 @@ double u_min_classical(const Params& p);
 
 // Compute RHS -------------------------
 
-std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p, const Grid& grid);
-std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p, const Grid& grid);
+void RHS(const std::vector<double>& V, double t, std::vector<double>& out, const Params& p,
+         const Grid& grid);
+void RHS_dimless(const std::vector<double>& u, const Params& p, const Grid& grid);
 
 // save current potential --------------
 
@@ -75,9 +76,6 @@ void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double
 
 // Integrate complete RG flow ----------
 
-// Simple dt forward step integrator
-void integrate_flow(const std::vector<double>& V_init, double dt, const Params& p,
-                    const std::string& filename = "results/phi4/flow.csv", int n_snapshots = 100);
 // Adaptive integrator (RK4 with step-doubling error estimate)
 void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p,
                              const Grid& grid, const StepperConfig& cfg,

@@ -6,12 +6,10 @@ namespace phi4 {
 std::vector<double> V_classical(const Params& p, const Grid& grid) {
     std::vector<double> V(grid.n_rho());
     double rho;
-
     for(size_t i = 0; i < grid.n_rho(); ++i) {
         rho = i * grid.d_rho();
         V[i] = p.m2 * rho + p.lambda / 6.0 * rho * rho;
     }
-
     return V;
 }
 
@@ -40,46 +38,51 @@ double u_min_classical(const Params& p) {
 // Compute RHS -------------------------
 
 // computes RHS of Wetterich equation
-std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p, const Grid& grid) {
+void RHS(const std::vector<double>& V, double t, std::vector<double>& out, const Params& p,
+         const Grid& grid) {
     std::vector<double> RHS_vals(grid.n_rho());
 
-    double prefactor = Ω(p.d) / std::pow(2 * M_PI, p.d) * std::pow(k, p.d + 2.) / p.d;
+    const double k = std::exp(t);
+    const double k2 = k * k;
+    const size_t N_grid = grid.n_rho();
+    const double prefactor = Ω(p.d) / std::pow(2 * M_PI, p.d) * std::pow(k, p.d + 2.) / p.d;
 
-    for(size_t i = 0; i < grid.n_rho(); ++i) {
+    bool warning_triggered = false;
+
+#pragma omp parallel for schedule(static)
+    for(size_t i = 0; i < N_grid; ++i) {
         const double rho = grid.rho_vals(i);
+        const double d1 = grid.d1(V, i);
+        const double d2 = grid.d2(V, i);
 
         // goldstone propagator
-        double denom_goldstone = k * k + grid.d1(V, i);
+        double denom_goldstone = k2 + d1;
         if(!std::isfinite(denom_goldstone) || std::abs(denom_goldstone) < 1e-13) {
-#pragma omp critical
-            if(p.warning_level >= 1) {
-                std::cerr << "[WARNING] |goldstone denom| = " << denom_goldstone
-                          << ", rho = " << rho << std::endl;
-            }
+            warning_triggered = true;
             denom_goldstone = 1e-13;
         }
 
         // massive propagator
-        double denom_massive = k * k + grid.d1(V, i) + 2.0 * rho * grid.d2(V, i);
+        double denom_massive = k2 + d1 + 2.0 * rho * d2;
         if(!std::isfinite(denom_massive) || std::abs(denom_massive) < 1e-13) {
-#pragma omp critical
-            if(p.warning_level >= 1) {
-                std::cerr << "[WARNING] |massive denom| = " << denom_massive << ", rho = " << rho
-                          << std::endl;
-            }
+            warning_triggered = true;
             denom_massive = 1e-13;
         }
 
-        RHS_vals[i] = prefactor * ((p.N - 1) / denom_goldstone + 1. / denom_massive);
+        out[i] = prefactor * ((p.N - 1.) / denom_goldstone + 1. / denom_massive);
+
+        if(warning_triggered && p.warning_level >= 1) {
+            std::cerr << "[WARNING] Small/non-finite propagator denominator detected at t = " << t
+                      << "\n";
+        }
     }
-    return RHS_vals;
 }
 
 // dimensionless quantities
 // ̄ρ = k^2-d ρ
 // u = k^-d V_k(k^d-2 ̄ρ)
 // computes RHS of Wetterich equation minus all terms of the LHS that is not the RG-time derivative
-std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p, const Grid& grid) {
+void RHS_dimless(const std::vector<double>& u, const Params& p, const Grid& grid) {
     std::vector<double> RHS_vals(grid.n_rho());
     std::vector<double> LHS_remainder(grid.n_rho());
     std::vector<double> goldstone_propagator(grid.n_rho());
@@ -101,7 +104,6 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p, c
         // goldstone modes
         double goldstone_denom = 1 + du;
         if(!std::isfinite(goldstone_denom) || std::abs(goldstone_denom) < 1e-12) {
-#pragma omp critical
             if(p.warning_level >= 1) {
                 std::cerr << "[WARNING] |goldstone denom| = " << abs(goldstone_denom)
                           << ", rho = " << rho << std::endl;
@@ -113,7 +115,6 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p, c
         // massive modes
         double massive_denom = 1 + du + 2 * rho * ddu;
         if(!std::isfinite(massive_denom) || std::abs(massive_denom) < 1e-12) {
-#pragma omp critical
             if(p.warning_level >= 1) {
                 std::cerr << "[WARNING] |massive denom| = " << abs(massive_denom)
                           << ", rho = " << rho << std::endl;
@@ -125,7 +126,6 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p, c
         RHS_vals[i] =
             -LHS_remainder[i] + prefactor * (goldstone_propagator[i] + massive_propagator[i]);
     }
-    return RHS_vals;
 }
 
 // save current potential --------------
@@ -217,53 +217,6 @@ void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double
 
 // Integrate complete RG flow ----------
 
-void integrate_flow(const std::vector<double>& V_init, double dt, const Params& p, const Grid& grid,
-                    const std::string& filename, int n_snapshots) {
-    if(dt >= 0) {
-        std::cerr << "[ERROR] dt must be negative" << std::endl;
-        return;
-    }
-    std::cout << "Solving flow equation...\n";
-
-    const RHSfunc rhs = [&p, &grid](const std::vector<double>& state, double t) {
-        return RHS(state, std::exp(t), p, grid);
-    };
-
-    const double total_t = p.t_start - p.t_end;
-    size_t N = static_cast<size_t>(std::ceil(total_t / std::abs(dt))) + 1;
-    double dt_t = -total_t / (N - 1);
-
-    std::vector<size_t> snap_indices;
-    for(int s = 0; s < n_snapshots; ++s) {
-        double frac = static_cast<double>(s) / (n_snapshots - 1);
-        size_t idx = static_cast<size_t>(std::round(frac * (N - 1)));
-        snap_indices.push_back(idx);
-    }
-
-    std::vector<std::vector<double>> snapshots, rhs_snapshots;
-    std::vector<double> k_values;
-
-    std::vector<double> V = V_init;
-    size_t next_snap = 0;
-    for(size_t i = 0; i < N; ++i) {
-        double t = p.t_start + i * (p.t_end - p.t_start) / (N - 1);
-        double k = exp(t);
-        progressBar(i + 1, N);
-
-        if(next_snap < snap_indices.size() && i == snap_indices[next_snap]) {
-            snapshots.push_back(V);
-            rhs_snapshots.push_back(RHS(V, k, p, grid));
-            k_values.push_back(k);
-            ++next_snap;
-        }
-
-        if(i + 1 < N) {
-            V = step_euler(V, t, dt_t, rhs);
-        }
-    }
-    save_all(snapshots, rhs_snapshots, k_values, p, grid, filename);
-}
-
 // Adaptive integrator using RK4 + step-doubling
 void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p,
                              const Grid& grid, const StepperConfig& cfg,
@@ -275,9 +228,8 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
 
     std::cout << "Solving flow equation with adaptive time step...\n";
 
-    const RHSfunc rhs = [&p, &grid](const std::vector<double>& state, double t) {
-        return RHS(state, std::exp(t), p, grid);
-    };
+    const RHSfunc rhs_func = [&p, &grid](const std::vector<double>& state, double t,
+                                         std::vector<double>& out) { RHS(state, t, out, p, grid); };
 
     std::vector<double> snap_targets(n_snapshots);
     for(int s = 0; s < n_snapshots; ++s) {
@@ -288,8 +240,8 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
     std::vector<std::pair<double, std::vector<double>>> snapshot_pairs;
     std::vector<std::pair<double, double>> step_history;
 
-    integrate_adaptive(V_init, p.t_start, p.t_end, dt_init, rhs, cfg, snap_targets, &snapshot_pairs,
-                       &step_history);
+    integrate_adaptive(V_init, p.t_start, p.t_end, dt_init, rhs_func, cfg, snap_targets,
+                       &snapshot_pairs, &step_history);
 
     std::vector<std::vector<double>> snapshots;
     std::vector<std::vector<double>> rhs_snapshots;
@@ -298,9 +250,12 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
     rhs_snapshots.reserve(snapshot_pairs.size());
     k_values.reserve(snapshot_pairs.size());
 
+    std::vector<double> rhs_buf(grid.n_rho());
+
     for(const auto& [t, V] : snapshot_pairs) {
         snapshots.push_back(V);
-        rhs_snapshots.push_back(RHS(V, std::exp(t), p, grid));
+        RHS(V, t, rhs_buf, p, grid);
+        rhs_snapshots.push_back(rhs_buf);
         k_values.push_back(std::exp(t));
     }
 

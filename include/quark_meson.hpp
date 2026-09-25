@@ -58,7 +58,8 @@ double V_min_classical(const Params& p);
 
 // Compute RHS ------------------------
 
-std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p, const Grid& grid);
+void RHS(const std::vector<double>& V, double k, std::vector<double>& out, const Params& p,
+         const Grid& grid);
 
 // save current potential --------------
 

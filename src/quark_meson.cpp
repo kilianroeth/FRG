@@ -235,9 +235,10 @@ void sweep_params(const std::vector<double>& m2, const std::vector<double>& lamb
                   const std::string& filename) {
     std::cout << "============== Quark Meson Model ==============\n";
     std::cout << "Sweep UV params..." << "\n";
-    int number_of_sweeps = m2.size() * lambda.size() * h.size();
-    int sweeps_done = 0;
-    double total_comp_time = 0.;
+    const int n_m2 = static_cast<int>(m2.size());
+    const int n_lambda = static_cast<int>(lambda.size());
+    const int n_h = static_cast<int>(h.size());
+    int number_of_sweeps = n_m2 * n_lambda * n_h;
 
     std::cout << "Number of sweeps = " << number_of_sweeps << "\n";
     std::cout << "Output file: " << filename << std::endl;
@@ -255,18 +256,23 @@ void sweep_params(const std::vector<double>& m2, const std::vector<double>& lamb
     file << "# ------------------------------\n";
     file << "# m2, lambda, h, rho0, m2_sigma, m2_pi \n";
 
-    for(double m2_val : m2) {
-        for(double lambda_val : lambda) {
-            for(double h_val : h) {
-                std::cout << "----------------------- [" << sweeps_done + 1 << "/"
-                          << number_of_sweeps << "] -----------------------\n";
-                std::cout << "m2 = " << m2_val << ", lambda = " << lambda_val << ", h = " << h_val
-                          << "\n";
+    int sweeps_done = 0;
+    double total_comp_time = 0.;
+
+    std::vector<double> rho0_vals(number_of_sweeps);
+    std::vector<double> m2_sigma_vals(number_of_sweeps);
+    std::vector<double> m2_pi_vals(number_of_sweeps);
+
+#pragma omp parallel for collapse(3) schedule(dynamic)
+    for(int i_m2 = 0; i_m2 < n_m2; ++i_m2) {
+        for(int i_lambda = 0; i_lambda < n_lambda; ++i_lambda) {
+            for(int i_h = 0; i_h < n_h; ++i_h) {
+                const int idx = (i_m2 * n_lambda + i_lambda) * n_h + i_h;
 
                 Params p_sweep = p;
-                p_sweep.m2 = m2_val;
-                p_sweep.lambda = lambda_val;
-                p_sweep.h = h_val;
+                p_sweep.m2 = m2[i_m2];
+                p_sweep.lambda = lambda[i_lambda];
+                p_sweep.h = h[i_h];
 
                 double dt_init = -0.0001;
                 const std::vector<double>& V_init = V_classical(p_sweep);
@@ -274,30 +280,47 @@ void sweep_params(const std::vector<double>& m2, const std::vector<double>& lamb
                 const RHSfunc rhs = [&p_sweep](const std::vector<double>& state, double t) {
                     return RHS(state, std::exp(t), p_sweep);
                 };
-                std::cout << "Solving flow equation...\n";
+                // std::cout << "Solving flow equation...\n";
                 std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-
-                // Solve flow equation
-
                 std::vector<double> V = integrate_adaptive(V_init, p_sweep.t_start, p_sweep.t_end,
                                                            dt_init, rhs, cfg, {}, nullptr, nullptr);
-
-                sweeps_done += 1;
                 std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
                 double duration = std::chrono::duration<double>(end - begin).count();
-                total_comp_time += duration;
-                double avg_time = total_comp_time / sweeps_done;
-                int remaining_sweeps = number_of_sweeps - sweeps_done;
-                double remaining_time = avg_time * remaining_sweeps;
-                std::cout << "Comptime       = " << duration << "[s]\n";
-                std::cout << "avg. comptime  = " << avg_time << "[s]\n";
-                std::cout << "Remaining time = " << remaining_time << "[s]" << std::endl;
 
                 // Compute observables
-                Observables obs = compute_observables(V, p);
-                std::cout << "ρ0 = " << obs.rho0 << "\n";
-                file << m2_val << ", " << lambda_val << ", " << h_val << ", " << obs.rho0 << ", "
-                     << obs.m2_sigma << ", " << obs.m2_pi << "\n";
+                Observables obs = compute_observables(V, p_sweep);
+                rho0_vals[idx] = obs.rho0;
+                m2_sigma_vals[idx] = obs.m2_sigma;
+                m2_pi_vals[idx] = obs.m2_pi;
+
+                int done = ++sweeps_done;
+#pragma omp critical
+                {
+                    total_comp_time += duration;
+                    double avg_time = total_comp_time / done;
+                    int remaining_sweeps = number_of_sweeps - done;
+                    double remaining_time = avg_time * remaining_sweeps;
+                    std::cout << "---------- [" << done << "/" << number_of_sweeps
+                              << "] ----------\n";
+                    std::cout << "m2 = " << p_sweep.m2 << ", lambda = " << p_sweep.lambda
+                              << ", h = " << p_sweep.h << "\n";
+                    std::cout << "ρ0 = " << obs.rho0 << "\n";
+                    std::cout << "Comptime          = " << duration << "[s]\n";
+                    std::cout << "avg. comptime     = " << avg_time << "[s]\n";
+                    std::cout << "Remaining time    = " << remaining_time / 60 << "[min]\n";
+                };
+            }
+        }
+    }
+
+    // save data
+    int i = 0;
+    for(double m2_val : m2) {
+        for(double lambda_val : lambda) {
+            for(double h_val : h) {
+                file << m2_val << ", " << lambda_val << ", " << h_val << ", " << rho0_vals[i]
+                     << ", " << m2_sigma_vals[i] << ", " << m2_pi_vals[i] << "\n";
+                i += 1;
             }
         }
     }

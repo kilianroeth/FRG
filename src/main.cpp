@@ -65,9 +65,9 @@ int main() {
     p.warning_level = 0;
 
     StepperConfig cfg;
-    cfg.abs_tol = 1e-8;
-    cfg.rel_tol = 1e-8;
-    cfg.show_progress = true;
+    cfg.abs_tol = 1e-9;
+    cfg.rel_tol = 1e-9;
+    cfg.show_progress = false;
 
     std::vector<double> V_init = QM::V_classical(p);
     std::cout << "Classical minimum: V_min = " << QM::V_min_classical(p) << std::endl;
@@ -83,7 +83,7 @@ int main() {
     QM::save_V(RHS_vals, "results/QM/RHS.txt", p);
 
     // QM::integrate_flow_adaptive(V_init, -0.0001, p, cfg, "results/QM/flow_adaptive.csv", 100);
-    QM::sweep_params(linspace(-0.1, 0.5, 15), linspace(1.0, 1.0, 1), linspace(0., 5., 15), p, cfg,
+    QM::sweep_params(linspace(-0.1, 0.75, 25), linspace(1.0, 1.0, 1), linspace(0., 7.5, 25), p, cfg,
                      "results/QM/UV_params.csv");
 
     return 0;

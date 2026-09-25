@@ -5,6 +5,7 @@ project(FRG
     VERSION 1.0.0
     DESCRIPTION "Numerical Functional Renormalization Group Equation Solver"
     LANGUAGES CXX)
+
 # export compile commands
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -28,14 +29,20 @@ target_link_libraries(FRG PRIVATE ${HDF5_LIBRARIES} OpenMP::OpenMP_CXX)
 # including directories
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
+# Enable Link-Time Optimization (LTO) in Release mode automatically
+set_property(TARGET ${PROJECT_NAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION_RELEASE ON)
+
 if (MSVC) 
-    target_compile_options(${PROJECT_NAME} PRIVATE /W4)
+    target_compile_options(${PROJECT_NAME} PRIVATE 
+        /W4
+        $<$<CONFIG:Release>:/O2 /arch:AVX2>
+    )
 else()
     target_compile_options(${PROJECT_NAME} PRIVATE
         -Wall
         -Wextra
         -Wpedantic
         $<$<CONFIG:Debug>:-g>
-        $<$<CONFIG:Release>:-O2>
+        $<$<CONFIG:Release>:-O3 -march=native>
     )
 endif()

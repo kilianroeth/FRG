@@ -46,30 +46,30 @@ struct Params {
     double d = 3;                        // spacetime dimension
     double t_start = 0.0;
     double t_end = -15.0;
-    Grid grid;
     int warning_level = 0;
 };
 
 // classical potential -----------------
 
-std::vector<double> V_classical(const Params& p);
+std::vector<double> V_classical(const Params& p, const Grid& grid);
 double V_min_classical(const Params& p);
 
 // dimensionless classical potential
-std::vector<double> u_classical(const Params& p);
+std::vector<double> u_classical(const Params& p, const Grid& grid);
 double u_min_classical(const Params& p);
 
 // Compute RHS -------------------------
 
-std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p);
-std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p);
+std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p, const Grid& grid);
+std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p, const Grid& grid);
 
 // save current potential --------------
 
-void save_V(const std::vector<double>& V, const std::string& filename, const Params& p);
+void save_V(const std::vector<double>& V, const std::string& filename, const Grid& grid);
 void save_all(const std::vector<std::vector<double>>& snapshots,
               const std::vector<std::vector<double>>& rhs_snapshots,
-              const std::vector<double>& k_values, const Params& p, const std::string& filename);
+              const std::vector<double>& k_values, const Params& p, const Grid& grid,
+              const std::string& filename);
 void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double>& k_values,
                   const std::string& filename);
 
@@ -80,7 +80,7 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
                     const std::string& filename = "results/phi4/flow.csv", int n_snapshots = 100);
 // Adaptive integrator (RK4 with step-doubling error estimate)
 void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p,
-                             const StepperConfig& cfg,
+                             const Grid& grid, const StepperConfig& cfg,
                              const std::string& filename = "results/phi4/flow_adaptive.csv",
                              int n_snapshots = 100);
 

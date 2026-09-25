@@ -3,12 +3,12 @@
 namespace phi4 {
 
 // classical potential -----------------
-std::vector<double> V_classical(const Params& p) {
-    std::vector<double> V(p.grid.n_rho());
+std::vector<double> V_classical(const Params& p, const Grid& grid) {
+    std::vector<double> V(grid.n_rho());
     double rho;
 
-    for(size_t i = 0; i < p.grid.n_rho(); ++i) {
-        rho = i * p.grid.d_rho();
+    for(size_t i = 0; i < grid.n_rho(); ++i) {
+        rho = i * grid.d_rho();
         V[i] = p.m2 * rho + p.lambda / 6.0 * rho * rho;
     }
 
@@ -19,13 +19,13 @@ double V_min_classical(const Params& p) {
     return -3.0 * p.m2 / p.lambda;
 }
 
-std::vector<double> u_classical(const Params& p) {
-    std::vector<double> u(p.grid.n_rho());
+std::vector<double> u_classical(const Params& p, const Grid& grid) {
+    std::vector<double> u(grid.n_rho());
     double rho;
     double k = exp(p.t_start);
 
-    for(size_t i = 0; i < p.grid.n_rho(); ++i) {
-        rho = std::pow(k, p.d - 2) * i * p.grid.d_rho();
+    for(size_t i = 0; i < grid.n_rho(); ++i) {
+        rho = std::pow(k, p.d - 2) * i * grid.d_rho();
         u[i] = std::pow(k, -p.d) * (p.m2 * rho + p.lambda / 6.0 * rho * rho);
     }
 
@@ -40,16 +40,16 @@ double u_min_classical(const Params& p) {
 // Compute RHS -------------------------
 
 // computes RHS of Wetterich equation
-std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p) {
-    std::vector<double> RHS_vals(p.grid.n_rho());
+std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p, const Grid& grid) {
+    std::vector<double> RHS_vals(grid.n_rho());
 
     double prefactor = Ω(p.d) / std::pow(2 * M_PI, p.d) * std::pow(k, p.d + 2.) / p.d;
 
-    for(size_t i = 0; i < p.grid.n_rho(); ++i) {
-        const double rho = p.grid.rho_vals(i);
+    for(size_t i = 0; i < grid.n_rho(); ++i) {
+        const double rho = grid.rho_vals(i);
 
         // goldstone propagator
-        double denom_goldstone = k * k + p.grid.d1(V, i);
+        double denom_goldstone = k * k + grid.d1(V, i);
         if(!std::isfinite(denom_goldstone) || std::abs(denom_goldstone) < 1e-13) {
 #pragma omp critical
             if(p.warning_level >= 1) {
@@ -60,7 +60,7 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
         }
 
         // massive propagator
-        double denom_massive = k * k + p.grid.d1(V, i) + 2.0 * rho * p.grid.d2(V, i);
+        double denom_massive = k * k + grid.d1(V, i) + 2.0 * rho * grid.d2(V, i);
         if(!std::isfinite(denom_massive) || std::abs(denom_massive) < 1e-13) {
 #pragma omp critical
             if(p.warning_level >= 1) {
@@ -79,22 +79,22 @@ std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p)
 // ̄ρ = k^2-d ρ
 // u = k^-d V_k(k^d-2 ̄ρ)
 // computes RHS of Wetterich equation minus all terms of the LHS that is not the RG-time derivative
-std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p) {
-    std::vector<double> RHS_vals(p.grid.n_rho());
-    std::vector<double> LHS_remainder(p.grid.n_rho());
-    std::vector<double> goldstone_propagator(p.grid.n_rho());
-    std::vector<double> massive_propagator(p.grid.n_rho());
+std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p, const Grid& grid) {
+    std::vector<double> RHS_vals(grid.n_rho());
+    std::vector<double> LHS_remainder(grid.n_rho());
+    std::vector<double> goldstone_propagator(grid.n_rho());
+    std::vector<double> massive_propagator(grid.n_rho());
 
     const double d = static_cast<double>(p.d);
     const double N = static_cast<double>(p.N);
 
     double prefactor = Ω(d) / (d * std::pow(2 * M_PI, d));
 
-    for(size_t i = 0; i < p.grid.n_rho(); ++i) {
-        double du = p.grid.d1(u, i);
-        double ddu = p.grid.d2(u, i);
+    for(size_t i = 0; i < grid.n_rho(); ++i) {
+        double du = grid.d1(u, i);
+        double ddu = grid.d2(u, i);
 
-        const double rho = i * p.grid.d_rho();
+        const double rho = i * grid.d_rho();
         // LHS remainings
         LHS_remainder[i] = d * u[i] + (2 - d) * rho * du;
 
@@ -130,7 +130,7 @@ std::vector<double> RHS_dimless(const std::vector<double>& u, const Params& p) {
 
 // save current potential --------------
 
-void save_V(const std::vector<double>& V, const std::string& filename, const Params& p) {
+void save_V(const std::vector<double>& V, const std::string& filename, const Grid& grid) {
     std::ofstream file(filename);
     if(!file) {
         std::cerr << "[ERROR] Cannot open " << filename << "\n";
@@ -138,7 +138,7 @@ void save_V(const std::vector<double>& V, const std::string& filename, const Par
 
     file << "ρ = 1/2 φ², V(ρ)\n";
     for(size_t i = 0; i < V.size(); ++i) {
-        file << p.grid.rho_vals(i) << ", " << V[i] << "\n";
+        file << grid.rho_vals(i) << ", " << V[i] << "\n";
     }
     file << std::endl;
 
@@ -147,7 +147,8 @@ void save_V(const std::vector<double>& V, const std::string& filename, const Par
 
 void save_all(const std::vector<std::vector<double>>& snapshots,
               const std::vector<std::vector<double>>& rhs_snapshots,
-              const std::vector<double>& k_values, const Params& p, const std::string& filename) {
+              const std::vector<double>& k_values, const Params& p, const Grid& grid,
+              const std::string& filename) {
     if(filename.empty()) {
         return;
     }
@@ -161,7 +162,7 @@ void save_all(const std::vector<std::vector<double>>& snapshots,
     file << "# Wetterich LPA flow, phi^4, d=3, N=";
     file << p.N << "\n";
     file << "# m2 = " << p.m2 << ", lambda = " << p.lambda << "\n";
-    file << "# rho_max = " << p.grid.rho_max() << ", n_rho = " << p.grid.n_rho() << "\n";
+    file << "# rho_max = " << grid.rho_max() << ", n_rho = " << grid.n_rho() << "\n";
 
     // V block
     file << "# block: V\n";
@@ -170,8 +171,8 @@ void save_all(const std::vector<std::vector<double>>& snapshots,
         file << ", k=" << std::fixed << std::setprecision(6) << k;
     file << "\n";
     file << std::scientific << std::setprecision(10);
-    for(size_t i = 0; i < p.grid.n_rho(); ++i) {
-        file << i * p.grid.d_rho();
+    for(size_t i = 0; i < grid.n_rho(); ++i) {
+        file << i * grid.d_rho();
         for(const auto& V : snapshots)
             file << ", " << V[i];
         file << "\n";
@@ -183,8 +184,8 @@ void save_all(const std::vector<std::vector<double>>& snapshots,
     for(double k : k_values)
         file << ", k=" << std::fixed << std::setprecision(6) << k;
     file << "\n";
-    for(size_t i = 0; i < p.grid.n_rho(); ++i) {
-        file << i * p.grid.d_rho();
+    for(size_t i = 0; i < grid.n_rho(); ++i) {
+        file << i * grid.d_rho();
         for(const auto& R : rhs_snapshots)
             file << ", " << R[i];
         file << "\n";
@@ -216,7 +217,7 @@ void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double
 
 // Integrate complete RG flow ----------
 
-void integrate_flow(const std::vector<double>& V_init, double dt, const Params& p,
+void integrate_flow(const std::vector<double>& V_init, double dt, const Params& p, const Grid& grid,
                     const std::string& filename, int n_snapshots) {
     if(dt >= 0) {
         std::cerr << "[ERROR] dt must be negative" << std::endl;
@@ -224,8 +225,8 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
     }
     std::cout << "Solving flow equation...\n";
 
-    const RHSfunc rhs = [&p](const std::vector<double>& state, double t) {
-        return RHS(state, std::exp(t), p);
+    const RHSfunc rhs = [&p, &grid](const std::vector<double>& state, double t) {
+        return RHS(state, std::exp(t), p, grid);
     };
 
     const double total_t = p.t_start - p.t_end;
@@ -251,7 +252,7 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
 
         if(next_snap < snap_indices.size() && i == snap_indices[next_snap]) {
             snapshots.push_back(V);
-            rhs_snapshots.push_back(RHS(V, k, p));
+            rhs_snapshots.push_back(RHS(V, k, p, grid));
             k_values.push_back(k);
             ++next_snap;
         }
@@ -260,13 +261,13 @@ void integrate_flow(const std::vector<double>& V_init, double dt, const Params& 
             V = step_euler(V, t, dt_t, rhs);
         }
     }
-    save_all(snapshots, rhs_snapshots, k_values, p, filename);
+    save_all(snapshots, rhs_snapshots, k_values, p, grid, filename);
 }
 
 // Adaptive integrator using RK4 + step-doubling
 void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p,
-                             const StepperConfig& cfg, const std::string& filename,
-                             int n_snapshots) {
+                             const Grid& grid, const StepperConfig& cfg,
+                             const std::string& filename, int n_snapshots) {
     if(dt_init >= 0) {
         std::cerr << "[ERROR] dt_init must be negative" << std::endl;
         return;
@@ -274,8 +275,8 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
 
     std::cout << "Solving flow equation with adaptive time step...\n";
 
-    const RHSfunc rhs = [&p](const std::vector<double>& state, double t) {
-        return RHS(state, std::exp(t), p);
+    const RHSfunc rhs = [&p, &grid](const std::vector<double>& state, double t) {
+        return RHS(state, std::exp(t), p, grid);
     };
 
     std::vector<double> snap_targets(n_snapshots);
@@ -299,7 +300,7 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
 
     for(const auto& [t, V] : snapshot_pairs) {
         snapshots.push_back(V);
-        rhs_snapshots.push_back(RHS(V, std::exp(t), p));
+        rhs_snapshots.push_back(RHS(V, std::exp(t), p, grid));
         k_values.push_back(std::exp(t));
     }
 
@@ -312,7 +313,7 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
         dt_k_values.push_back(std::exp(t));
     }
 
-    save_all(snapshots, rhs_snapshots, k_values, p, filename);
+    save_all(snapshots, rhs_snapshots, k_values, p, grid, filename);
     if(!filename.empty()) {
         save_dt_hist(
             dt_values, dt_k_values,

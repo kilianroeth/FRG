@@ -53,7 +53,6 @@ int main() {
     grid.set_rho_vals(linspace(0., 0.75, 500));
 
     QM::Params p;
-    p.grid = grid;
     p.m2 = -0.08;
     p.d = 3;
     p.N = 4;
@@ -69,22 +68,22 @@ int main() {
     cfg.rel_tol = 1e-10;
     cfg.show_progress = false;
 
-    std::vector<double> V_init = QM::V_classical(p);
+    std::vector<double> V_init = QM::V_classical(p, grid);
     std::cout << "Classical minimum: V_min = " << QM::V_min_classical(p) << std::endl;
     std::vector<double> dV_vals(V_init.size()), ddV_vals(V_init.size());
     for(size_t i = 0; i < V_init.size(); ++i) {
         dV_vals[i] = grid.d1(V_init, i);
         ddV_vals[i] = grid.d2(V_init, i);
     }
-    std::vector<double> RHS_vals = RHS(V_init, 1, p);
-    QM::save_V(V_init, "results/QM/V_classical.txt", p);
-    QM::save_V(dV_vals, "results/QM/V_classical_prime.txt", p);
-    QM::save_V(ddV_vals, "results/QM/V_classical_doubleprime.txt", p);
-    QM::save_V(RHS_vals, "results/QM/RHS.txt", p);
+    std::vector<double> RHS_vals = RHS(V_init, 1, p, grid);
+    QM::save_V(V_init, "results/QM/V_classical.txt", grid);
+    QM::save_V(dV_vals, "results/QM/V_classical_prime.txt", grid);
+    QM::save_V(ddV_vals, "results/QM/V_classical_doubleprime.txt", grid);
+    QM::save_V(RHS_vals, "results/QM/RHS.txt", grid);
 
     // QM::integrate_flow_adaptive(V_init, -0.0001, p, cfg, "results/QM/flow_adaptive.csv", 100);
-    QM::sweep_params(linspace(-0.1, 0.75, 50), linspace(1.0, 1.0, 1), linspace(0., 7.5, 50), p, cfg,
-                     "results/QM/UV_params.csv");
+    QM::sweep_params(linspace(-0.1, 0.75, 50), linspace(1.0, 1.0, 1), linspace(0., 7.5, 50), p,
+                     grid, cfg, "results/QM/UV_params.csv");
 
     return 0;
 }

@@ -1,5 +1,7 @@
 #include "phi4_lpa.hpp"
 
+namespace phi4 {
+
 // classical potential -----------------
 std::vector<double> V_classical(const Params& p) {
     std::vector<double> V(p.grid.n_rho());
@@ -318,3 +320,5 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
                                            // integrate_flow_adaptive to have a dynamical directory
     }
 }
+
+} // namespace phi4

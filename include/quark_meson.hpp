@@ -15,6 +15,7 @@ constexpr double M_PI = 3.14159265358979323846;
 
 #include "grid.hpp"
 #include "integrator.hpp"
+#include "phi4_lpa.hpp"
 #include "utils.hpp"
 
 /**
@@ -45,5 +46,20 @@ struct Params {
 // Compute RHS ------------------------
 
 std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p);
+
+// save current potential --------------
+
+void save_V(const std::vector<double>& V, const std::string& filename, const Params& p);
+void save_all(const std::vector<std::vector<double>>& snapshots,
+              const std::vector<std::vector<double>>& rhs_snapshots,
+              const std::vector<double>& k_values, const Params& p, const std::string& filename);
+void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double>& k_values,
+                  const std::string& filename);
+
+// Adaptive integrator (RK4 with step-doubling error estimate)
+void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p,
+                             const StepperConfig& cfg,
+                             const std::string& filename = "results/QM/flow_adaptive.csv",
+                             int n_snapshots = 100);
 
 } // namespace QM

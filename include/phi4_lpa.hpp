@@ -35,6 +35,8 @@ constexpr double M_PI = 3.14159265358979323846;
  *
  */
 
+namespace phi4 {
+
 // Paramters ---------------------------
 
 struct Params {
@@ -81,3 +83,5 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
                              const StepperConfig& cfg,
                              const std::string& filename = "results/phi4/flow_adaptive.csv",
                              int n_snapshots = 100);
+
+} // namespace phi4

@@ -27,6 +27,28 @@ usage() {
     exit 0
 }
 
+printFRG() {
+    local C1="\033[38;2;50;255;120m"  # Emerald Green
+    local C2="\033[38;2;20;240;160m"  # Mint Green
+    local C3="\033[38;2;0;225;200m"   # Bright Cyan
+    local C4="\033[38;2;0;200;230m"   # Ocean Cyan
+    local C5="\033[38;2;0;160;255m"   # Sky Blue
+    local C6="\033[38;2;30;110;255m"  # Royal Blue
+    local C7="\033[38;2;60;60;255m"   # Deep Electric Blue
+    local RESET="\033[0m"
+
+    printf "=================================\n"
+    printf "\n"
+    printf "${C1}   ███████╗██████╗  ██████╗  ${RESET}\n"
+    printf "${C2}   ██╔════╝██╔══██╗██╔════╝  ${RESET}\n"
+    printf "${C3}   █████╗  ██████╔╝██║  ███╗ ${RESET}\n"
+    printf "${C4}   ██╔══╝  ██╔══██╗██║   ██║ ${RESET}\n"
+    printf "${C5}   ██║     ██║  ██║╚██████╔╝ ${RESET}\n"
+    printf "${C6}   ╚═╝     ╚═╝  ╚═╝ ╚═════╝  ${RESET}\n"
+    printf "\n"
+    printf "==================================\n"
+}
+
 for arg in "$@"; do
     case $arg in
         --run|-r)      RUN=true ;;
@@ -57,6 +79,8 @@ EXECUTABLE=$(find "$BUILD_DIR" -maxdepth 2 -type f -perm /111 ! -name "*.cmake" 
 [[ -n "$EXECUTABLE" ]] || error "Could not find build exectuable."
 
 success "Build $EXECUTABLE"
+
+printFRG
 
 if $RUN; then
     echo ""

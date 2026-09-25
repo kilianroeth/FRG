@@ -2,6 +2,23 @@
 
 namespace QM {
 
+// classical potential -----------------
+std::vector<double> V_classical(const Params& p) {
+    std::vector<double> V(p.grid.n_rho());
+    double rho;
+
+    for(size_t i = 0; i < p.grid.n_rho(); ++i) {
+        rho = i * p.grid.d_rho();
+        V[i] = p.m2 * rho + p.lambda / 6.0 * rho * rho;
+    }
+
+    return V;
+}
+
+double V_min_classical(const Params& p) {
+    return -3.0 * p.m2 / p.lambda;
+}
+
 // Compute RHS ------------------------
 
 std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p) {
@@ -111,6 +128,50 @@ void save_dt_hist(const std::vector<double>& dt_values, const std::vector<double
     file.close();
 }
 
+// Compute observables of the QM model
+Observables compute_observables(std::vector<double>& V, const Params& p) {
+    Observables obs;
+    const size_t N = V.size();
+    if(N < 3) {
+        return obs;
+    }
+
+    const double drho = p.grid.d_rho();
+
+    // 1. Find minimum index
+    auto min_it = std::min_element(V.begin(), V.end());
+    size_t idx = std::distance(V.begin(), min_it);
+
+    if(idx == 0 || idx >= N - 1) {
+        obs.rho0 = 0.0;
+
+        double V_prime_0 = (V[1] - V[0]) / drho;
+        obs.m2_pi = V_prime_0;
+        obs.m2_sigma = 0.;
+        return obs;
+    }
+
+    // 2. Parabolic Interpolation around local minimum
+    double y1 = V[idx - 1];
+    double y2 = V[idx];
+    double y3 = V[idx + 1];
+
+    double denom = y3 - 2.0 * y2 + y1;
+    double delta = (denom > 1e-12) ? -0.5 * (y3 - y1) / denom : 0.;
+    obs.rho0 = (static_cast<double>(idx) + delta) * drho;
+
+    // 3. Compute derivatives
+    double V_prime_idx = (y3 - y1) / (2. * drho);
+    double V_double_prime = denom / (drho * drho);
+    double V_prime_at_rho0 = V_prime_idx + delta * drho * V_double_prime;
+
+    // 4. Compute masses
+    obs.m2_pi = V_prime_at_rho0;
+    obs.m2_sigma = V_prime_at_rho0 + 2.0 * obs.rho0 * V_double_prime;
+
+    return obs;
+}
+
 // Adaptive integrator (RK4 with step-doubling error estimate)
 void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, const Params& p,
                              const StepperConfig& cfg, const std::string& filename,
@@ -167,6 +228,81 @@ void integrate_flow_adaptive(const std::vector<double>& V_init, double dt_init, 
             "results/phi4/dt_values.txt"); // TODO use the first part of string of filename of
                                            // integrate_flow_adaptive to have a dynamical directory
     }
+}
+
+void sweep_params(const std::vector<double>& m2, const std::vector<double>& lambda,
+                  const std::vector<double>& h, const Params& p, const StepperConfig& cfg,
+                  const std::string& filename) {
+    std::cout << "============== Quark Meson Model ==============\n";
+    std::cout << "Sweep UV params..." << "\n";
+    int number_of_sweeps = m2.size() * lambda.size() * h.size();
+    int sweeps_done = 0;
+    double total_comp_time = 0.;
+
+    std::cout << "Number of sweeps = " << number_of_sweeps << "\n";
+    std::cout << "Output file: " << filename << std::endl;
+
+    std::ofstream file(filename);
+    if(!file) {
+        std::cerr << "[ERROR] Cannot open " << filename << "\n";
+        return;
+    }
+
+    // metadata
+    file << "# Wetterich QM LPA flow, d=3, N=";
+    file << p.N << ", Nc = " << p.Nc << "\n";
+    file << "# rho_max = " << p.grid.rho_max() << ", n_rho = " << p.grid.n_rho() << "\n";
+    file << "# ------------------------------\n";
+    file << "# m2, lambda, h, rho0, m2_sigma, m2_pi \n";
+
+    for(double m2_val : m2) {
+        for(double lambda_val : lambda) {
+            for(double h_val : h) {
+                std::cout << "----------------------- [" << sweeps_done + 1 << "/"
+                          << number_of_sweeps << "] -----------------------\n";
+                std::cout << "m2 = " << m2_val << ", lambda = " << lambda_val << ", h = " << h_val
+                          << "\n";
+
+                Params p_sweep = p;
+                p_sweep.m2 = m2_val;
+                p_sweep.lambda = lambda_val;
+                p_sweep.h = h_val;
+
+                double dt_init = -0.0001;
+                const std::vector<double>& V_init = V_classical(p_sweep);
+
+                const RHSfunc rhs = [&p_sweep](const std::vector<double>& state, double t) {
+                    return RHS(state, std::exp(t), p_sweep);
+                };
+                std::cout << "Solving flow equation...\n";
+                std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
+                // Solve flow equation
+
+                std::vector<double> V = integrate_adaptive(V_init, p_sweep.t_start, p_sweep.t_end,
+                                                           dt_init, rhs, cfg, {}, nullptr, nullptr);
+
+                sweeps_done += 1;
+                std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+                double duration = std::chrono::duration<double>(end - begin).count();
+                total_comp_time += duration;
+                double avg_time = total_comp_time / sweeps_done;
+                int remaining_sweeps = number_of_sweeps - sweeps_done;
+                double remaining_time = avg_time * remaining_sweeps;
+                std::cout << "Comptime       = " << duration << "[s]\n";
+                std::cout << "avg. comptime  = " << avg_time << "[s]\n";
+                std::cout << "Remaining time = " << remaining_time << "[s]" << std::endl;
+
+                // Compute observables
+                Observables obs = compute_observables(V, p);
+                std::cout << "ρ0 = " << obs.rho0 << "\n";
+                file << m2_val << ", " << lambda_val << ", " << h_val << ", " << obs.rho0 << ", "
+                     << obs.m2_sigma << ", " << obs.m2_pi << "\n";
+            }
+        }
+    }
+
+    file.close();
 }
 
 } // namespace QM

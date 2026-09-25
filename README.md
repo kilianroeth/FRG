@@ -7,7 +7,8 @@ Two models are currently implemented:
 - **Quark-Meson model** in vacuum ```src/quark_meson.cpp```
 
 ![effective potential flow](/results/phi4/eff_pot_flow_3.png)
-*Flow of the effective potential $V_k(\rho)$ for the $\phi^4$ $O(N)$ model as the RG scale k is lowered from the UV towards the IR.*
+
+Flow of the effective potential $V_k(\rho)$ for the $\phi^4$ $O(N)$ model as the RG scale k is lowered from the UV towards the IR.
 
 ## Background
 

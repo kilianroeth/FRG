@@ -2,3 +2,5 @@ numpy
 matplotlib
 pandas
 scienceplots
+h5py
+plot/plot.py

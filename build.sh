@@ -84,7 +84,14 @@ printFRG
 
 if $RUN; then
     echo ""
-    info "Running $EXECUTABLE..."
+
+    # Determine 2/3 of available logical cores (rounded down, minimum 1)
+    TOTAL_CORES=$(nproc 2>/dev/null || sysctl -n hw.logicalcpu)
+    OMP_THREADS=$(( TOTAL_CORES * 5 / 6 ))
+    [[ "$OMP_THREADS" -lt 1 ]] && OMP_THREADS=1
+
+    info "Running $EXECUTABLE with OMP_NUM_THREADS=$OMP_THREADS (of $TOTAL_CORES cores)..."
     echo "----------------------------------"
+    export OMP_NUM_THREADS=$OMP_THREADS
     "$EXECUTABLE"
 fi

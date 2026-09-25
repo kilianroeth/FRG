@@ -19,6 +19,10 @@ double V_min_classical(const Params& p) {
     return -3.0 * p.m2 / p.lambda;
 }
 
+// -----------------------------------------------
+//              vacuum theory
+// -----------------------------------------------
+
 // Compute RHS ------------------------
 
 std::vector<double> RHS(const std::vector<double>& V, double k, const Params& p) {
@@ -256,7 +260,7 @@ void sweep_params(const std::vector<double>& m2, const std::vector<double>& lamb
     file << "# ------------------------------\n";
     file << "# m2, lambda, h, rho0, m2_sigma, m2_pi \n";
 
-    int sweeps_done = 0;
+    std::atomic<int> sweeps_done{0};
     double total_comp_time = 0.;
 
     std::vector<double> rho0_vals(number_of_sweeps);
@@ -307,11 +311,20 @@ void sweep_params(const std::vector<double>& m2, const std::vector<double>& lamb
                     std::cout << "ρ0 = " << obs.rho0 << "\n";
                     std::cout << "Comptime          = " << duration << "[s]\n";
                     std::cout << "avg. comptime     = " << avg_time << "[s]\n";
-                    std::cout << "Remaining time    = " << remaining_time / 60 << "[min]\n";
+                    if(remaining_time < 60) {
+                        std::cout << "Remaining time    = " << remaining_time << "[s]\n";
+                    } else if(remaining_time / 60. < 60.) {
+                        std::cout << "Remaining time    = " << remaining_time / 60. << "[min]\n";
+                    } else {
+                        std::cout << "Remaining time    = " << remaining_time / (3600.) << "[h]\n";
+                    }
                 };
             }
         }
     }
+
+    std::cout << "=========================\n";
+    std::cout << "Total time: " << total_comp_time << "\n";
 
     // save data
     int i = 0;
@@ -327,5 +340,9 @@ void sweep_params(const std::vector<double>& m2, const std::vector<double>& lamb
 
     file.close();
 }
+
+// -----------------------------------------------
+//              thermal theory
+// -----------------------------------------------
 
 } // namespace QM
